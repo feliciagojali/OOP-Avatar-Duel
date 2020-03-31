@@ -1,18 +1,18 @@
-class Character extends Card{
+class Skill extends Card{
     private String type;
     private int attack;
     private int defense;
     private int power;
 
-    public Character(){
+    public Skill(){
         super();
-        this.type = "Character";
+        this.type = "Skill";
         this.attack = 0;
         this.defense = 0;
         this.power = 0;
     }
 
-    public Character(int id, String name, String element, String description, String imagepath, String type, int attack, int defense, int power){
+    public Skill(int id, String name, String element, String description, String imagepath, String type, int attack, int defense, int power){
         super(id, name, element, description, imagepath);
         this.type = type;
         this.attack = attack;
