@@ -30,7 +30,7 @@ abstract class Card{
         return this.description;
     }
 
-    public String imagePath()
+    public String getImagePath()
     {
         return this.imagePath;
     }

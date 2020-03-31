@@ -1,5 +1,8 @@
 # IF2210 Project Template
 
+![](./thumbnail.jpg)
+> Image taken from [this amazing YouTube video.](https://www.youtube.com/watch?v=nkX9vpsCi3I)
+
 Here is an example of project using gradle as the build tools.
 Try running these commands:
 
