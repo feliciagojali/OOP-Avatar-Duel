@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.avatarduel.model.Element;
-import com.avatarduel.model.Land;
+import com.avatarduel.model.LandCard;
 import com.avatarduel.util.CSVReader;
 
 public class AvatarDuel extends Application {
@@ -24,7 +24,7 @@ public class AvatarDuel extends Application {
     landReader.setSkipHeader(true);
     List<String[]> landRows = landReader.read();
     for (String[] row : landRows) {
-      Land l = new Land(row[1], row[3], Element.valueOf(row[2]));
+      LandCard l = new LandCard(row[1], row[3], Element.valueOf(row[2]));
     }
   }
 
