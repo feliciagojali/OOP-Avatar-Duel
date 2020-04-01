@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="164.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="cardName" layoutX="7.0" layoutY="6.0" prefHeight="17.0" prefWidth="108.0" text="Name">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label fx:id="cardDescription" alignment="TOP_LEFT" layoutX="12.0" layoutY="173.0" prefHeight="44.0" prefWidth="140.0" text="Lorem ipsum dolor sit amet,">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardElement" alignment="CENTER_RIGHT" layoutX="103.0" layoutY="6.0" prefHeight="17.0" prefWidth="48.0" text="Element">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <ImageView fx:id="cardImage" fitHeight="140.0" fitWidth="140.0" layoutX="12.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
