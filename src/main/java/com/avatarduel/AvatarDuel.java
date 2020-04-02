@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javafx.fxml.FXMLLoader;
@@ -56,10 +59,11 @@ public class AvatarDuel extends Application {
     cardTitle.setText(l.getName());
     cardElement.setText(l.getElement().toString());
 
-    Image img = new Image(getClass().getResourceAsStream("./card/image/character/Aang.png"));
+    String path = "card/image/land/" + l.getImagePath();
+    Image img = new Image(getClass().getResourceAsStream(path));
 
     cardImage.setImage(img);
-    cardDescription.setWrapText(true);;
+    cardDescription.setWrapText(true);
     cardDescription.setText(l.getDescription());
 
     stage.setTitle("Avatar Duel");
