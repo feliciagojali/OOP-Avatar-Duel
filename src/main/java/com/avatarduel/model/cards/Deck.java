@@ -1,7 +1,8 @@
-package com.avatarduel.model;
+package com.avatarduel.model.cards;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 
 public class Deck {
     private ArrayList<Card> deck;

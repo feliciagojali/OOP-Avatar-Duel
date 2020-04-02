@@ -1,4 +1,4 @@
-package com.avatarduel.model;
+package com.avatarduel.model.cards;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.avatarduel.util.*;
+import com.avatarduel.enums.Element;
 
 public class LandCardList 
 {

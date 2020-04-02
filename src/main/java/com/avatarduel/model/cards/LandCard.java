@@ -1,4 +1,6 @@
-package com.avatarduel.model;
+package com.avatarduel.model.cards;
+
+import com.avatarduel.enums.Element;
 
 public class LandCard extends Card {
 

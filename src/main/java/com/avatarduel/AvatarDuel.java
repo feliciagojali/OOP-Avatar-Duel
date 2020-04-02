@@ -1,56 +1,28 @@
 package com.avatarduel;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.List;
-
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
-import com.avatarduel.model.Element;
-import com.avatarduel.model.LandCard;
-import com.avatarduel.util.CSVReader;
-import com.avatarduel.model.LandCardList;
+import com.avatarduel.model.cards.LandCard;
+import com.avatarduel.model.cards.CharacterCard;
+import com.avatarduel.model.cards.LandCardList;
+import com.avatarduel.model.cards.CharacterCardList;
 
 public class AvatarDuel extends Application {
-  // private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
-
-  // public void loadCards() throws IOException, URISyntaxException {
-  //   File landCSVFile = new File(getClass().getResource(LAND_CSV_FILE_PATH).toURI());
-  //   CSVReader landReader = new CSVReader(landCSVFile, "\t");
-  //   landReader.setSkipHeader(true);
-  //   List<String[]> landRows = landReader.read();
-  //   for (String[] row : landRows) {
-  //     Land l = new Land(row[1], row[3], Element.valueOf(row[2]));
-  //   }
-  // }
-
   @Override
   public void start(Stage stage) throws Exception {
-    // Text text = new Text();
-    // text.setText("Loading...");
-    // text.setX(50);
-    // text.setY(50);
-
     FXMLLoader loader = new FXMLLoader(AvatarDuel.class.getResource("card.fxml"));
     Parent root = loader.load();
 
     Scene scene = new Scene(root, 1280, 720);
     
-    LandCard l = LandCardList.getLandCardById(1);
+    CharacterCard l = CharacterCardList.getCharacterCardById(29);
     Label cardTitle = (Label)loader.getNamespace().get("cardName");
     Label cardElement = (Label)loader.getNamespace().get("cardElement");
     ImageView cardImage= (ImageView)loader.getNamespace().get("cardImage");
@@ -59,7 +31,7 @@ public class AvatarDuel extends Application {
     cardTitle.setText(l.getName());
     cardElement.setText(l.getElement().toString());
 
-    String path = "card/image/land/" + l.getImagePath();
+    String path = "card/image/character/" + l.getImagePath();
     Image img = new Image(getClass().getResourceAsStream(path));
 
     cardImage.setImage(img);
@@ -77,15 +49,15 @@ public class AvatarDuel extends Application {
   }
 
   public static void main(String[] args) {
-    try{
-      for(int i = 1; i <=16;++i)
-      {
-        LandCardList.getLandCardById(i).printCard();
-      }
-    }
-    catch(Exception e){
-      System.out.println(e);
-    }
+    // try{
+    //   for(int i = 1; i <=16;++i)
+    //   {
+    //     CharacterCardList.getCharacterCardById(i).printCard();
+    //   }
+    // }
+    // catch(Exception e){
+    //   System.out.println(e);
+    // }
     launch();
   }
 }
