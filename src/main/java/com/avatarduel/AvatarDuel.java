@@ -32,6 +32,7 @@ public class AvatarDuel extends Application {
     cardElement.setText(l.getElement().toString());
 
     String path = "card/image/character/" + l.getImagePath();
+    System.out.println(path);
     Image img = new Image(getClass().getResourceAsStream(path));
 
     cardImage.setImage(img);

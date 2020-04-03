@@ -16,7 +16,7 @@ public class CharacterCardList
     private Map<Integer, String[]> characterCardList;
 
     // Define filepaths to the CSV file
-    private static final String CHARACTER_CARD_FILE_PATH = "../card/data/character.csv";
+    private static final String CHARACTER_CARD_FILE_PATH = "../../card/data/character.csv";
 
     private CharacterCardList() throws URISyntaxException, IOException
     {
