@@ -6,6 +6,9 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 import com.avatarduel.util.*;
 import com.avatarduel.enums.Element;
 
@@ -14,6 +17,7 @@ public class CharacterCardList
     private static CharacterCardList characterCardListInstance = null;
 
     private Map<Integer, String[]> characterCardList;
+    private Set<Integer> characterCardIdList;
 
     // Define filepaths to the CSV file
     private static final String CHARACTER_CARD_FILE_PATH = "../../card/data/character.csv";
@@ -33,14 +37,33 @@ public class CharacterCardList
         
         // Input data to map
         this.characterCardList = new HashMap<Integer, String[]>();
+        this.characterCardIdList = new TreeSet<Integer>();
         for(String[] characterCardEntry : characterCardData)
-            characterCardList.put(Integer.valueOf(characterCardEntry[0]), characterCardEntry);
+        {
+            this.characterCardList.put(Integer.valueOf(characterCardEntry[0]), characterCardEntry);
+            this.characterCardIdList.add(Integer.parseInt(characterCardEntry[0]));
+        }
 
     }
 
     public Map<Integer, String[]> getCharacterCardList()
     {
         return this.characterCardList;
+    }
+
+    public Set<Integer> getCharacterCardIdList()
+    {
+        return this.characterCardIdList;
+    }
+
+    public static int getCharacterCardCount()
+    {
+        return characterCardListInstance.getCharacterCardIdList().size();
+    }
+
+    public static boolean isIdCharacterCard(int id)
+    {
+        return characterCardListInstance.getCharacterCardIdList().contains(new Integer(id));
     }
 
     public static CharacterCard getCharacterCardById(int id) throws URISyntaxException, IOException

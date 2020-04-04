@@ -9,9 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
-import com.avatarduel.model.cards.LandCard;
 import com.avatarduel.model.cards.CharacterCard;
-import com.avatarduel.model.cards.LandCardList;
 import com.avatarduel.model.cards.CharacterCardList;
 
 public class AvatarDuel extends Application {

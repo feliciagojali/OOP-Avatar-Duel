@@ -3,6 +3,8 @@
 ![](./thumbnail.jpg)
 > Image taken from [this amazing YouTube video.](https://www.youtube.com/watch?v=nkX9vpsCi3I)
 
+Class diagram : [here](https://www.draw.io/#G14HlTTgaMnMFkue-jKyBi_Nd2L9VMpUsd)
+
 Here is an example of project using gradle as the build tools.
 Try running these commands:
 

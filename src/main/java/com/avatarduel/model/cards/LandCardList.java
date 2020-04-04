@@ -6,6 +6,9 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 import com.avatarduel.util.*;
 import com.avatarduel.enums.Element;
 
@@ -14,8 +17,9 @@ public class LandCardList
     private static LandCardList landCardListInstance = null;
 
     private Map<Integer, String[]> landCardList;
+    private Set<Integer> landCardIdList;
 
-    // Define filepaths to the CSV file
+    // Define filepath to the CSV file
     private static final String LAND_CARD_FILE_PATH = "../card/data/land.csv";
 
     private LandCardList() throws URISyntaxException, IOException
@@ -33,14 +37,33 @@ public class LandCardList
         
         // Input data to map
         this.landCardList = new HashMap<Integer, String[]>();
+        this.landCardIdList = new TreeSet<Integer>();
         for(String[] landCardEntry : landCardData)
-            landCardList.put(Integer.valueOf(landCardEntry[0]), landCardEntry);
+        {
+            this.landCardList.put(Integer.valueOf(landCardEntry[0]), landCardEntry);
+            this.landCardIdList.add(Integer.parseInt(landCardEntry[0]));
+        }
 
     }
 
     public Map<Integer, String[]> getLandCardList()
     {
         return this.landCardList;
+    }
+
+    public Set<Integer> getLandCardIdList()
+    {
+        return this.landCardIdList;
+    }
+
+    public static int getLandCardCount()
+    {
+        return landCardListInstance.getLandCardIdList().size();
+    }
+
+    public static boolean isIdLandCard(int id)
+    {
+        return landCardListInstance.getLandCardIdList().contains(new Integer(id));
     }
 
     public static LandCard getLandCardById(int id) throws URISyntaxException, IOException
