@@ -38,6 +38,7 @@ public class SkillCardList
         // Input data to map
         this.skillCardList = new HashMap<Integer, String[]>();
         this.skillCardIdList = new TreeSet<Integer>();
+        
         for(String[] skillCardEntry : skillCardData)
         {
             this.skillCardList.put(Integer.valueOf(skillCardEntry[0]), skillCardEntry);
@@ -56,13 +57,19 @@ public class SkillCardList
         return this.skillCardIdList;
     }
 
-    public static int getSkillCardCount()
+    public static int getSkillCardCount() throws URISyntaxException, IOException
     {
+        if(skillCardListInstance == null)
+            skillCardListInstance = new SkillCardList();
+
         return skillCardListInstance.getSkillCardIdList().size();
     }
 
-    public static boolean isIdSkillCard(int id)
+    public static boolean isIdSkillCard(int id) throws URISyntaxException, IOException
     {
+        if(skillCardListInstance == null)
+            skillCardListInstance = new SkillCardList();
+
         return skillCardListInstance.getSkillCardIdList().contains(new Integer(id));
     }
 

@@ -20,7 +20,7 @@ public class LandCardList
     private Set<Integer> landCardIdList;
 
     // Define filepath to the CSV file
-    private static final String LAND_CARD_FILE_PATH = "../card/data/land.csv";
+    private static final String LAND_CARD_FILE_PATH = "../../card/data/land.csv";
 
     private LandCardList() throws URISyntaxException, IOException
     {
@@ -38,8 +38,10 @@ public class LandCardList
         // Input data to map
         this.landCardList = new HashMap<Integer, String[]>();
         this.landCardIdList = new TreeSet<Integer>();
+
         for(String[] landCardEntry : landCardData)
         {
+
             this.landCardList.put(Integer.valueOf(landCardEntry[0]), landCardEntry);
             this.landCardIdList.add(Integer.parseInt(landCardEntry[0]));
         }
@@ -56,13 +58,19 @@ public class LandCardList
         return this.landCardIdList;
     }
 
-    public static int getLandCardCount()
+    public static int getLandCardCount() throws URISyntaxException, IOException
     {
+        if(landCardListInstance == null)
+            landCardListInstance = new LandCardList();
+        
         return landCardListInstance.getLandCardIdList().size();
     }
 
-    public static boolean isIdLandCard(int id)
+    public static boolean isIdLandCard(int id) throws URISyntaxException, IOException
     {
+        if(landCardListInstance == null)
+            landCardListInstance = new LandCardList();
+
         return landCardListInstance.getLandCardIdList().contains(new Integer(id));
     }
 

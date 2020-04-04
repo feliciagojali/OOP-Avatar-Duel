@@ -36,4 +36,9 @@ abstract class Card {
     {
         return this.imagePath;
     }
+
+    public String toString()
+    {
+        return Integer.toString(this.id) + " " + this.name  + " " + String.valueOf(this.element);
+    }
 }

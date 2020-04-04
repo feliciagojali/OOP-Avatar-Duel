@@ -1,5 +1,7 @@
 package com.avatarduel.model.cards;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +20,7 @@ public class Deck {
         this.size = 60;
     }
 
-    public void initializeDeck()
+    public void initializeDeck() throws IOException, URISyntaxException
     {
         int totalWeight = LAND_CARD_WEIGHT + CHARACTER_CARD_WEIGHT + SKILL_CARD_WEIGHT;
         int totalCardCount = LandCardList.getLandCardCount() + CharacterCardList.getCharacterCardCount() + SkillCardList.getSkillCardCount();
@@ -72,5 +74,15 @@ public class Deck {
 
     public void shuffle() {
         Collections.shuffle(this.cards);
+    }
+
+    public int drawCard()
+    {
+        return this.cards.pop();
+    }
+
+    public boolean isDeckEmpty()
+    {
+        return this.cards.isEmpty();
     }
 }

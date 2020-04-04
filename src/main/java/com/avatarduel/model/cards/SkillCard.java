@@ -2,7 +2,7 @@ package com.avatarduel.model.cards;
 
 import com.avatarduel.enums.Element;
 
-class SkillCard extends Card{
+public class SkillCard extends Card{
     protected int attack;
     protected int defense;
     protected int power;

@@ -38,6 +38,7 @@ public class CharacterCardList
         // Input data to map
         this.characterCardList = new HashMap<Integer, String[]>();
         this.characterCardIdList = new TreeSet<Integer>();
+        
         for(String[] characterCardEntry : characterCardData)
         {
             this.characterCardList.put(Integer.valueOf(characterCardEntry[0]), characterCardEntry);
@@ -56,13 +57,19 @@ public class CharacterCardList
         return this.characterCardIdList;
     }
 
-    public static int getCharacterCardCount()
+    public static int getCharacterCardCount() throws URISyntaxException, IOException
     {
+        if(characterCardListInstance == null)
+            characterCardListInstance = new CharacterCardList();
+
         return characterCardListInstance.getCharacterCardIdList().size();
     }
 
-    public static boolean isIdCharacterCard(int id)
+    public static boolean isIdCharacterCard(int id) throws URISyntaxException, IOException
     {
+        if(characterCardListInstance == null)
+            characterCardListInstance = new CharacterCardList();
+
         return characterCardListInstance.getCharacterCardIdList().contains(new Integer(id));
     }
 

@@ -11,6 +11,11 @@ import javafx.scene.image.Image;
 
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.cards.CharacterCardList;
+import com.avatarduel.model.cards.Deck;
+import com.avatarduel.model.cards.LandCard;
+import com.avatarduel.model.cards.LandCardList;
+import com.avatarduel.model.cards.SkillCard;
+import com.avatarduel.model.cards.SkillCardList;
 
 public class AvatarDuel extends Application {
   @Override
@@ -48,15 +53,26 @@ public class AvatarDuel extends Application {
   }
 
   public static void main(String[] args) {
-    // try{
-    //   for(int i = 1; i <=16;++i)
-    //   {
-    //     CharacterCardList.getCharacterCardById(i).printCard();
-    //   }
-    // }
-    // catch(Exception e){
-    //   System.out.println(e);
-    // }
+    try{
+
+      Deck d = new Deck();
+      d.initializeDeck();
+      d.shuffle();
+      while(!d.isDeckEmpty())
+      {
+        int id = d.drawCard();
+        
+        if(LandCardList.isIdLandCard(id)) System.out.println(LandCardList.getLandCardById(id));
+        else if(CharacterCardList.isIdCharacterCard(id)) System.out.println(CharacterCardList.getCharacterCardById(id));
+        else if(SkillCardList.isIdSkillCard(id)) System.out.println(SkillCardList.getSkillCardById(id));
+
+      }
+    }
+    catch(Exception e)
+    {
+      System.out.println("abcdef");
+    }
+
     launch();
   }
 }
