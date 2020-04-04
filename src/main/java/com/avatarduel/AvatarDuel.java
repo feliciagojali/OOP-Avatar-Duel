@@ -1,58 +1,78 @@
 package com.avatarduel;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.List;
-
+import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
-import com.avatarduel.model.Element;
-import com.avatarduel.model.LandCard;
-import com.avatarduel.util.CSVReader;
+import com.avatarduel.model.cards.CharacterCard;
+import com.avatarduel.model.cards.CharacterCardList;
+import com.avatarduel.model.cards.Deck;
+import com.avatarduel.model.cards.LandCard;
+import com.avatarduel.model.cards.LandCardList;
+import com.avatarduel.model.cards.SkillCard;
+import com.avatarduel.model.cards.SkillCardList;
 
 public class AvatarDuel extends Application {
-  private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
-
-  public void loadCards() throws IOException, URISyntaxException {
-    File landCSVFile = new File(getClass().getResource(LAND_CSV_FILE_PATH).toURI());
-    CSVReader landReader = new CSVReader(landCSVFile, "\t");
-    landReader.setSkipHeader(true);
-    List<String[]> landRows = landReader.read();
-    for (String[] row : landRows) {
-      // LandCard l = new LandCard(row[1], row[3], Element.valueOf(row[2]));
-    }
-  }
-
   @Override
-  public void start(Stage stage) {
-    Text text = new Text();
-    text.setText("Loading...");
-    text.setX(50);
-    text.setY(50);
-
-    Group root = new Group();
-    root.getChildren().add(text);
+  public void start(Stage stage) throws Exception {
+    FXMLLoader loader = new FXMLLoader(AvatarDuel.class.getResource("card.fxml"));
+    Parent root = loader.load();
 
     Scene scene = new Scene(root, 1280, 720);
+    
+    CharacterCard l = CharacterCardList.getCharacterCardById(29);
+    Label cardTitle = (Label)loader.getNamespace().get("cardName");
+    Label cardElement = (Label)loader.getNamespace().get("cardElement");
+    ImageView cardImage= (ImageView)loader.getNamespace().get("cardImage");
+    Label cardDescription = (Label)loader.getNamespace().get("cardDescription");
+    
+    cardTitle.setText(l.getName());
+    cardElement.setText(l.getElement().toString());
+
+    String path = "card/image/character/" + l.getImagePath();
+    System.out.println(path);
+    Image img = new Image(getClass().getResourceAsStream(path));
+
+    cardImage.setImage(img);
+    cardDescription.setWrapText(true);
+    cardDescription.setText(l.getDescription());
 
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);
     stage.show();
-
-    try {
-      this.loadCards();
-      text.setText("Avatar Duel!");
-    } catch (Exception e) {
-      text.setText("Failed to load cards: " + e);
-    }
+    // try {
+    //   text.setText("Avatar Duel!");
+    // } catch (Exception e) {
+    //   text.setText("Failed to load cards: " + e);
+    // }
   }
 
   public static void main(String[] args) {
+    try{
+
+      Deck d = new Deck();
+      d.initializeDeck();
+      d.shuffle();
+      while(!d.isDeckEmpty())
+      {
+        int id = d.drawCard();
+        
+        if(LandCardList.isIdLandCard(id)) System.out.println(LandCardList.getLandCardById(id));
+        else if(CharacterCardList.isIdCharacterCard(id)) System.out.println(CharacterCardList.getCharacterCardById(id));
+        else if(SkillCardList.isIdSkillCard(id)) System.out.println(SkillCardList.getSkillCardById(id));
+
+      }
+    }
+    catch(Exception e)
+    {
+      System.out.println("abcdef");
+    }
+
     launch();
   }
 }
