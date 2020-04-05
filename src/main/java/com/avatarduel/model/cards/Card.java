@@ -2,7 +2,7 @@ package com.avatarduel.model.cards;
 
 import com.avatarduel.enums.Element;
 
-abstract class Card {
+public class Card {
     protected int id;
     protected String name;
     protected Element element;
