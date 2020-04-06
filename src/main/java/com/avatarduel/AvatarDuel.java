@@ -3,6 +3,7 @@ package com.avatarduel;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,29 +20,33 @@ import com.avatarduel.model.cards.SkillCard;
 import com.avatarduel.model.cards.SkillCardList;
 import com.avatarduel.model.gui.CardGUI;
 import com.avatarduel.model.gui.CardGUIBuilder;
+import com.avatarduel.model.gui.GameGUI;
 
 public class AvatarDuel extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     FXMLLoader game = new FXMLLoader(AvatarDuel.class.getResource("gui/game.fxml"));
     Parent gameRoot = game.load();
+    GameGUI con = (GameGUI)game.getController();
     
-    CharacterCard l = CharacterCardList.getCharacterCardById(29);
-
+    CharacterCard l = CharacterCardList.getCharacterCardById(30);
+    
     // Parent root = cardLoader.load();
     // CardGUI con = (CardGUI)cardLoader.getController();
     // con.setAttack("-");
     // con.setDefense("-");
+    
+    AnchorPane root = new CardGUIBuilder()
+    .setName(l.getName())
+    .setElement(l.getElement())
+    .setImage("card/image/character/" + l.getImagePath())
+    .setDescription(l.getDescription())
+    .setAttack(Integer.toString(l.getAttack()))
+    .setDefense(Integer.toString(l.getDefense()))
+    .setPower(Integer.toString(l.getPower()))
+    .build();
 
-    Parent root = new CardGUIBuilder()
-      .setName(l.getName())
-      .setElement(l.getElement())
-      .setImage("card/image/character/" + l.getImagePath())
-      .setDescription(l.getDescription())
-      .setAttack(Integer.toString(l.getAttack()))
-      .setDefense(Integer.toString(l.getDefense()))
-      .setPower(Integer.toString(l.getPower()))
-      .build();
+    con.setCardInfo(root);
     // .setName(l.getName())
     // .setAttack(Integer.toString(l.getAttack()))
     // .setDefense(Integer.toString(l.getDefense()))
@@ -49,7 +54,7 @@ public class AvatarDuel extends Application {
     // .setDescription(l.getDescription())
     // .setImage("/card/image/character/" + l.getImagePath())
     
-    Scene scene = new Scene(gameRoot, 1280, 720);
+    Scene scene = new Scene(gameRoot, 1200, 900);
     BorderPane bp = (BorderPane)game.getNamespace().get("main");
     bp.setLeft(root);
 
