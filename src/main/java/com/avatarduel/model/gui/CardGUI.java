@@ -14,8 +14,6 @@ import com.avatarduel.enums.Element;
 
 
 public class CardGUI{
-    // private FXMLLoader cardLoader;
-    // private static final String CARD_FXML_PATH = "gui/card.fxml";
     
     @FXML
     private Label cardName;
@@ -50,13 +48,11 @@ public class CardGUI{
     public void setElement(Element element)
     {
         this.cardElement.setText(element.toString());
-        
     }
     
     @FXML
-    public void setImage(String imagePath)
+    public void setImage(Image image)
     {
-        Image image = new Image(getClass().getResourceAsStream(imagePath));
         cardImage.setImage(image);
     }
     

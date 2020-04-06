@@ -26,17 +26,21 @@ public class AvatarDuel extends Application {
     FXMLLoader game = new FXMLLoader(AvatarDuel.class.getResource("gui/game.fxml"));
     Parent gameRoot = game.load();
     
-    FXMLLoader cardLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/card.fxml"));
-
     CharacterCard l = CharacterCardList.getCharacterCardById(29);
 
     // Parent root = cardLoader.load();
     // CardGUI con = (CardGUI)cardLoader.getController();
     // con.setAttack("-");
     // con.setDefense("-");
+
     Parent root = new CardGUIBuilder()
-      .setDefense("dw")
-      .setAttack("banana")
+      .setName(l.getName())
+      .setElement(l.getElement())
+      .setImage("card/image/character/" + l.getImagePath())
+      .setDescription(l.getDescription())
+      .setAttack(Integer.toString(l.getAttack()))
+      .setDefense(Integer.toString(l.getDefense()))
+      .setPower(Integer.toString(l.getPower()))
       .build();
     // .setName(l.getName())
     // .setAttack(Integer.toString(l.getAttack()))

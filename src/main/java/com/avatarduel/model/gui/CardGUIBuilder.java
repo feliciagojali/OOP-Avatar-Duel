@@ -36,7 +36,8 @@ public class CardGUIBuilder {
     
     public CardGUIBuilder setImage(String imagePath)
     {
-        cardController.setImage(imagePath);
+        Image image = new Image(AvatarDuel.class.getResourceAsStream(imagePath));
+        cardController.setImage(image);
         return this;
     }
     
