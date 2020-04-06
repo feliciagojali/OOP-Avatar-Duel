@@ -3,6 +3,7 @@ package com.avatarduel;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
@@ -16,31 +17,37 @@ import com.avatarduel.model.cards.LandCard;
 import com.avatarduel.model.cards.LandCardList;
 import com.avatarduel.model.cards.SkillCard;
 import com.avatarduel.model.cards.SkillCardList;
+import com.avatarduel.model.gui.CardGUI;
+import com.avatarduel.model.gui.CardGUIBuilder;
 
 public class AvatarDuel extends Application {
   @Override
   public void start(Stage stage) throws Exception {
-    FXMLLoader loader = new FXMLLoader(AvatarDuel.class.getResource("card.fxml"));
-    Parent root = loader.load();
-
-    Scene scene = new Scene(root, 1280, 720);
+    FXMLLoader game = new FXMLLoader(AvatarDuel.class.getResource("gui/game.fxml"));
+    Parent gameRoot = game.load();
     
+    FXMLLoader cardLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/card.fxml"));
+
     CharacterCard l = CharacterCardList.getCharacterCardById(29);
-    Label cardTitle = (Label)loader.getNamespace().get("cardName");
-    Label cardElement = (Label)loader.getNamespace().get("cardElement");
-    ImageView cardImage= (ImageView)loader.getNamespace().get("cardImage");
-    Label cardDescription = (Label)loader.getNamespace().get("cardDescription");
+
+    // Parent root = cardLoader.load();
+    // CardGUI con = (CardGUI)cardLoader.getController();
+    // con.setAttack("-");
+    // con.setDefense("-");
+    Parent root = new CardGUIBuilder()
+      .setDefense("dw")
+      .setAttack("banana")
+      .build();
+    // .setName(l.getName())
+    // .setAttack(Integer.toString(l.getAttack()))
+    // .setDefense(Integer.toString(l.getDefense()))
+    // .setPower(Integer.toString(l.getPower()))
+    // .setDescription(l.getDescription())
+    // .setImage("/card/image/character/" + l.getImagePath())
     
-    cardTitle.setText(l.getName());
-    cardElement.setText(l.getElement().toString());
-
-    String path = "card/image/character/" + l.getImagePath();
-    System.out.println(path);
-    Image img = new Image(getClass().getResourceAsStream(path));
-
-    cardImage.setImage(img);
-    cardDescription.setWrapText(true);
-    cardDescription.setText(l.getDescription());
+    Scene scene = new Scene(gameRoot, 1280, 720);
+    BorderPane bp = (BorderPane)game.getNamespace().get("main");
+    bp.setLeft(root);
 
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);
