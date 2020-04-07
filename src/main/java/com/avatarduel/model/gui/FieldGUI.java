@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -73,7 +74,10 @@ public class FieldGUI {
         this.characterSlots[5] = characterSlot6;
         this.characterSlots[6] = characterSlot7;
         this.characterSlots[7] = characterSlot8;
-    
+        
+        // for (AnchorPane card : characterSlots) {
+        //     card.setOnAction()
+        // }
     }
 
     @FXML
@@ -83,14 +87,25 @@ public class FieldGUI {
             AnchorPane cardField = new CardFieldGUIBuilder()
                 .setImage("card/image/character/" + card.getImagePath())
                 .build();
-
-            characterSlots[slot].getChildren().add(cardField);
-            System.out.println("pisadgbawh");
+                
+                characterSlots[slot].getChildren().add(cardField);
+                System.out.println("pisadgbawh");
         }
         catch(Exception e)
         {
-            System.out.println(e);
+                System.out.println(e);
         }
     }
 
+    @FXML
+    public void handleOnMouseClick(MouseEvent event)
+    {
+        String fxId = event.getPickResult().getIntersectedNode().getId();
+        int id;
+
+        if(fxId.contains("character")) id = Integer.parseInt(fxId.substring(9));
+        else id = Integer.parseInt(fxId.substring(5));
+
+        System.out.println(id);
+    }
 }

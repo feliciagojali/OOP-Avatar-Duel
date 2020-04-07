@@ -5,21 +5,21 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="1380.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.FieldGUI">
    <children>
-      <AnchorPane fx:id="characterSlot1" layoutX="20.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot2" layoutX="190.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot3" layoutX="360.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot4" layoutX="530.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot5" layoutX="700.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot6" layoutX="870.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot7" layoutX="1040.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot8" layoutX="1210.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot1" layoutX="20.0" layoutY="220.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot2" layoutX="190.0" layoutY="220.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot3" layoutX="360.0" layoutY="220.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot4" layoutX="530.0" layoutY="220.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot5" layoutX="700.0" layoutY="220.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot6" layoutX="870.0" layoutY="220.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot7" layoutX="1040.0" layoutY="220.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot8" layoutX="1210.0" layoutY="220.0" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="characterSlot1" layoutX="20.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="characterSlot2" layoutX="190.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="characterSlot3" layoutX="360.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="characterSlot4" layoutX="530.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="characterSlot5" layoutX="700.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="characterSlot6" layoutX="870.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="characterSlot7" layoutX="1040.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="characterSlot8" layoutX="1210.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="skillSlot1" layoutX="20.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="skillSlot2" layoutX="190.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="skillSlot3" layoutX="360.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="skillSlot4" layoutX="530.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="skillSlot5" layoutX="700.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="skillSlot6" layoutX="870.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="skillSlot7" layoutX="1040.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <AnchorPane fx:id="skillSlot8" layoutX="1210.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
    </children>
 </AnchorPane>

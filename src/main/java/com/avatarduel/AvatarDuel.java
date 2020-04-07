@@ -30,7 +30,7 @@ public class AvatarDuel extends Application {
     Parent gameRoot = game.load();
     GameGUI con = (GameGUI)game.getController();
     
-    CharacterCard l = CharacterCardList.getCharacterCardById(30);
+    CharacterCard l = CharacterCardList.getCharacterCardById(29);
     
     // Parent root = cardLoader.load();
     // CardGUI con = (CardGUI)cardLoader.getController();
