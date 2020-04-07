@@ -10,7 +10,7 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 import com.avatarduel.AvatarDuel;
-import com.avatarduel.enums.Element;
+import com.avatarduel.model.cards.Element;
 
 
 public class CardGUI{

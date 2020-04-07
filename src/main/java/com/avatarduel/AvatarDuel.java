@@ -11,28 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
-<<<<<<< HEAD
-// import com.avatarduel.model.cards.CharacterCard;
-// import com.avatarduel.model.cards.CharacterCardList;
-import com.avatarduel.model.player.*;
 import com.avatarduel.model.cards.*;
-// import com.avatarduel.model.cards.LandCard;
-// import com.avatarduel.model.cards.LandCardList;
-// import com.avatarduel.model.cards.SkillCard;
-// import com.avatarduel.model.cards.SkillCardList;
-=======
-import com.avatarduel.model.cards.CharacterCard;
-import com.avatarduel.model.cards.CharacterCardList;
-import com.avatarduel.model.cards.Deck;
-import com.avatarduel.model.cards.LandCard;
-import com.avatarduel.model.cards.LandCardList;
-import com.avatarduel.model.cards.SkillCard;
-import com.avatarduel.model.cards.SkillCardList;
-import com.avatarduel.model.gui.CardGUI;
-import com.avatarduel.model.gui.CardGUIBuilder;
-import com.avatarduel.model.gui.FieldGUI;
-import com.avatarduel.model.gui.GameGUI;
->>>>>>> game-interface
+import com.avatarduel.model.gui.*;
+import com.avatarduel.model.player.*;
 
 public class AvatarDuel extends Application {
   @Override

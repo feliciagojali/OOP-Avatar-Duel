@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 import com.avatarduel.AvatarDuel;
-import com.avatarduel.enums.Element;
+import com.avatarduel.model.cards.Element;
 import com.avatarduel.model.cards.CharacterCard;
 
 public class FieldGUI {

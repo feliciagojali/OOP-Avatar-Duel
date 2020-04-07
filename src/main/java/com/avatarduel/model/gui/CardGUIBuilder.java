@@ -5,7 +5,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 import com.avatarduel.AvatarDuel;
-import com.avatarduel.enums.Element;
+import com.avatarduel.model.cards.Element;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
