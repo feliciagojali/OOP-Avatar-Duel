@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import com.avatarduel.util.*;
-import com.avatarduel.enums.Element;
 
 public class CharacterCardList 
 {
@@ -22,28 +21,34 @@ public class CharacterCardList
     // Define filepaths to the CSV file
     private static final String CHARACTER_CARD_FILE_PATH = "../../card/data/character.csv";
 
-    private CharacterCardList() throws URISyntaxException, IOException
+    private CharacterCardList()
     {
         // Define file from known filepaths
-        File characterCardFile = new File(getClass().getResource(CHARACTER_CARD_FILE_PATH).toURI());
-        
-        // Define CSV readers for each file
-        CSVReader characterCardReader = new CSVReader(characterCardFile, "\t");
-
-        characterCardReader.setSkipHeader(true);
-        
-        // Generate list of entry for card data
-        List<String[]> characterCardData = characterCardReader.read();
-        
-        // Input data to map
-        this.characterCardList = new HashMap<Integer, String[]>();
-        this.characterCardIdList = new TreeSet<Integer>();
-        
-        for(String[] characterCardEntry : characterCardData)
-        {
-            this.characterCardList.put(Integer.valueOf(characterCardEntry[0]), characterCardEntry);
-            this.characterCardIdList.add(Integer.parseInt(characterCardEntry[0]));
+        File characterCardFile;
+        try {
+            characterCardFile = new File(getClass().getResource(CHARACTER_CARD_FILE_PATH).toURI());
+            // Define CSV readers for each file
+            final CSVReader characterCardReader = new CSVReader(characterCardFile, "\t");
+    
+            characterCardReader.setSkipHeader(true);
+            
+            // Generate list of entry for card data
+            final List<String[]> characterCardData = characterCardReader.read();
+            
+            // Input data to map
+            this.characterCardList = new HashMap<Integer, String[]>();
+            this.characterCardIdList = new TreeSet<Integer>();
+            
+            for(final String[] characterCardEntry : characterCardData)
+            {
+                this.characterCardList.put(Integer.valueOf(characterCardEntry[0]), characterCardEntry);
+                this.characterCardIdList.add(Integer.parseInt(characterCardEntry[0]));
+            }
+        } catch (final URISyntaxException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+        
 
     }
 
@@ -57,7 +62,7 @@ public class CharacterCardList
         return this.characterCardIdList;
     }
 
-    public static int getCharacterCardCount() throws URISyntaxException, IOException
+    public static int getCharacterCardCount() 
     {
         if(characterCardListInstance == null)
             characterCardListInstance = new CharacterCardList();
@@ -65,7 +70,7 @@ public class CharacterCardList
         return characterCardListInstance.getCharacterCardIdList().size();
     }
 
-    public static boolean isIdCharacterCard(int id) throws URISyntaxException, IOException
+    public static boolean isIdCharacterCard(final int id)
     {
         if(characterCardListInstance == null)
             characterCardListInstance = new CharacterCardList();
@@ -73,12 +78,12 @@ public class CharacterCardList
         return characterCardListInstance.getCharacterCardIdList().contains(new Integer(id));
     }
 
-    public static CharacterCard getCharacterCardById(int id) throws URISyntaxException, IOException
+    public static CharacterCard getCharacterCardById(final int id) 
     {
         if(characterCardListInstance == null)
             characterCardListInstance = new CharacterCardList();
         
-        String[] cardData = characterCardListInstance.getCharacterCardList().get(id);
+        final String[] cardData = characterCardListInstance.getCharacterCardList().get(id);
 
         return new CharacterCard(
             id,

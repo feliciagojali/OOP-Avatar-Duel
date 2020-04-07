@@ -1,6 +1,5 @@
 package com.avatarduel.model.cards;
 
-import com.avatarduel.enums.Element;
 
 public class Card {
     protected int id;
@@ -15,6 +14,11 @@ public class Card {
         this.element = element;
         this.description = description;
         this.imagePath = imagePath;
+    }
+
+    public int getId()
+    {
+        return this.id;
     }
 
     public String getName()

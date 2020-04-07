@@ -1,10 +1,13 @@
-package com.avatarduel.model.cards;
+package com.avatarduel.model.player;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
+
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
+import com.avatarduel.model.cards.*;
+
+
+
 
 public class Deck {
     private Stack<Integer> cards;
@@ -15,10 +18,10 @@ public class Deck {
 
     public Deck() {
         this.cards = new Stack<>();
-        this.size = 60;
+        this.size = 67;
     }
 
-    public void initializeDeck() throws IOException, URISyntaxException
+    public void initializeDeck() 
     {
         int totalWeight = LAND_CARD_WEIGHT + CHARACTER_CARD_WEIGHT + SKILL_CARD_WEIGHT;
         int totalCardCount = LandCardList.getLandCardCount() + CharacterCardList.getCharacterCardCount() + SkillCardList.getSkillCardCount();

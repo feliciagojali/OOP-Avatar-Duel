@@ -1,6 +1,5 @@
 package com.avatarduel.model.cards;
 
-import com.avatarduel.enums.Element;
 
 public class CharacterCard extends Card{
     private int attack;

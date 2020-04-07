@@ -9,13 +9,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
-import com.avatarduel.model.cards.CharacterCard;
-import com.avatarduel.model.cards.CharacterCardList;
-import com.avatarduel.model.cards.Deck;
-import com.avatarduel.model.cards.LandCard;
-import com.avatarduel.model.cards.LandCardList;
-import com.avatarduel.model.cards.SkillCard;
-import com.avatarduel.model.cards.SkillCardList;
+// import com.avatarduel.model.cards.CharacterCard;
+// import com.avatarduel.model.cards.CharacterCardList;
+import com.avatarduel.model.player.*;
+import com.avatarduel.model.cards.*;
+// import com.avatarduel.model.cards.LandCard;
+// import com.avatarduel.model.cards.LandCardList;
+// import com.avatarduel.model.cards.SkillCard;
+// import com.avatarduel.model.cards.SkillCardList;
 
 public class AvatarDuel extends Application {
   @Override
@@ -53,7 +54,7 @@ public class AvatarDuel extends Application {
   }
 
   public static void main(String[] args) {
-    try{
+    // try{
 
       Deck d = new Deck();
       d.initializeDeck();
@@ -67,12 +68,12 @@ public class AvatarDuel extends Application {
         else if(SkillCardList.isIdSkillCard(id)) System.out.println(SkillCardList.getSkillCardById(id));
 
       }
-    }
-    catch(Exception e)
-    {
-      System.out.println("abcdef");
-    }
-
+    // }
+    // catch(Exception e)
+    // {
+    //   System.out.println("abcdef");
+    // }
+    System.out.println("hee");
     launch();
   }
 }
