@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.GameGUI">
+   <center>
+      <VBox prefHeight="800.0" prefWidth="806.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="topFieldContainer" prefHeight="210.0" prefWidth="866.0" style="-fx-border-color: black;" VBox.vgrow="ALWAYS" />
+            <AnchorPane fx:id="bottomFieldContainer" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <HBox fx:id="cardInfoContainer" prefHeight="681.0" prefWidth="282.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <StackPane fx:id="handContainer" prefHeight="219.0" prefWidth="1200.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.CardFieldGUI">
+   <children>
+      <ImageView fx:id="cardFieldImage" fitHeight="140.0" fitWidth="140.0" layoutX="5.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

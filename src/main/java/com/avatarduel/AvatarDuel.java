@@ -3,12 +3,15 @@ package com.avatarduel;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
+<<<<<<< HEAD
 // import com.avatarduel.model.cards.CharacterCard;
 // import com.avatarduel.model.cards.CharacterCardList;
 import com.avatarduel.model.player.*;
@@ -17,31 +20,65 @@ import com.avatarduel.model.cards.*;
 // import com.avatarduel.model.cards.LandCardList;
 // import com.avatarduel.model.cards.SkillCard;
 // import com.avatarduel.model.cards.SkillCardList;
+=======
+import com.avatarduel.model.cards.CharacterCard;
+import com.avatarduel.model.cards.CharacterCardList;
+import com.avatarduel.model.cards.Deck;
+import com.avatarduel.model.cards.LandCard;
+import com.avatarduel.model.cards.LandCardList;
+import com.avatarduel.model.cards.SkillCard;
+import com.avatarduel.model.cards.SkillCardList;
+import com.avatarduel.model.gui.CardGUI;
+import com.avatarduel.model.gui.CardGUIBuilder;
+import com.avatarduel.model.gui.FieldGUI;
+import com.avatarduel.model.gui.GameGUI;
+>>>>>>> game-interface
 
 public class AvatarDuel extends Application {
   @Override
   public void start(Stage stage) throws Exception {
-    FXMLLoader loader = new FXMLLoader(AvatarDuel.class.getResource("card.fxml"));
-    Parent root = loader.load();
-
-    Scene scene = new Scene(root, 1280, 720);
+    FXMLLoader game = new FXMLLoader(AvatarDuel.class.getResource("gui/game.fxml"));
+    Parent gameRoot = game.load();
+    GameGUI con = (GameGUI)game.getController();
     
     CharacterCard l = CharacterCardList.getCharacterCardById(29);
-    Label cardTitle = (Label)loader.getNamespace().get("cardName");
-    Label cardElement = (Label)loader.getNamespace().get("cardElement");
-    ImageView cardImage= (ImageView)loader.getNamespace().get("cardImage");
-    Label cardDescription = (Label)loader.getNamespace().get("cardDescription");
     
-    cardTitle.setText(l.getName());
-    cardElement.setText(l.getElement().toString());
+    // Parent root = cardLoader.load();
+    // CardGUI con = (CardGUI)cardLoader.getController();
+    // con.setAttack("-");
+    // con.setDefense("-");
+    
+    AnchorPane root = new CardGUIBuilder()
+    .setName(l.getName())
+    .setElement(l.getElement())
+    .setImage("card/image/character/" + l.getImagePath())
+    .setDescription(l.getDescription())
+    .setAttack(Integer.toString(l.getAttack()))
+    .setDefense(Integer.toString(l.getDefense()))
+    .setPower(Integer.toString(l.getPower()))
+    .build();
 
-    String path = "card/image/character/" + l.getImagePath();
-    System.out.println(path);
-    Image img = new Image(getClass().getResourceAsStream(path));
+    FXMLLoader fieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
+    AnchorPane field = fieldLoader.load();
+    FXMLLoader fieldLoader2 = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
+    AnchorPane field2 = fieldLoader2.load();
+    FieldGUI conField = (FieldGUI)fieldLoader.getController();
 
-    cardImage.setImage(img);
-    cardDescription.setWrapText(true);
-    cardDescription.setText(l.getDescription());
+    conField.setCharacter(l, 0);
+
+    con.setCardInfo(root);
+    con.setBottomField(field);
+    con.setTopField(field2);
+    // .setName(l.getName())
+    // .setAttack(Integer.toString(l.getAttack()))
+    // .setDefense(Integer.toString(l.getDefense()))
+    // .setPower(Integer.toString(l.getPower()))
+    // .setDescription(l.getDescription())
+    // .setImage("/card/image/character/" + l.getImagePath())
+    
+    Scene scene = new Scene(gameRoot, 1400, 900);
+    BorderPane bp = (BorderPane)game.getNamespace().get("main");
+    bp.setLeft(root);
 
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);
