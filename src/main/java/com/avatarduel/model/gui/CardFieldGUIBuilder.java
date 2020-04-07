@@ -12,14 +12,14 @@ import javafx.scene.image.Image;
 
 public class CardFieldGUIBuilder {
     FXMLLoader cardFieldLoader;
-    CardGUI cardFieldController;
+    CardFieldGUI cardFieldController;
     AnchorPane cardField;
 
     public CardFieldGUIBuilder() throws IOException
     {
-        this.cardFieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/card.fxml"));
+        this.cardFieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/cardField.fxml"));
         this.cardField = cardFieldLoader.load();
-        this.cardFieldController =  (CardGUI)cardFieldLoader.getController();
+        this.cardFieldController =  (CardFieldGUI)cardFieldLoader.getController();
     }
 
     public CardFieldGUIBuilder setImage(String imagePath)

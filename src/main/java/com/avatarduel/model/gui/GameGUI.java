@@ -31,13 +31,13 @@ public class GameGUI {
     @FXML
     public void setBottomField(AnchorPane field)
     {
-        bottomFieldContainer = field;
+        bottomFieldContainer.getChildren().addAll(field);
     }
-
+    
     @FXML
     public void setTopField(AnchorPane field)
     {
-        topFieldContainer = field;
+        topFieldContainer.getChildren().addAll(field);
     }
 
     @FXML

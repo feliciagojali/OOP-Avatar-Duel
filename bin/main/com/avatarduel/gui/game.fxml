@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.GameGUI">
+<BorderPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.GameGUI">
    <center>
       <VBox prefHeight="800.0" prefWidth="806.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,7 +17,7 @@
       </VBox>
    </center>
    <left>
-      <HBox fx:id="cardInfoContainer" prefHeight="606.0" prefWidth="322.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+      <HBox fx:id="cardInfoContainer" prefHeight="681.0" prefWidth="282.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
    </left>
    <bottom>
       <StackPane fx:id="handContainer" prefHeight="219.0" prefWidth="1200.0" BorderPane.alignment="CENTER" />

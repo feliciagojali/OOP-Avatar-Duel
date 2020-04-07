@@ -20,6 +20,7 @@ import com.avatarduel.model.cards.SkillCard;
 import com.avatarduel.model.cards.SkillCardList;
 import com.avatarduel.model.gui.CardGUI;
 import com.avatarduel.model.gui.CardGUIBuilder;
+import com.avatarduel.model.gui.FieldGUI;
 import com.avatarduel.model.gui.GameGUI;
 
 public class AvatarDuel extends Application {
@@ -46,7 +47,17 @@ public class AvatarDuel extends Application {
     .setPower(Integer.toString(l.getPower()))
     .build();
 
+    FXMLLoader fieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
+    AnchorPane field = fieldLoader.load();
+    FXMLLoader fieldLoader2 = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
+    AnchorPane field2 = fieldLoader2.load();
+    FieldGUI conField = (FieldGUI)fieldLoader.getController();
+
+    conField.setCharacter(l, 0);
+
     con.setCardInfo(root);
+    con.setBottomField(field);
+    con.setTopField(field2);
     // .setName(l.getName())
     // .setAttack(Integer.toString(l.getAttack()))
     // .setDefense(Integer.toString(l.getDefense()))
@@ -54,7 +65,7 @@ public class AvatarDuel extends Application {
     // .setDescription(l.getDescription())
     // .setImage("/card/image/character/" + l.getImagePath())
     
-    Scene scene = new Scene(gameRoot, 1200, 900);
+    Scene scene = new Scene(gameRoot, 1400, 900);
     BorderPane bp = (BorderPane)game.getNamespace().get("main");
     bp.setLeft(root);
 
