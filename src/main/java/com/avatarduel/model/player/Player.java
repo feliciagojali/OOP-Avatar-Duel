@@ -13,7 +13,7 @@ public class Player {
     private Deck deck;
     private Field field;
 
-    public Player(String name) throws URISyntaxException,IOException{
+    public Player(String name){
         this.name = name;
         this.hp = 80;
         this.cardInHand = new Hand();
@@ -21,7 +21,7 @@ public class Player {
         d.initializeDeck();
         d.shuffle();
         this.deck = d;
-        for(int i=0;i<=7;i++){
+        for(int i=0;i<=6;i++){
             this.drawCardfromDeck();
         }
         this.field =  new Field();
@@ -72,13 +72,13 @@ public class Player {
     public void playCard(int posTangan, int posField){
         Card x = this.cardInHand.getCard(posTangan);
         if (CharacterCardList.isIdCharacterCard(x.getId())){
-            if(!this.field.isCharacterRowFull() && !this.field.isPosCharacterAvail(posField)){
+            if(this.field.isPosCharacterAvail(posField)){
                 this.cardInHand.discardCard(posTangan);
                 CharacterCard C = CharacterCardList.getCharacterCardById(x.getId());
                 this.field.addCharacterRow(C, posField);
             }   
-        } else {
-            if (!this.field.isSkillRowFull() && !this.field.isPosSkillAvail(posField)){
+        } else if (SkillCardList.isIdSkillCard(x.getId())) {
+            if (this.field.isPosSkillAvail(posField)){
                 this.cardInHand.discardCard(posTangan);
                 SkillCard C = SkillCardList.getSkillCardById(x.getId());
                 this.field.addSkillRow(C, posField);

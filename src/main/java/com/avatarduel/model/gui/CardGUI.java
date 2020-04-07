@@ -83,4 +83,8 @@ public class CardGUI{
         this.cardPower.setText(power);
         
     }
+    @FXML
+    public void imagepicker(){
+        this.setName("aku anak aang");
+    }
 }

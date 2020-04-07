@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="328.0" style="-fx-background-color: #964b00;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.CardGUI">
+<AnchorPane onMouseClicked="#imagepicker" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="328.0" style="-fx-background-color: #964b00;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.CardGUI">
    <children>
       <Label fx:id="cardName" layoutX="25.0" layoutY="20.0" prefHeight="30.0" prefWidth="193.0" text="Name" textFill="WHITE">
          <font>
