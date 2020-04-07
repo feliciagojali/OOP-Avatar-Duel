@@ -77,15 +77,15 @@ public class AvatarDuel extends Application {
       Deck d = new Deck();
       d.initializeDeck();
       d.shuffle();
-      // while(!d.isDeckEmpty())
-      // {
-      //   int id = d.drawCard();
+      while(!d.isDeckEmpty())
+      {
+        int id = d.drawCard();
         
-      //   if(LandCardList.isIdLandCard(id)) System.out.println(LandCardList.getLandCardById(id));
-      //   else if(CharacterCardList.isIdCharacterCard(id)) System.out.println(CharacterCardList.getCharacterCardById(id));
-      //   else if(SkillCardList.isIdSkillCard(id)) System.out.println(SkillCardList.getSkillCardById(id));
+        if(LandCardList.isIdLandCard(id)) System.out.println(LandCardList.getLandCardById(id));
+        else if(CharacterCardList.isIdCharacterCard(id)) System.out.println(CharacterCardList.getCharacterCardById(id));
+        else if(SkillCardList.isIdSkillCard(id)) System.out.println(SkillCardList.getSkillCardById(id));
 
-      // }
+      }
 
       // A.drawCardfromDeck();
       // A.discardCard(2);
@@ -99,7 +99,7 @@ public class AvatarDuel extends Application {
     // {
     //   System.out.println("abcdef");
     // }
-    System.out.println("hee");
-    // launch();
+    launch();
   }
+  
 }
