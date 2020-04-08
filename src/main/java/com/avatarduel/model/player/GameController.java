@@ -32,11 +32,13 @@ public class GameController {
                 break;
             case end:
                 this.phase = Phase.draw;
+                this.listOfPlayers.get(this.playerActive).getField().resetHasAtk();
                 if (this.playerActive == 0){
                     this.playerActive = 1;
                 } else {
                     this.playerActive = 0;
                 }
+
             default:
                 break;
         }

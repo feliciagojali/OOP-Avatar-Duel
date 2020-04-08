@@ -12,7 +12,6 @@ public class Player {
     private ElemenStats stats;
     private Deck deck;
     private Field field;
-
     public Player(String name){
         this.name = name;
         this.hp = 80;
@@ -28,6 +27,18 @@ public class Player {
         this.stats = new ElemenStats();
     }
     
+    public Field getField(){
+        return this.field;
+    }
+
+    public int getHp(){
+        return this.hp;
+    }
+
+    public void setHp(int x){
+        this.hp = x;
+    }
+
     public void drawCardfromDeck(){
         int x = this.deck.drawCard();
         boolean landcard =  LandCardList.isIdLandCard(x);
@@ -64,7 +75,10 @@ public class Player {
         
                 }
                 this.cardInHand.discardCard(posTangan);
-            } 
+            }
+            else if(CharacterCardList.isIdCharacterCard(x.getId())) {
+                
+            }
 
         }       
     }
@@ -85,7 +99,43 @@ public class Player {
             }
         }
     }
+    
+    public boolean canAttack(int posisi){
+        return (!this.field.isPosCharacterAvail(posisi) && this.field.canAttack(posisi));
+    }
+    public void attack(Player enemy,int Pos, int EnemyPos){
+        if (canAttack(Pos)) {
+            if (!this.field.isPosCharacterAvail(EnemyPos)) {
+                // posisi kartu enemy menyerang
+                if (enemy.getField().getCharacterStance(EnemyPos)) {
+                    if (enemy.getField().getCharacterCard(EnemyPos).getAttack() < this.field.getCharacterCard(Pos).getAttack()) {
+                        int selisihattack = this.field.getCharacterCard(Pos).getAttack() - enemy.getField().getCharacterCard(EnemyPos).getAttack();
+                        enemy.getField().discardCharaCard(EnemyPos);
+                        enemy.setHp(enemy.getHp()-selisihattack);
+                        this.field.setHasAtk(Pos);
+                        this.field.unableChange(Pos);
+                    }
+                } else {
+                    // posisi kartu bertahan
+                    if (enemy.getField().getCharacterCard(EnemyPos).getDefense() < this.field.getCharacterCard(Pos).getDefense()){
+                        enemy.getField().discardCharaCard(EnemyPos);
+                        this.field.setHasAtk(Pos);
+                        this.field.unableChange(Pos);
 
+                    }
+                }
+
+
+            }
+        }
+    }
+
+    // ini attack kalau di field lawan udah gaada kartu samsek
+    public void AttackEnemy(Player enemy,int pos){
+        int attack = this.field.getCharacterCard(pos).getAttack();
+        enemy.setHp(enemy.getHp()-attack);
+
+    }
     
    
 
