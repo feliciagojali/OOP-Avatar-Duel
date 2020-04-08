@@ -1,5 +1,8 @@
 package com.avatarduel.model.player;
 import java.util.LinkedList;
+import java.util.ArrayList;
+
+import javafx.scene.Parent;
 
 public class GameController {
     private LinkedList<Player> listOfPlayers;
@@ -44,4 +47,6 @@ public class GameController {
         }
 
     }
+
+
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: black;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="cardName" alignment="CENTER" layoutX="22.0" layoutY="33.0" prefHeight="44.0" prefWidth="106.0" text="Name" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardElement" alignment="CENTER" layoutX="27.0" layoutY="77.0" prefHeight="17.0" prefWidth="96.0" text="Element">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="107.0" prefHeight="17.0" prefWidth="44.0" text="ATK" />
+      <Label alignment="CENTER" layoutX="92.0" layoutY="107.0" prefHeight="17.0" prefWidth="44.0" text="DEF" />
+      <Label fx:id="cardAttack" alignment="CENTER" layoutX="14.0" layoutY="131.0" prefHeight="17.0" prefWidth="44.0" text="val" />
+      <Label fx:id="cardDefense" alignment="CENTER" layoutX="92.0" layoutY="131.0" prefHeight="17.0" prefWidth="44.0" text="val" />
+      <Label fx:id="cardType" alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="17.0" prefWidth="96.0" text="Type">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</fx:root>

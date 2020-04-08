@@ -12,6 +12,7 @@ public class Player {
     private ElementStats stats;
     private Deck deck;
     private Field field;
+
     public Player(String name){
         this.name = name;
         this.hp = 80;
@@ -43,6 +44,7 @@ public class Player {
         int x = this.deck.drawCard();
         boolean landcard =  LandCardList.isIdLandCard(x);
         boolean character = CharacterCardList.isIdCharacterCard(x);
+        
         if (landcard){
             LandCard L = LandCardList.getLandCardById(x);
             this.cardInHand.addCard(L);

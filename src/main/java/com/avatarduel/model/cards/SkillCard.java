@@ -1,7 +1,7 @@
 package com.avatarduel.model.cards;
 
 
-public class SkillCard extends Card{
+public class SkillCard extends Card implements FieldCard{
     protected int attack;
     protected int defense;
     protected int power;
