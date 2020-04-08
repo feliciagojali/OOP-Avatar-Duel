@@ -78,12 +78,20 @@ public class AvatarDuel extends Application {
         else if(SkillCardList.isIdSkillCard(id)) System.out.println(SkillCardList.getSkillCardById(id));
 
       }
+
+      // A.drawCardfromDeck();
+      // A.discardCard(2);
+      // B.discardCard(1);
+      // B.playCard(1, 3);
+     
+      
+
     // }
     // catch(Exception e)
     // {
     //   System.out.println("abcdef");
     // }
-    System.out.println("hee");
     launch();
   }
+  
 }
