@@ -1,11 +1,11 @@
 package com.avatarduel.model.player;
 
-public class StatsAir {
+public class Stats {
     private int current;
     private int max;
     private int regen;
 
-    public StatsAir(){
+    public Stats(){
         this.current = 0;
         this.max = 0;
         this.regen = 0;
