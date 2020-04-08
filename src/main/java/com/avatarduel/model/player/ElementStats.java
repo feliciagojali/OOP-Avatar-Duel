@@ -23,25 +23,30 @@ public class ElementStats {
             case WATER:
                 water.setCurrent(water.getCurrent() + 1);
                 water.setMax(water.getMax() + 1);
-                water.setRegen(water.getRegen() + 1);
                 break;
             case EARTH:
                 earth.setCurrent(earth.getCurrent() + 1);
                 earth.setMax(earth.getMax() + 1);
-                earth.setRegen(earth.getRegen() + 1);
                 break;
             case FIRE:
                 fire.setCurrent(fire.getCurrent() + 1);
                 fire.setMax(fire.getMax() + 1);
-                fire.setRegen(fire.getRegen() + 1);
                 break;
             case AIR:
                 air.setCurrent(air.getCurrent() + 1);
                 air.setMax(air.getMax() + 1);
-                air.setRegen(air.getRegen() + 1);
                 break;
             default:
                 break;
         }
+    }
+
+    // Reset stat to max
+    public void resetStats()
+    {
+        water.setCurrent(water.getMax());
+        earth.setCurrent(earth.getMax());
+        fire.setCurrent(fire.getMax());
+        air.setCurrent(air.getMax());
     }
 }
