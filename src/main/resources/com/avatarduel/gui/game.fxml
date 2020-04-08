@@ -21,7 +21,7 @@
          <right>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="drawButton" mnemonicParsing="false" onMouseClicked="#drawCard" prefHeight="111.0" prefWidth="191.0" text="draw" />
+                  <Button fx:id="drawButton" mnemonicParsing="false" onMouseClicked="#drawCard" prefHeight="61.0" prefWidth="127.0" text="draw" />
                </children>
             </StackPane>
          </right>
@@ -41,4 +41,7 @@
    <center>
       <StackPane prefHeight="579.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </center>
+   <left>
+      <StackPane fx:id="cardInfoSlot" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>

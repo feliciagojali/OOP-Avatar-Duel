@@ -11,17 +11,20 @@ import com.avatarduel.model.cards.SkillCard;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.input.MouseEvent;
 
 public class MinicardController extends AnchorPane {
+    private static InterfaceChannel channel = new InterfaceChannel();
 
     @FXML private Label cardType;
     @FXML private Label cardName;
     @FXML private Label cardElement;
     @FXML private Label cardAttack;
     @FXML private Label cardDefense;
+    @FXML private Button cardUseButton;
 
     Card card;
 
@@ -86,6 +89,18 @@ public class MinicardController extends AnchorPane {
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    public void useCard()
+    {
+    }
+
+    @FXML
+    public void showCardInfo()
+    {
+        System.out.println(this.card);
+        channel.sendCardInfo(this.card);
     }
 
 }
