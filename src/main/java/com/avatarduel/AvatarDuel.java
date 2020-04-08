@@ -41,21 +41,18 @@ public class AvatarDuel extends Application {
 
     FXMLLoader fieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
     AnchorPane field = fieldLoader.load();
-    FXMLLoader fieldLoader2 = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
-    AnchorPane field2 = fieldLoader2.load();
     FieldGUI conField = (FieldGUI)fieldLoader.getController();
 
-    conField.setCharacter(l, 0);
+    FXMLLoader fieldLoader2 = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
+    AnchorPane field2 = fieldLoader2.load();
+
+    FXMLLoader deckLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/deck.fxml"));
+    AnchorPane deck = deckLoader.load();
 
     con.setCardInfo(root);
     con.setBottomField(field);
     con.setTopField(field2);
-    // .setName(l.getName())
-    // .setAttack(Integer.toString(l.getAttack()))
-    // .setDefense(Integer.toString(l.getDefense()))
-    // .setPower(Integer.toString(l.getPower()))
-    // .setDescription(l.getDescription())
-    // .setImage("/card/image/character/" + l.getImagePath())
+    con.setDeckContainer(deck);
     
     Scene scene = new Scene(gameRoot, 1400, 900);
     BorderPane bp = (BorderPane)game.getNamespace().get("main");
@@ -64,11 +61,6 @@ public class AvatarDuel extends Application {
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);
     stage.show();
-    // try {
-    //   text.setText("Avatar Duel!");
-    // } catch (Exception e) {
-    //   text.setText("Failed to load cards: " + e);
-    // }
   }
 
   public static void main(String[] args) {

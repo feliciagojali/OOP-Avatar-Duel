@@ -13,6 +13,7 @@ import java.io.IOException;
 import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.Element;
 import com.avatarduel.model.cards.CharacterCard;
+import com.avatarduel.model.cards.CharacterCardList;
 
 public class FieldGUI {
 
@@ -102,10 +103,18 @@ public class FieldGUI {
     {
         String fxId = event.getPickResult().getIntersectedNode().getId();
         int id;
+        CharacterCard card = CharacterCardList.getCharacterCardById(29);
 
-        if(fxId.contains("character")) id = Integer.parseInt(fxId.substring(9));
-        else id = Integer.parseInt(fxId.substring(5));
-
-        System.out.println(id);
+        if(fxId.contains("characterSlot"))
+        {
+            id = Integer.parseInt(fxId.substring(13));
+            this.setCharacter(card, id-1);
+        }
+        else
+        {
+            id = Integer.parseInt(fxId.substring(9));
+            System.out.println(id);
+        }
+        
     }
 }
