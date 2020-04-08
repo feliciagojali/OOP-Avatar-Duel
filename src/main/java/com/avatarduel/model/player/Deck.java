@@ -82,6 +82,11 @@ public class Deck {
         return this.cards.pop();
     }
 
+    public int getCardsLeft()
+    {
+        return this.cards.size();
+    }
+
     public boolean isDeckEmpty()
     {
         return this.cards.isEmpty();
