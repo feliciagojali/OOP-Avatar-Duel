@@ -15,6 +15,22 @@ public class ElementStats {
         air = new Stats();
     }
 
+    public Stats getWstats(){
+        return this.water;
+    }
+
+    public Stats getEstats(){
+        return this.earth;
+    }
+
+    public Stats getFstats(){
+        return this.fire;
+    }
+
+    public Stats getAstats(){
+        return this.air;
+    }
+
     // When using landcard
     public void addStats(Element element)
     {

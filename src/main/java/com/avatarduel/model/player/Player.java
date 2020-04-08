@@ -9,7 +9,7 @@ public class Player {
     private String name;
     private int hp;
     private Hand cardInHand;
-    private ElemenStats stats;
+    private ElementStats stats;
     private Deck deck;
     private Field field;
     public Player(String name){
@@ -24,7 +24,7 @@ public class Player {
             this.drawCardfromDeck();
         }
         this.field =  new Field();
-        this.stats = new ElemenStats();
+        this.stats = new ElementStats();
     }
     
     public Field getField(){
@@ -55,32 +55,66 @@ public class Player {
         }
     }
 
-    public void discardCard(int posTangan){
+    public boolean discardCard(int posTangan){
+        boolean answ = false;
         if (this.cardInHand.isPosValid(posTangan)) {
             Card x = this.cardInHand.getCard(posTangan);
             if (LandCardList.isIdLandCard(x.getId())) {
-                if (x.getElement() == Element.WATER)
-                {
-        
+                this.stats.addStats(x.getElement());
+                this.cardInHand.discardCard(posTangan);
+                answ = true;
+                return answ;
+            }
+
+            else if(CharacterCardList.isIdCharacterCard(x.getId())) {
+                CharacterCard C = CharacterCardList.getCharacterCardById(x.getId());
+                if (C.getElement() == Element.EARTH){
+                    if (this.stats.getEstats().getCurrent() >= C.getPower()) {
+                        answ = true;
+                    }
                 }
-                else if (x.getElement() == Element.AIR)
-                {
-        
+                else if (C.getElement() == Element.AIR){
+                    if (this.stats.getAstats().getCurrent() >= C.getPower()){
+                        answ = true;
+                    }
                 }
-                else if (x.getElement() == Element.FIRE)
-                {
-        
+                else if (C.getElement() == Element.WATER){
+                    if (this.stats.getWstats().getCurrent() >= C.getPower()){
+                        answ = true;
+                    }
                 }
                 else {
-        
+                    if (this.stats.getFstats().getCurrent() >= C.getPower()){
+                        answ = true;
+                    }
                 }
-                this.cardInHand.discardCard(posTangan);
             }
-            else if(CharacterCardList.isIdCharacterCard(x.getId())) {
-                
+            else {
+                SkillCard S = SkillCardList.getSkillCardById(x.getId());
+                if (S.getElement() == Element.EARTH){
+                    if (this.stats.getEstats().getCurrent() >= S.getPower()) {
+                        answ = true;
+                    }
+                }
+                else if (S.getElement() == Element.AIR){
+                    if (this.stats.getAstats().getCurrent() >= S.getPower()){
+                        answ = true;
+                    }
+                }
+                else if (S.getElement() == Element.WATER){
+                    if (this.stats.getWstats().getCurrent() >= S.getPower()){
+                        answ = true;
+                    }
+                }
+                else {
+                    if (this.stats.getFstats().getCurrent() >= S.getPower()){
+                        answ = true;
+                    }
+                }
             }
 
         }       
+        return answ;
     }
 
     public void playCard(int posTangan, int posField){
