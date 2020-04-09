@@ -94,7 +94,6 @@ public class MinicardController extends AnchorPane {
     @FXML
     public void showCardInfo()
     {
-        System.out.println(this.card);
         if(card instanceof CharacterCard) channel.sendCardInfo((CharacterCard)this.card);
         else if(card instanceof LandCard) channel.sendCardInfo((LandCard)this.card);
         else if(card instanceof SkillCard) channel.sendCardInfo((SkillCard)this.card);

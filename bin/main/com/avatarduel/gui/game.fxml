@@ -8,21 +8,21 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="821.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.GameController">
+<BorderPane prefHeight="821.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.GameController">
    <bottom>
       <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" BorderPane.alignment="CENTER">
          <left>
-            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <StackPane prefHeight="320.0" prefWidth="200.0" />
-                  <fx:include fx:id="deck" source="deck.fxml" />
-               </children>
-            </StackPane>
+            <StackPane fx:id="deckSlot" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="drawButton" mnemonicParsing="false" onMouseClicked="#drawCard" prefHeight="61.0" prefWidth="127.0" text="draw" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="changeTurn" mnemonicParsing="false" onMouseClicked="#changeTurn" prefHeight="61.0" prefWidth="127.0" text="changeTurn()" />
+                        <Button fx:id="drawButton" mnemonicParsing="false" onMouseClicked="#drawCard" prefHeight="61.0" prefWidth="127.0" text="draw" />
+                     </children>
+                  </VBox>
                </children>
             </StackPane>
          </right>
@@ -57,7 +57,10 @@
       <VBox BorderPane.alignment="CENTER">
          <children>
             <StackPane fx:id="cardInfoSlot" prefHeight="301.0" prefWidth="252.0" />
-            <StackPane fx:id="statsSlot" layoutX="10.0" layoutY="10.0" prefHeight="301.0" prefWidth="252.0" />
+            <StackPane fx:id="statsSlot" layoutX="10.0" layoutY="10.0" prefHeight="301.0" prefWidth="252.0">
+               <children>
+                  <fx:include source="stats.fxml" />
+               </children></StackPane>
          </children>
       </VBox>
    </left>

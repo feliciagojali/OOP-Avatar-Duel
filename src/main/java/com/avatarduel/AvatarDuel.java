@@ -7,6 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -21,6 +23,11 @@ public class AvatarDuel extends Application {
     FXMLLoader gameLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/game.fxml"));
     BorderPane gameRoot = gameLoader.load();
     
+    // Media media = new Media(AvatarDuel.class.getResource("music/song.mp3").toString());
+    // MediaPlayer mp = new MediaPlayer(media);
+    // mp.setVolume(0.1);
+    // mp.play();
+
     Scene scene = new Scene(gameRoot, 600, 400);
 
     stage.setTitle("Avatar Duel");

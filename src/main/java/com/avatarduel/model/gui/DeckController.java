@@ -2,29 +2,43 @@ package com.avatarduel.model.gui;
 
 import javafx.scene.control.Label;
 
+import java.io.IOException;
+
+import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.Card;
 import com.avatarduel.model.player.Deck;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 
-public class DeckController {
-    
+public class DeckController extends AnchorPane {
+
     @FXML private Label cardLeftLabel;
-    private Deck deck;
 
-    public void initialize()
+    public DeckController(Deck deck)
     {
-        this.deck = new Deck();
-        this.deck.initializeDeck();
-        this.deck.shuffle();
-        this.cardLeftLabel.setText(Integer.toString(this.deck.getCardsLeft()));
+        FXMLLoader deckLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/deck.fxml"));
+        deckLoader.setRoot(this);
+        deckLoader.setController(this);
+        
+        try
+        {
+            deckLoader.load();
+            this.cardLeftLabel.setText(Integer.toString(deck.getCardsLeft()));
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        // this.cardLeftLabel.setText(Integer.toString(this.deck.getCardsLeft()));
     }
     
     @FXML
-    public int decrement()
+    public void setCardLeftLabelText(int x)
     {
-        this.cardLeftLabel.setText(Integer.toString(this.deck.getCardsLeft() - 1));
-        return this.deck.drawCard();
+        this.cardLeftLabel.setText(Integer.toString(x));
     }
 
 }
