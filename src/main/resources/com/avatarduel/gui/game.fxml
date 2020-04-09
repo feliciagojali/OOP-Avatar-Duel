@@ -47,13 +47,18 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <fx:include source="field.fxml" />
-                  <fx:include source="field.fxml" />
+                  <fx:include fx:id="topField" source="field.fxml" />
+                  <fx:include fx:id="bottomField" source="field.fxml" />
                </children>
             </VBox>
          </children></StackPane>
    </center>
    <left>
-      <StackPane fx:id="cardInfoSlot" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <StackPane fx:id="cardInfoSlot" prefHeight="301.0" prefWidth="252.0" />
+            <StackPane fx:id="statsSlot" layoutX="10.0" layoutY="10.0" prefHeight="301.0" prefWidth="252.0" />
+         </children>
+      </VBox>
    </left>
 </BorderPane>
