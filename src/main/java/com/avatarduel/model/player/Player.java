@@ -27,7 +27,9 @@ public class Player {
         this.field =  new Field();
         this.stats = new ElementStats();
     }
-    
+    public Hand getHand(){
+        return this.cardInHand;
+    }
     public Field getField(){
         return this.field;
     }
@@ -39,7 +41,21 @@ public class Player {
     public void setHp(int x){
         this.hp = x;
     }
-
+    public void drawCard(Card X){
+        boolean landcard =  LandCardList.isIdLandCard(X.getId());
+        boolean character = CharacterCardList.isIdCharacterCard(X.getId());
+        
+        if (landcard){
+            LandCard L = LandCardList.getLandCardById(X.getId());
+            this.cardInHand.addCard(L);
+        } else if(character){ 
+            CharacterCard C = CharacterCardList.getCharacterCardById(X.getId());
+            this.cardInHand.addCard(C);;
+        } else{
+            SkillCard S = SkillCardList.getSkillCardById(X.getId());
+            this.cardInHand.addCard(S);
+        }
+    }
     public void drawCardfromDeck(){
         int x = this.deck.drawCard();
         boolean landcard =  LandCardList.isIdLandCard(x);

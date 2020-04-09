@@ -1,5 +1,7 @@
 package com.avatarduel.model.gui;
 
+import java.io.IOException;
+
 import javax.management.RuntimeErrorException;
 
 import com.avatarduel.AvatarDuel;
@@ -18,22 +20,27 @@ import javafx.scene.input.MouseEvent;
 public class MinicardController extends AnchorPane {
     private static InterfaceChannel channel = new InterfaceChannel();
 
-    @FXML private Label cardType;
-    @FXML private Label cardName;
-    @FXML private Label cardElement;
-    @FXML private Label cardAttack;
-    @FXML private Label cardDefense;
-    @FXML private Button cardUseButton;
+    @FXML
+    private Label cardType;
+    @FXML
+    private Label cardName;
+    @FXML
+    private Label cardElement;
+    @FXML
+    private Label cardAttack;
+    @FXML
+    private Label cardDefense;
+    @FXML
+    private Button cardUseButton;
 
     Card card;
 
-    public MinicardController(LandCard c)
-    {
+    public MinicardController(LandCard c) {
         FXMLLoader minicardLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/minicard.fxml"));
         minicardLoader.setRoot(this);
         minicardLoader.setController(this);
 
-        try{
+        try {
             minicardLoader.load();
             this.card = c;
             this.cardType.setText("Land");
@@ -41,20 +48,17 @@ public class MinicardController extends AnchorPane {
             this.cardElement.setText(c.getElement().toString());
             this.cardAttack.setText("-");
             this.cardDefense.setText("-");
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-    
-    public MinicardController(CharacterCard c)
-    {
+
+    public MinicardController(CharacterCard c) {
         FXMLLoader minicardLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/minicard.fxml"));
         minicardLoader.setRoot(this);
         minicardLoader.setController(this);
 
-        try{
+        try {
             minicardLoader.load();
             this.card = c;
             this.cardType.setText("Character");
@@ -62,20 +66,17 @@ public class MinicardController extends AnchorPane {
             this.cardElement.setText(c.getElement().toString());
             this.cardAttack.setText(Integer.toString(c.getAttack()));
             this.cardDefense.setText(Integer.toString(c.getDefense()));
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public MinicardController(SkillCard c)
-    {
+    public MinicardController(SkillCard c) {
         FXMLLoader minicardLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/minicard.fxml"));
         minicardLoader.setRoot(this);
         minicardLoader.setController(this);
 
-        try{
+        try {
             minicardLoader.load();
             this.card = c;
             this.cardType.setText("Skill");
@@ -83,18 +84,17 @@ public class MinicardController extends AnchorPane {
             this.cardElement.setText(c.getElement().toString());
             this.cardAttack.setText(Integer.toString(c.getAttack()));
             this.cardDefense.setText(Integer.toString(c.getDefense()));
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @FXML
-    public void useCard()
-    {
+    public void useCard() {
     }
 
+   
+    
     @FXML
     public void showCardInfo()
     {
