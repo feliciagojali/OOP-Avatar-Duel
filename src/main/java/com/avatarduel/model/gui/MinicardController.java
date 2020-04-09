@@ -20,18 +20,12 @@ import javafx.scene.input.MouseEvent;
 public class MinicardController extends AnchorPane {
     private static InterfaceChannel channel = new InterfaceChannel();
 
-    @FXML
-    private Label cardType;
-    @FXML
-    private Label cardName;
-    @FXML
-    private Label cardElement;
-    @FXML
-    private Label cardAttack;
-    @FXML
-    private Label cardDefense;
-    @FXML
-    private Button cardUseButton;
+    @FXML private Label cardType;
+    @FXML private Label cardName;
+    @FXML private Label cardElement;    
+    @FXML private Label cardAttack;
+    @FXML private Label cardDefense;
+    @FXML private Button cardUseButton;
 
     Card card;
 
@@ -90,7 +84,9 @@ public class MinicardController extends AnchorPane {
     }
 
     @FXML
-    public void useCard() {
+    public void useCard()
+    {
+        
     }
 
    

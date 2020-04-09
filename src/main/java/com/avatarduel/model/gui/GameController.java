@@ -24,6 +24,8 @@ public class GameController{
 
     
     @FXML private DeckController deckController;
+    @FXML private FieldController bottomFieldController;
+    @FXML private FieldController topFieldController;
     @FXML private Button drawButton;
     @FXML private HBox handSlot;
     @FXML private StackPane cardInfoSlot;
