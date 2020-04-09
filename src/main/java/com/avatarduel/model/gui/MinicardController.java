@@ -5,7 +5,6 @@ import javax.management.RuntimeErrorException;
 import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.Card;
 import com.avatarduel.model.cards.CharacterCard;
-import com.avatarduel.model.cards.FieldCard;
 import com.avatarduel.model.cards.LandCard;
 import com.avatarduel.model.cards.SkillCard;
 
@@ -100,7 +99,9 @@ public class MinicardController extends AnchorPane {
     public void showCardInfo()
     {
         System.out.println(this.card);
-        channel.sendCardInfo(this.card);
+        if(card instanceof CharacterCard) channel.sendCardInfo((CharacterCard)this.card);
+        else if(card instanceof LandCard) channel.sendCardInfo((LandCard)this.card);
+        else if(card instanceof SkillCard) channel.sendCardInfo((SkillCard)this.card);
     }
 
 }

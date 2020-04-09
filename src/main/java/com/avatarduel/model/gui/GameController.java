@@ -59,21 +59,24 @@ public class GameController{
     }
 
     @FXML
-    public void setCardInfo(Card c)
+    public void setCardInfo(CharacterCard c)
     {
-        System.out.println("pisang goreng tepung");
-        
-        System.out.println(this.cardInfoSlot.getChildren());
         this.cardInfoSlot.getChildren().clear();
-        System.out.println(this.cardInfoSlot.getChildren());
+        this.cardInfoSlot.getChildren().add(new CardController(c));        
+    }
 
-        if(c instanceof CharacterCard)
-            this.cardInfoSlot.getChildren().add(new MinicardController((CharacterCard)c));
-        else if(c instanceof LandCard)
-            this.cardInfoSlot.getChildren().add(new MinicardController((LandCard)c));
-        else if(c instanceof SkillCard)
-            this.cardInfoSlot.getChildren().add(new MinicardController((SkillCard)c));
+    @FXML
+    public void setCardInfo(SkillCard c)
+    {
+        this.cardInfoSlot.getChildren().clear();
+        this.cardInfoSlot.getChildren().add(new CardController(c));        
+    }
 
-    }  
+    @FXML
+    public void setCardInfo(LandCard c)
+    {
+        this.cardInfoSlot.getChildren().clear();
+        this.cardInfoSlot.getChildren().add(new CardController(c));        
+    }
 
 }
