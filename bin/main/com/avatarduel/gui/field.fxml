@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="1380.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.FieldGUI">
+<GridPane hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="360.0" prefWidth="1200.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.FieldController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="180.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="180.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <AnchorPane fx:id="characterSlot1" layoutX="20.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot2" layoutX="190.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot3" layoutX="360.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot4" layoutX="530.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot5" layoutX="700.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot6" layoutX="870.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot7" layoutX="1040.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="characterSlot8" layoutX="1210.0" layoutY="20.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot1" layoutX="20.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot2" layoutX="190.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot3" layoutX="360.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot4" layoutX="530.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot5" layoutX="700.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot6" layoutX="870.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot7" layoutX="1040.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
-      <AnchorPane fx:id="skillSlot8" layoutX="1210.0" layoutY="220.0" onMouseClicked="#handleOnMouseClick" prefHeight="180.0" prefWidth="150.0" style="-fx-background-color: red;" />
+      <StackPane prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" />
+      <StackPane layoutX="20.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="1" />
+      <StackPane layoutX="168.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="2" />
+      <StackPane layoutX="316.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="3" />
+      <StackPane layoutX="465.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="4" />
+      <StackPane layoutX="614.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="5" />
+      <StackPane layoutX="168.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="6" />
+      <StackPane layoutX="763.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="7" />
+      <StackPane layoutX="20.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.rowIndex="1" />
+      <StackPane layoutX="1061.0" layoutY="20.0" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <StackPane prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <StackPane prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <StackPane prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <StackPane prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+      <StackPane prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+      <StackPane prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee;" GridPane.columnIndex="7" GridPane.rowIndex="1" />
    </children>
-</AnchorPane>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</GridPane>
