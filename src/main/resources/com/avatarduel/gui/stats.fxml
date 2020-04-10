@@ -5,29 +5,29 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="278.0" prefWidth="262.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="stats" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="278.0" prefWidth="262.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="139.0" layoutY="27.0" text="0 / 0">
+      <Label fx:id="waterStats" layoutX="139.0" layoutY="27.0" text="0 / 0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="139.0" layoutY="72.0" text="0 / 0">
+      <Label fx:id="earthStats" layoutX="139.0" layoutY="72.0" text="0 / 0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="139.0" layoutY="117.0" text="0 / 0">
+      <Label fx:id="fireStats" layoutX="139.0" layoutY="117.0" text="0 / 0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="139.0" layoutY="162.0" text="0 / 0">
+      <Label fx:id="airStats" layoutX="139.0" layoutY="162.0" text="0 / 0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="139.0" layoutY="207.0" text="0 / 0">
+      <Label fx:id="energyStats" layoutX="139.0" layoutY="207.0" text="0 / 0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -58,4 +58,4 @@
          </font>
       </Label>
    </children>
-</AnchorPane>
+</fx:root>

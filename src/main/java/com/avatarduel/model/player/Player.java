@@ -42,6 +42,10 @@ public class Player {
         return this.field;
     }
 
+    public ElementStats getElementStats(){
+        return this.stats;
+    }
+
     public int getHp(){
         return this.hp;
     }
@@ -81,22 +85,22 @@ public class Player {
             else if(CharacterCardList.isIdCharacterCard(x.getId())) {
                 CharacterCard C = CharacterCardList.getCharacterCardById(x.getId());
                 if (C.getElement() == Element.EARTH){
-                    if (this.stats.getEstats().getCurrent() >= C.getPower()) {
+                    if (this.stats.getEarthStats().getCurrent() >= C.getPower()) {
                         answ = true;
                     }
                 }
                 else if (C.getElement() == Element.AIR){
-                    if (this.stats.getAstats().getCurrent() >= C.getPower()){
+                    if (this.stats.getAirStats().getCurrent() >= C.getPower()){
                         answ = true;
                     }
                 }
                 else if (C.getElement() == Element.WATER){
-                    if (this.stats.getWstats().getCurrent() >= C.getPower()){
+                    if (this.stats.getWaterStats().getCurrent() >= C.getPower()){
                         answ = true;
                     }
                 }
                 else {
-                    if (this.stats.getFstats().getCurrent() >= C.getPower()){
+                    if (this.stats.getFireStats().getCurrent() >= C.getPower()){
                         answ = true;
                     }
                 }
@@ -104,22 +108,22 @@ public class Player {
             else {
                 SkillCard S = SkillCardList.getSkillCardById(x.getId());
                 if (S.getElement() == Element.EARTH){
-                    if (this.stats.getEstats().getCurrent() >= S.getPower()) {
+                    if (this.stats.getEarthStats().getCurrent() >= S.getPower()) {
                         answ = true;
                     }
                 }
                 else if (S.getElement() == Element.AIR){
-                    if (this.stats.getAstats().getCurrent() >= S.getPower()){
+                    if (this.stats.getAirStats().getCurrent() >= S.getPower()){
                         answ = true;
                     }
                 }
                 else if (S.getElement() == Element.WATER){
-                    if (this.stats.getWstats().getCurrent() >= S.getPower()){
+                    if (this.stats.getWaterStats().getCurrent() >= S.getPower()){
                         answ = true;
                     }
                 }
                 else {
-                    if (this.stats.getFstats().getCurrent() >= S.getPower()){
+                    if (this.stats.getFireStats().getCurrent() >= S.getPower()){
                         answ = true;
                     }
                 }

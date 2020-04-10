@@ -7,27 +7,33 @@ public class ElementStats {
     private Stats earth;
     private Stats fire;
     private Stats air;
+    private Stats energy;
     
     public ElementStats(){
         water = new Stats();
         earth = new Stats();
         fire = new Stats();
         air = new Stats();
+        energy = new Stats();
     }
 
-    public Stats getWstats(){
+    public Stats getWaterStats(){
         return this.water;
     }
 
-    public Stats getEstats(){
+    public Stats getEarthStats(){
         return this.earth;
     }
 
-    public Stats getFstats(){
+    public Stats getFireStats(){
         return this.fire;
     }
 
-    public Stats getAstats(){
+    public Stats getAirStats(){
+        return this.air;
+    }
+
+    public Stats getEnergyStats(){
         return this.air;
     }
 
@@ -64,5 +70,6 @@ public class ElementStats {
         earth.setCurrent(earth.getMax());
         fire.setCurrent(fire.getMax());
         air.setCurrent(air.getMax());
+        energy.setCurrent(energy.getMax());
     }
 }

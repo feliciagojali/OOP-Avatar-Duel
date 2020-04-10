@@ -20,22 +20,24 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.input.MouseEvent;
 
 public class GameController{
-    public static GameController gameControllerInstance = null;
-
+    static GameController gameControllerInstance = null;
     
     @FXML private DeckController deckController;
     @FXML private FieldController bottomFieldController;
     @FXML private FieldController topFieldController;
+    @FXML private StatsController statsController;
     @FXML private Button drawButton;
     @FXML private HBox handSlot;
     @FXML private StackPane cardInfoSlot;
     @FXML private StackPane deckSlot;
+    @FXML private StackPane statsSlot;
     
     private Player playerA;
     private Player playerB;
+
+    // For storing current active player's reference
     private Player activePlayer;
 
-    // private Phase phase;
     
     public void initialize() {
         // Initialize static instance for reference
@@ -46,6 +48,7 @@ public class GameController{
         this.activePlayer = this.playerA;
         this.setHandInterface();
         this.setDeckInterface();
+        this.setStatsInterface();
         // this.phase = Phase.draw;
         
     }
@@ -82,22 +85,24 @@ public class GameController{
         this.deckController.setCardLeftLabelText(this.activePlayer.getDeck().getCardsLeft());
     }
     
+    // Set interface to current player's hand
     @FXML
     public void setHandInterface()
     {
         this.handSlot.getChildren().clear();
-
+        
         for(Card card : this.activePlayer.getHand().getCards())
         {
             if(card instanceof CharacterCard)
-                this.handSlot.getChildren().add(new MinicardController((CharacterCard)card));
+            this.handSlot.getChildren().add(new MinicardController((CharacterCard)card));
             else if(card instanceof LandCard)
                 this.handSlot.getChildren().add(new MinicardController((LandCard)card));
-            else
+                else
                 this.handSlot.getChildren().add(new MinicardController((SkillCard)card));
-        }
+            }
     }
-
+    
+    // Set interface to current player's deck
     @FXML
     public void setDeckInterface()
     {
@@ -106,7 +111,18 @@ public class GameController{
         this.deckController = new DeckController(this.activePlayer.getDeck());
         this.deckSlot.getChildren().add(this.deckController);
     }
+    
+    // Set interface to current player's stats
+    @FXML
+    public void setStatsInterface()
+    {
+        this.statsSlot.getChildren().clear();
 
+        this.statsController = new StatsController(this.activePlayer.getElementStats());
+        this.statsSlot.getChildren().add(this.statsController);
+    }
+    
+    // Set interface to current player's card info when hovered
     @FXML
     public void setCardInfo(CharacterCard c)
     {
@@ -128,12 +144,15 @@ public class GameController{
         this.cardInfoSlot.getChildren().add(new CardController(c));        
     }
 
+    // Switch turns between player A and B
     @FXML
     public void changeTurn()
     {
         this.activePlayer = this.activePlayer == this.playerA ? this.playerB : this.playerA;
         this.setHandInterface();
         this.setDeckInterface();
+        this.setStatsInterface();
     }
+
 
 }
