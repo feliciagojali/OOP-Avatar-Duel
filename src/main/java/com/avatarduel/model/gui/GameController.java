@@ -16,22 +16,24 @@ import com.avatarduel.model.player.Phase;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.input.MouseEvent;
 
 public class GameController{
     static GameController gameControllerInstance = null;
     
-    @FXML private DeckController deckController;
-    @FXML private FieldController bottomFieldController;
-    @FXML private FieldController topFieldController;
-    @FXML private StatsController statsController;
-    @FXML private Button drawButton;
-    @FXML private HBox handSlot;
     @FXML private StackPane cardInfoSlot;
     @FXML private StackPane deckSlot;
     @FXML private StackPane statsSlot;
+    @FXML private ScrollPane handSlot;
     
+    private DeckController deckController;
+    private FieldController bottomFieldController;
+    private FieldController topFieldController;
+    private StatsController statsController;
+    private HandController handController;
+
     private Player playerA;
     private Player playerB;
 
@@ -52,54 +54,60 @@ public class GameController{
         // this.phase = Phase.draw;
         
     }
-    
  
-    @FXML
-    public void drawCard(MouseEvent event)
-    {
-        int id = this.activePlayer.getDeck().drawCard();
+    // @FXML
+    // public void drawCard(MouseEvent event)
+    // {
+    //     int id = this.activePlayer.getDeck().drawCard();
 
-        Card card = null;
+    //     Card card = null;
 
-        if(CharacterCardList.isIdCharacterCard(id))
-        {
-            card = (CharacterCard)CharacterCardList.getCharacterCardById(id);
-            this.handSlot.getChildren().addAll(new MinicardController((CharacterCard)card));
-            this.activePlayer.getHand().addCard((CharacterCard)card);
-        }
-        else if(LandCardList.isIdLandCard(id))
-        {
-            card = (LandCard) LandCardList.getLandCardById(id);
-            this.handSlot.getChildren().addAll(new MinicardController((LandCard)card));
-            this.activePlayer.getHand().addCard((LandCard)card);
+    //     if(CharacterCardList.isIdCharacterCard(id))
+    //     {
+    //         card = (CharacterCard)CharacterCardList.getCharacterCardById(id);
+    //         this.handSlot.getChildren().addAll(new MinicardController((CharacterCard)card));
+    //         this.activePlayer.getHand().addCard((CharacterCard)card);
+    //     }
+    //     else if(LandCardList.isIdLandCard(id))
+    //     {
+    //         card = (LandCard) LandCardList.getLandCardById(id);
+    //         this.handSlot.getChildren().addAll(new MinicardController((LandCard)card));
+    //         this.activePlayer.getHand().addCard((LandCard)card);
 
-        }
-        else
-        {
-            card = SkillCardList.getSkillCardById(id);
-            this.handSlot.getChildren().addAll(new MinicardController((SkillCard)card));
-            this.activePlayer.getHand().addCard((SkillCard)card);
+    //     }
+    //     else
+    //     {
+    //         card = SkillCardList.getSkillCardById(id);
+    //         this.handSlot.getChildren().addAll(new MinicardController((SkillCard)card));
+    //         this.activePlayer.getHand().addCard((SkillCard)card);
 
-        }
+    //     }
         
-        this.deckController.setCardLeftLabelText(this.activePlayer.getDeck().getCardsLeft());
-    }
+    //     this.deckController.setCardLeftLabelText(this.activePlayer.getDeck().getCardsLeft());
+    // }
     
+    // // Set interface to current player's hand
+    // @FXML
+    // public void setHandInterface()
+    // {
+    //     this.handSlot.getChildren().clear();
+        
+    //     for(Card card : this.activePlayer.getHand().getCards())
+    //     {
+    //         if(card instanceof CharacterCard)
+    //         this.handSlot.getChildren().add(new MinicardController((CharacterCard)card));
+    //         else if(card instanceof LandCard)
+    //             this.handSlot.getChildren().add(new MinicardController((LandCard)card));
+    //             else
+    //             this.handSlot.getChildren().add(new MinicardController((SkillCard)card));
+    //         }
+    // }
     // Set interface to current player's hand
     @FXML
     public void setHandInterface()
     {
-        this.handSlot.getChildren().clear();
-        
-        for(Card card : this.activePlayer.getHand().getCards())
-        {
-            if(card instanceof CharacterCard)
-            this.handSlot.getChildren().add(new MinicardController((CharacterCard)card));
-            else if(card instanceof LandCard)
-                this.handSlot.getChildren().add(new MinicardController((LandCard)card));
-                else
-                this.handSlot.getChildren().add(new MinicardController((SkillCard)card));
-            }
+        this.handController = new HandController(this.activePlayer);
+        this.handSlot.setContent(this.handController);
     }
     
     // Set interface to current player's deck
@@ -108,7 +116,7 @@ public class GameController{
     {
         this.deckSlot.getChildren().clear();
         
-        this.deckController = new DeckController(this.activePlayer.getDeck());
+        this.deckController = new DeckController(this.activePlayer, this.handController);
         this.deckSlot.getChildren().add(this.deckController);
     }
     
