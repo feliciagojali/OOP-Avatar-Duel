@@ -19,14 +19,14 @@ public class Hand {
     }
     
     public Card getCard(int pos){
-        return this.cards.get(pos-1);
+        return this.cards.get(pos);
     }
 
     public boolean isPosValid(int pos){
-        return this.cards.get(pos-1) != null;
+        return this.cards.get(pos) != null;
     }
     public void discardCard(int pos){
-        this.cards.remove(pos-1);
+        this.cards.remove(pos);
         
     }
 

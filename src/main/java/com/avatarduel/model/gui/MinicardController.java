@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.input.MouseEvent;
 
 public class MinicardController extends AnchorPane {
@@ -25,9 +26,10 @@ public class MinicardController extends AnchorPane {
     @FXML private Label cardDefense;
     @FXML private Button cardUseButton;
 
-    Card card;
+    private GameController gameController;
+    private Card card;
 
-    public MinicardController(LandCard c) {
+    public MinicardController(LandCard c, GameController controller) {
         FXMLLoader minicardLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/minicard.fxml"));
         minicardLoader.setRoot(this);
         minicardLoader.setController(this);
@@ -40,12 +42,13 @@ public class MinicardController extends AnchorPane {
             this.cardElement.setText(c.getElement().toString());
             this.cardAttack.setText("-");
             this.cardDefense.setText("-");
+            this.gameController = controller;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public MinicardController(CharacterCard c) {
+    public MinicardController(CharacterCard c, GameController controller) {
         FXMLLoader minicardLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/minicard.fxml"));
         minicardLoader.setRoot(this);
         minicardLoader.setController(this);
@@ -58,12 +61,13 @@ public class MinicardController extends AnchorPane {
             this.cardElement.setText(c.getElement().toString());
             this.cardAttack.setText(Integer.toString(c.getAttack()));
             this.cardDefense.setText(Integer.toString(c.getDefense()));
+            this.gameController = controller;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public MinicardController(SkillCard c) {
+    public MinicardController(SkillCard c, GameController controller) {
         FXMLLoader minicardLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/minicard.fxml"));
         minicardLoader.setRoot(this);
         minicardLoader.setController(this);
@@ -76,6 +80,8 @@ public class MinicardController extends AnchorPane {
             this.cardElement.setText(c.getElement().toString());
             this.cardAttack.setText(Integer.toString(c.getAttack()));
             this.cardDefense.setText(Integer.toString(c.getDefense()));
+            this.gameController = controller;
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -84,17 +90,32 @@ public class MinicardController extends AnchorPane {
     @FXML
     public void useCard()
     {
-        
-    }
+        int cardIndex = ((HBox)this.getParent()).getChildren().indexOf(this);
+        System.out.println(cardIndex);
 
-   
+        if(card instanceof LandCard)
+        {
+            for(Card c1 : this.gameController.getActivePlayer().getHand().getCards())
+            {
+                System.out.println(c1);
+            }
+            this.gameController.getActivePlayer().discardCard(cardIndex);
+            System.out.println("-----------");
+            for(Card c2 : this.gameController.getActivePlayer().getHand().getCards())
+            {
+                System.out.println(c2);
+            }
+            this.gameController.setStatsInterface();
+            ((HBox)this.getParent()).getChildren().remove(this);
+        }
+    }
     
     @FXML
     public void showCardInfo()
     {
-        if(card instanceof CharacterCard) channel.sendCardInfo((CharacterCard)this.card);
-        else if(card instanceof LandCard) channel.sendCardInfo((LandCard)this.card);
-        else if(card instanceof SkillCard) channel.sendCardInfo((SkillCard)this.card);
+        if(card instanceof CharacterCard) this.gameController.setCardInfo((CharacterCard)this.card);
+        else if(card instanceof LandCard) this.gameController.setCardInfo((LandCard)this.card);
+        else if(card instanceof SkillCard) this.gameController.setCardInfo((SkillCard)this.card);
     }
 
 }

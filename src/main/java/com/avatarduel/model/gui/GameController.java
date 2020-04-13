@@ -56,12 +56,18 @@ public class GameController{
         // this.phase = Phase.draw;
     }
 
+    // Get active player
+    public Player getActivePlayer()
+    {
+        return this.activePlayer;
+    }
+
     // Set top field interface
     @FXML
     public void setTopFieldInterface()
     {
         this.topFieldSlot.getChildren().clear();
-        this.topFieldController = new FieldController(this.activePlayer, false);
+        this.topFieldController = new FieldController(this.activePlayer, this, false);
         this.topFieldSlot.getChildren().add(this.topFieldController);
     }
 
@@ -70,7 +76,7 @@ public class GameController{
     public void setBottomFieldInterface()
     {
         this.bottomFieldSlot.getChildren().clear();
-        this.bottomFieldController = new FieldController(this.activePlayer, false);
+        this.bottomFieldController = new FieldController(this.activePlayer, this, false);
         this.bottomFieldSlot.getChildren().add(this.bottomFieldController);
     }
 
@@ -78,7 +84,7 @@ public class GameController{
     @FXML
     public void setHandInterface()
     {
-        this.handController = new HandController(this.activePlayer);
+        this.handController = new HandController(this.activePlayer, this);
         this.handSlot.setContent(this.handController);
     }
     
@@ -132,6 +138,7 @@ public class GameController{
         this.setHandInterface();
         this.setDeckInterface();
         this.setStatsInterface();
+        
     }
 
 

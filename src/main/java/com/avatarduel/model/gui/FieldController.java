@@ -30,9 +30,10 @@ public class FieldController extends GridPane{
     private StackPane bottomSlots[];
     private boolean isFlipped;
 
+    private GameController gameController;
     private Player activePlayer;
 
-    public FieldController(Player player, boolean flip)
+    public FieldController(Player player, GameController controller, boolean flip)
     {
         FXMLLoader fieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
         fieldLoader.setRoot(this);
@@ -59,6 +60,7 @@ public class FieldController extends GridPane{
         {
             fieldLoader.load();
             this.activePlayer = player;
+            this.gameController = controller;
             this.isFlipped = flip;
         }
         catch(IOException e)
@@ -72,8 +74,8 @@ public class FieldController extends GridPane{
         for(int i=0;i<6;i++)
         {
             int index = this.isFlipped ? 6-i-1 : i;
-            this.topSlots[index].getChildren().add(new MinicardController(this.activePlayer.getField().getCharacterCards()[i]));
-            this.bottomSlots[index].getChildren().add(new MinicardController(this.activePlayer.getField().getSkillCards()[i]));
+            this.topSlots[index].getChildren().add(new MinicardController(this.activePlayer.getField().getCharacterCards()[i], this.gameController));
+            this.bottomSlots[index].getChildren().add(new MinicardController(this.activePlayer.getField().getSkillCards()[i], this.gameController));
         }
     }
 

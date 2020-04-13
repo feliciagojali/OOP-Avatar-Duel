@@ -16,9 +16,10 @@ import javafx.fxml.FXMLLoader;
 
 public class HandController extends HBox{
 
+    private GameController gameController;
     private Player activePlayer;
 
-    public HandController(Player player)
+    public HandController(Player player, GameController controller)
     {
         FXMLLoader handLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/hand.fxml"));
         handLoader.setRoot(this);
@@ -28,6 +29,7 @@ public class HandController extends HBox{
         {
             handLoader.load();
             this.activePlayer = player;
+            this.gameController = controller;
             this.displayHand();
         }
         catch(IOException e)
@@ -43,11 +45,11 @@ public class HandController extends HBox{
         for(Card card : this.activePlayer.getHand().getCards())
         {
             if(card instanceof CharacterCard)
-                this.getChildren().add(new MinicardController((CharacterCard)card));
+                this.getChildren().add(new MinicardController((CharacterCard)card, this.gameController));
             else if(card instanceof LandCard)
-                this.getChildren().add(new MinicardController((LandCard)card));
+                this.getChildren().add(new MinicardController((LandCard)card, this.gameController));
             else
-                this.getChildren().add(new MinicardController((SkillCard)card));
+                this.getChildren().add(new MinicardController((SkillCard)card, this.gameController));
         }
     }
 }
