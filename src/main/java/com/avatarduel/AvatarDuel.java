@@ -28,7 +28,7 @@ public class AvatarDuel extends Application {
     // mp.setVolume(0.1);
     // mp.play();
 
-    Scene scene = new Scene(gameRoot, 600, 400);
+    Scene scene = new Scene(gameRoot, 1200, 1000);
 
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="821.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.GameController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.GameController">
    <bottom>
       <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" BorderPane.alignment="CENTER">
          <left>
@@ -41,8 +41,8 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <fx:include fx:id="topField" source="field.fxml" />
-                  <fx:include fx:id="bottomField" source="field.fxml" />
+                  <StackPane fx:id="topFieldSlot" VBox.vgrow="ALWAYS" />
+                  <StackPane fx:id="bottomFieldSlot" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </children></StackPane>

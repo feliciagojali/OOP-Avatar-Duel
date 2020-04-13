@@ -21,11 +21,12 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.input.MouseEvent;
 
 public class GameController{
-    static GameController gameControllerInstance = null;
     
     @FXML private StackPane cardInfoSlot;
     @FXML private StackPane deckSlot;
     @FXML private StackPane statsSlot;
+    @FXML private StackPane topFieldSlot;
+    @FXML private StackPane bottomFieldSlot;
     @FXML private ScrollPane handSlot;
     
     private DeckController deckController;
@@ -42,66 +43,37 @@ public class GameController{
 
     
     public void initialize() {
-        // Initialize static instance for reference
-        gameControllerInstance = this;
-       
+        
+        // Initialize game controller requirements
         this.playerA = new Player("A");
         this.playerB = new Player("B");
         this.activePlayer = this.playerA;
         this.setHandInterface();
         this.setDeckInterface();
         this.setStatsInterface();
+        this.setTopFieldInterface();
+        this.setBottomFieldInterface();
         // this.phase = Phase.draw;
-        
     }
- 
-    // @FXML
-    // public void drawCard(MouseEvent event)
-    // {
-    //     int id = this.activePlayer.getDeck().drawCard();
 
-    //     Card card = null;
+    // Set top field interface
+    @FXML
+    public void setTopFieldInterface()
+    {
+        this.topFieldSlot.getChildren().clear();
+        this.topFieldController = new FieldController(this.activePlayer, false);
+        this.topFieldSlot.getChildren().add(this.topFieldController);
+    }
 
-    //     if(CharacterCardList.isIdCharacterCard(id))
-    //     {
-    //         card = (CharacterCard)CharacterCardList.getCharacterCardById(id);
-    //         this.handSlot.getChildren().addAll(new MinicardController((CharacterCard)card));
-    //         this.activePlayer.getHand().addCard((CharacterCard)card);
-    //     }
-    //     else if(LandCardList.isIdLandCard(id))
-    //     {
-    //         card = (LandCard) LandCardList.getLandCardById(id);
-    //         this.handSlot.getChildren().addAll(new MinicardController((LandCard)card));
-    //         this.activePlayer.getHand().addCard((LandCard)card);
+    // Set bottom field interface
+    @FXML
+    public void setBottomFieldInterface()
+    {
+        this.bottomFieldSlot.getChildren().clear();
+        this.bottomFieldController = new FieldController(this.activePlayer, false);
+        this.bottomFieldSlot.getChildren().add(this.bottomFieldController);
+    }
 
-    //     }
-    //     else
-    //     {
-    //         card = SkillCardList.getSkillCardById(id);
-    //         this.handSlot.getChildren().addAll(new MinicardController((SkillCard)card));
-    //         this.activePlayer.getHand().addCard((SkillCard)card);
-
-    //     }
-        
-    //     this.deckController.setCardLeftLabelText(this.activePlayer.getDeck().getCardsLeft());
-    // }
-    
-    // // Set interface to current player's hand
-    // @FXML
-    // public void setHandInterface()
-    // {
-    //     this.handSlot.getChildren().clear();
-        
-    //     for(Card card : this.activePlayer.getHand().getCards())
-    //     {
-    //         if(card instanceof CharacterCard)
-    //         this.handSlot.getChildren().add(new MinicardController((CharacterCard)card));
-    //         else if(card instanceof LandCard)
-    //             this.handSlot.getChildren().add(new MinicardController((LandCard)card));
-    //             else
-    //             this.handSlot.getChildren().add(new MinicardController((SkillCard)card));
-    //         }
-    // }
     // Set interface to current player's hand
     @FXML
     public void setHandInterface()
