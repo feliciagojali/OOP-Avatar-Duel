@@ -57,6 +57,11 @@ public class Player {
         return this.hp;
     }
 
+    public int getSelectedCardIndex()
+    {
+        return this.selectedCardIndex;
+    }
+
     public void setHp(int x){
         this.hp = x;
     }
@@ -126,6 +131,8 @@ public class Player {
                 this.stats.reduceStats(card.getElement(), card.getPower());
             }
         }
+
+        this.selectedCardIndex = -1;
     }
     
     public boolean canAttack(int posisi){

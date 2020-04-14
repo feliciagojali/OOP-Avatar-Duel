@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.avatarduel.AvatarDuel;
+import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Player;
 
 import javafx.fxml.FXML;
@@ -33,24 +34,23 @@ public class FieldController extends GridPane{
     private StackPane topSlots[];
     private StackPane bottomSlots[];
     private Map<String, StackPane> slotsMap;
-    private boolean isFlipped;
 
     private GameController gameController;
-    private Player activePlayer;
+    private Player owner;
 
     public FieldController(Player player, GameController controller, boolean flip)
     {
-        FXMLLoader fieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
+        FXMLLoader fieldLoader;
+        if(flip) fieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/fieldFlip.fxml"));
+        else fieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
         fieldLoader.setRoot(this);
         fieldLoader.setController(this);
-        
         
         try
         {
             fieldLoader.load();
-            this.activePlayer = player;
+            this.owner = player;
             this.gameController = controller;
-            this.isFlipped = flip;
 
             // Store FXML slot references in array for easy referencing
             this.topSlots = new StackPane[6];
@@ -75,6 +75,7 @@ public class FieldController extends GridPane{
                 this.slotsMap.put("topSlot" + i, this.topSlots[i-1]);
                 this.slotsMap.put("bottomSlot" + i, this.bottomSlots[i-1]);
             }
+            this.displayField();
         }
         catch(IOException e)
         {
@@ -86,19 +87,39 @@ public class FieldController extends GridPane{
     {
         for(int i=0;i<6;i++)
         {
-            int index = this.isFlipped ? 6-i-1 : i;
-            if(this.activePlayer.getField().getCharacterCards()[i] != null)
-                this.topSlots[index].getChildren().add(new MinicardController(this.activePlayer.getField().getCharacterCards()[i], this.gameController));
-            if(this.activePlayer.getField().getSkillCards()[i] != null)
-                this.bottomSlots[index].getChildren().add(new MinicardController(this.activePlayer.getField().getSkillCards()[i], this.gameController));
+            if(this.owner.getField().getCharacterCards()[i] != null)
+                this.topSlots[i].getChildren().add(new MinicardController(this.owner.getField().getCharacterCards()[i], this.gameController));
+            if(this.owner.getField().getSkillCards()[i] != null)
+                this.bottomSlots[i].getChildren().add(new MinicardController(this.owner.getField().getSkillCards()[i], this.gameController));
         }
     }
 
     @FXML
     public void putCard(MouseEvent event)
     {
+        // Get the clicked slot
         StackPane slot = this.slotsMap.get(((StackPane)event.getSource()).getId().toString());
+
+        boolean isTopSlot = true;
+
         int slotIndex = Arrays.asList(this.topSlots).indexOf(slot);
+        if(slotIndex == -1)
+        {
+            slotIndex = Arrays.asList(this.bottomSlots).indexOf(slot);
+            isTopSlot = false;
+        }
+
+        // Check whether the card is a character
+        boolean isCharacter = this.gameController.getActivePlayer().getHand().getCard(this.gameController.getActivePlayer().getSelectedCardIndex()) instanceof CharacterCard;
+        System.out.println(slotIndex);
+        System.out.println(isCharacter);
+        System.out.println(isTopSlot);
+        
+        if((isCharacter && !isTopSlot) || (!isCharacter && isTopSlot))
+            throw new RuntimeException("Invalid card position");
+
+        if(!isCharacter && this.gameController.getActivePlayer().getField().getCharacterCards()[slotIndex] == null)
+            throw new RuntimeException("Skill cards must be used in conjuction of character cards");
         
         this.gameController.getActivePlayer().playCard(slotIndex);
         this.displayField();

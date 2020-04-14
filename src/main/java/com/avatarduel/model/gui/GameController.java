@@ -51,8 +51,7 @@ public class GameController{
         this.setHandInterface();
         this.setDeckInterface();
         this.setStatsInterface();
-        this.setTopFieldInterface();
-        this.setBottomFieldInterface();
+        this.setFieldInterface(this.activePlayer, this.playerB);
         // this.phase = Phase.draw;
     }
 
@@ -76,20 +75,15 @@ public class GameController{
 
     // Set top field interface
     @FXML
-    public void setTopFieldInterface()
-    {
-        this.topFieldSlot.getChildren().clear();
-        this.topFieldController = new FieldController(this.activePlayer, this, false);
-        this.topFieldSlot.getChildren().add(this.topFieldController);
-    }
-
-    // Set bottom field interface
-    @FXML
-    public void setBottomFieldInterface()
+    public void setFieldInterface(Player bottomPlayer, Player topPlayer)
     {
         this.bottomFieldSlot.getChildren().clear();
-        this.bottomFieldController = new FieldController(this.activePlayer, this, false);
+        this.bottomFieldController = new FieldController(bottomPlayer, this, false);
         this.bottomFieldSlot.getChildren().add(this.bottomFieldController);
+
+        this.topFieldSlot.getChildren().clear();
+        this.topFieldController = new FieldController(topPlayer, this, true);
+        this.topFieldSlot.getChildren().add(this.topFieldController);
     }
 
     // Set interface to current player's hand
@@ -146,10 +140,12 @@ public class GameController{
     @FXML
     public void changeTurn()
     {
+        Player otherPlayer = this.activePlayer;
         this.activePlayer = this.activePlayer == this.playerA ? this.playerB : this.playerA;
         this.setHandInterface();
         this.setDeckInterface();
         this.setStatsInterface();
+        this.setFieldInterface(this.activePlayer, otherPlayer);
         
     }
 
