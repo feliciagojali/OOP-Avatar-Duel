@@ -90,9 +90,9 @@ public class SkillCardList
             Element.valueOf(cardData[2]),
             cardData[3],
             cardData[4],
+            Integer.parseInt(cardData[6]),
             Integer.parseInt(cardData[7]),
-            Integer.parseInt(cardData[5]),
-            Integer.parseInt(cardData[6])
+            Integer.parseInt(cardData[5])
         );
     }
      

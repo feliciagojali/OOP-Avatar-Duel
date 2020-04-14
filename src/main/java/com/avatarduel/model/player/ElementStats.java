@@ -17,27 +17,24 @@ public class ElementStats {
         energy = new Stats();
     }
 
-    public Stats getWaterStats(){
-        return this.water;
+    public Stats getStats(Element element)
+    {
+        switch(element)
+        {
+            case WATER:
+                return this.water;
+            case EARTH:
+                return this.earth;
+            case FIRE:
+                return this.fire;
+            case AIR:
+                return this.air;
+            default:
+                return this.energy;
+        }
     }
 
-    public Stats getEarthStats(){
-        return this.earth;
-    }
-
-    public Stats getFireStats(){
-        return this.fire;
-    }
-
-    public Stats getAirStats(){
-        return this.air;
-    }
-
-    public Stats getEnergyStats(){
-        return this.air;
-    }
-
-    // When using landcard
+    // Add up stats
     public void addStats(Element element)
     {
         switch(element)
@@ -59,8 +56,34 @@ public class ElementStats {
                 air.setMax(air.getMax() + 1);
                 break;
             default:
+                energy.setCurrent(energy.getCurrent() + 1);
+                energy.setMax(energy.getMax() + 1);
                 break;
         }
+    }
+    
+    // Use stat
+    public void reduceStats(Element element, int deduction)
+    {
+        switch(element)
+        {
+            case WATER:
+                water.setCurrent(water.getCurrent() - deduction);
+                break;
+            case EARTH:
+                earth.setCurrent(earth.getCurrent() - deduction);
+                break;
+            case FIRE:
+                fire.setCurrent(fire.getCurrent() - deduction);
+                break;
+            case AIR:
+                air.setCurrent(air.getCurrent() - deduction);
+                break;
+            default:
+                energy.setCurrent(energy.getCurrent() - deduction);
+                break;
+        }
+
     }
 
     // Reset stat to max

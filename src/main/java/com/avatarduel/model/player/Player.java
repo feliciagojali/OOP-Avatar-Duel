@@ -6,12 +6,16 @@ import java.net.URISyntaxException;
 import com.avatarduel.model.cards.*;
 
 public class Player {
+    // General player fields
     private String name;
     private int hp;
     private ElementStats stats;
+
+    // Card related fields
     private Hand hand;
     private Deck deck;
     private Field field;
+    private int selectedCardIndex;
 
     public Player(String name){
         this.name = name;
@@ -30,6 +34,7 @@ public class Player {
         
         this.field =  new Field();
         this.stats = new ElementStats();
+        this.selectedCardIndex = -1;
     }
     
     public Deck getDeck(){
@@ -69,72 +74,56 @@ public class Player {
         }
     }
 
-    public void discardCard(int pos) {
+    public void useCard(int pos) {
         if (!this.hand.isPosValid(pos))
             throw new RuntimeException("Invalid hand position");
 
         if (this.hand.getCard(pos) instanceof LandCard) {
-            System.out.println("pisang");
             this.stats.addStats(this.hand.getCard(pos).getElement());
             this.hand.discardCard(pos);
         }
+        else if(this.hand.getCard(pos) instanceof CharacterCard) {
+            CharacterCard card = (CharacterCard)this.hand.getCard(pos);
 
-        /* TODO : Ini ntar ada attribute buat nyimpen last clicked buat ntar action taroh */
-
-        // else if(CharacterCardList.isIdCharacterCard(x.getId())) {
-        //     CharacterCard C = CharacterCardList.getCharacterCardById(x.getId());
-        //     if (C.getElement() == Element.EARTH){
-        //         if (this.stats.getEarthStats().getCurrent() >= C.getPower()) {
-        //         }
-        //     }
-        //     else if (C.getElement() == Element.AIR){
-        //         if (this.stats.getAirStats().getCurrent() >= C.getPower()){
-        //         }
-        //     }
-        //     else if (C.getElement() == Element.WATER){
-        //         if (this.stats.getWaterStats().getCurrent() >= C.getPower()){
-        //         }
-        //     }
-        //     else {
-        //         if (this.stats.getFireStats().getCurrent() >= C.getPower()){
-        //         }
-        //     }
-        // }
-        // else {
-        //     SkillCard S = SkillCardList.getSkillCardById(x.getId());
-        //     if (S.getElement() == Element.EARTH){
-        //         if (this.stats.getEarthStats().getCurrent() >= S.getPower()) {
-        //         }
-        //     }
-        //     else if (S.getElement() == Element.AIR){
-        //         if (this.stats.getAirStats().getCurrent() >= S.getPower()){
-        //         }
-        //     }
-        //     else if (S.getElement() == Element.WATER){
-        //         if (this.stats.getWaterStats().getCurrent() >= S.getPower()){
-        //         }
-        //     }
-        //     else {
-        //         if (this.stats.getFireStats().getCurrent() >= S.getPower()){
-        //         }
-        //     }
-        // }
-
+            // If power > current stats, throw exception
+            if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent())
+            throw new RuntimeException("Insufficent element stats");
+            
+            this.selectedCardIndex = pos;
+        }
+        else 
+        {
+            SkillCard card = (SkillCard)this.hand.getCard(pos);
+        
+            // If power > current stats, throw exception
+            if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent())
+                throw new RuntimeException("Insufficent element stats");
+            
+            this.selectedCardIndex = pos;
+        }
+        System.out.println(this.selectedCardIndex);
     }
 
-    public void playCard(int posHand, int posField){
-        Card x = this.hand.getCard(posHand);
-        if (CharacterCardList.isIdCharacterCard(x.getId())){
+    public void playCard(int posField){
+        // If havent selected any card (-1)..
+        if(this.selectedCardIndex == -1)
+            throw new RuntimeException("No card selected");
+        
+        if (this.hand.getCard(this.selectedCardIndex) instanceof CharacterCard)
+        {
             if(this.field.isPosCharacterAvail(posField)){
-                this.hand.discardCard(posHand);
-                CharacterCard C = CharacterCardList.getCharacterCardById(x.getId());
-                this.field.addCharacterRow(C, posField);
+                CharacterCard card = (CharacterCard)this.hand.getCard(this.selectedCardIndex);
+                this.hand.discardCard(this.selectedCardIndex);
+                this.field.addCharacterRow(card, posField);
+                this.stats.reduceStats(card.getElement(), card.getPower());
             }   
-        } else if (SkillCardList.isIdSkillCard(x.getId())) {
+        }
+        else{
             if (this.field.isPosSkillAvail(posField)){
-                this.hand.discardCard(posHand);
-                SkillCard C = SkillCardList.getSkillCardById(x.getId());
-                this.field.addSkillRow(C, posField);
+                SkillCard card = (SkillCard)this.hand.getCard(this.selectedCardIndex);
+                this.hand.discardCard(this.selectedCardIndex);
+                this.field.addSkillRow(card, posField);
+                this.stats.reduceStats(card.getElement(), card.getPower());
             }
         }
     }

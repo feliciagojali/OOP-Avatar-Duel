@@ -7,6 +7,7 @@ import javax.management.RuntimeErrorException;
 import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.Card;
 import com.avatarduel.model.cards.CharacterCard;
+import com.avatarduel.model.cards.Element;
 import com.avatarduel.model.cards.LandCard;
 import com.avatarduel.model.cards.SkillCard;
 import com.avatarduel.model.player.ElementStats;
@@ -27,7 +28,9 @@ public class StatsController extends AnchorPane {
     @FXML private Label airStats;
     @FXML private Label energyStats;
 
-    public StatsController(ElementStats elementStats)
+    private GameController gameController;
+
+    public StatsController(GameController controller)
     {
         FXMLLoader statsLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/stats.fxml"));
         statsLoader.setRoot(this);
@@ -36,16 +39,23 @@ public class StatsController extends AnchorPane {
         try
         {
             statsLoader.load();
-            this.waterStats.setText(elementStats.getWaterStats().getCurrent() + "/" + elementStats.getWaterStats().getMax());
-            this.earthStats.setText(elementStats.getEarthStats().getCurrent() + "/" + elementStats.getEarthStats().getMax());
-            this.fireStats.setText(elementStats.getFireStats().getCurrent() + "/" + elementStats.getFireStats().getMax());
-            this.airStats.setText(elementStats.getAirStats().getCurrent() + "/" + elementStats.getAirStats().getMax());
-            this.energyStats.setText(elementStats.getEnergyStats().getCurrent() + "/" + elementStats.getEnergyStats().getMax());
+            this.gameController = controller;
+            this.displayStats();
         }
         catch(IOException e)
         {
             throw new RuntimeException(e);
         }
+    }
+    
+    public void displayStats()
+    {
+        
+        this.waterStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.WATER).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.WATER).getMax());
+        this.earthStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.EARTH).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.EARTH).getMax());
+        this.fireStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.FIRE).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.FIRE).getMax());
+        this.airStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.AIR).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.AIR).getMax());
+        this.energyStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.ENERGY).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.ENERGY).getMax());
     }
 
 }

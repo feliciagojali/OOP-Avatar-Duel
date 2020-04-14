@@ -93,22 +93,29 @@ public class MinicardController extends AnchorPane {
         int cardIndex = ((HBox)this.getParent()).getChildren().indexOf(this);
         System.out.println(cardIndex);
 
+        for(Card c1 : this.gameController.getActivePlayer().getHand().getCards())
+        {
+            System.out.println(c1);
+        }
+        this.gameController.getActivePlayer().useCard(cardIndex);
+        System.out.println("-----------");
+        for(Card c2 : this.gameController.getActivePlayer().getHand().getCards())
+        {
+            System.out.println(c2);
+        }
         if(card instanceof LandCard)
         {
-            for(Card c1 : this.gameController.getActivePlayer().getHand().getCards())
-            {
-                System.out.println(c1);
-            }
-            this.gameController.getActivePlayer().discardCard(cardIndex);
-            System.out.println("-----------");
-            for(Card c2 : this.gameController.getActivePlayer().getHand().getCards())
-            {
-                System.out.println(c2);
-            }
             this.gameController.setStatsInterface();
             ((HBox)this.getParent()).getChildren().remove(this);
         }
     }
+
+    // @FXML
+    // public void putCard()
+    // {
+    //     int slotIndex = ((HBox)this.getParent()).getChildren().indexOf(this)
+    //     this.gameController.getActivePlayer().playCard();
+    // }
     
     @FXML
     public void showCardInfo()

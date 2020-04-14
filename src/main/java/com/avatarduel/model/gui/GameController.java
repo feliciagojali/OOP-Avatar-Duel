@@ -62,6 +62,18 @@ public class GameController{
         return this.activePlayer;
     }
 
+    // Get hand controller
+    public HandController getHandController()
+    {
+        return this.handController;
+    }
+
+    // Get stats controller
+    public StatsController getStatsController()
+    {
+        return this.statsController;
+    }
+
     // Set top field interface
     @FXML
     public void setTopFieldInterface()
@@ -104,7 +116,7 @@ public class GameController{
     {
         this.statsSlot.getChildren().clear();
 
-        this.statsController = new StatsController(this.activePlayer.getElementStats());
+        this.statsController = new StatsController(this);
         this.statsSlot.getChildren().add(this.statsController);
     }
     

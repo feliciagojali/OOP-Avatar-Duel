@@ -33,34 +33,34 @@ public class Field {
     }
 
     public CharacterCard getCharacterCard(int pos){
-        return this.characterRow[pos-1];
+        return this.characterRow[pos];
     }
 
     public boolean isPosSkillAvail(int pos){
-        return(this.skillRow[pos-1] == null);
+        return(this.skillRow[pos] == null);
     }
 
     public boolean isPosCharacterAvail(int pos){
-        return(this.characterRow[pos-1] == null);
+        return(this.characterRow[pos] == null);
     }
     
  
     public void addSkillRow(SkillCard x ,int pos){
-        this.skillRow[pos-1] = x;
+        this.skillRow[pos] = x;
     }
 
     public void addCharacterRow(CharacterCard x, int pos){
-        this.characterRow[pos-1] = x;
+        this.characterRow[pos] = x;
     }
     
     public void changeStance(int pos){
-        if (this.canChangeStance[pos-1]) {
-            this.characterStance[pos-1] = !this.characterStance[pos-1];
+        if (this.canChangeStance[pos]) {
+            this.characterStance[pos] = !this.characterStance[pos];
         }
     }
 
     public void setHasAtk(int pos){
-        this.characterHasAtk[pos-1] = true;
+        this.characterHasAtk[pos] = true;
     }
 
     public void resetHasAtk(){
@@ -69,20 +69,20 @@ public class Field {
         }
     }
     public boolean getCharacterStance (int pos){
-        return(this.characterStance[pos-1]);
+        return(this.characterStance[pos]);
     }
     public boolean canAttack(int pos){
-        return(!this.characterHasAtk[pos-1] && this.characterStance[pos-1]);
+        return(!this.characterHasAtk[pos] && this.characterStance[pos]);
     }
 
     public void discardCharaCard(int pos){
-        this.characterRow[pos-1] = null;
+        this.characterRow[pos] = null;
     }
 
     public void discardSkillCard(int pos){
-        this.skillRow[pos-1] = null;
+        this.skillRow[pos] = null;
     }
     public void unableChange(int pos){
-        this.canChangeStance[pos-1] = false;
+        this.canChangeStance[pos] = false;
     }
 }
