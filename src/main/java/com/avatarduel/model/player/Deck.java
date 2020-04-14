@@ -26,9 +26,11 @@ public class Deck {
         int totalWeight = LAND_CARD_WEIGHT + CHARACTER_CARD_WEIGHT + SKILL_CARD_WEIGHT;
         int totalCardCount = LandCardList.getLandCardCount() + CharacterCardList.getCharacterCardCount() + SkillCardList.getSkillCardCount();
 
-        int landCardCount = (LAND_CARD_WEIGHT/totalWeight) * this.size;
-        int characterCardCount = (CHARACTER_CARD_WEIGHT/totalWeight) * this.size;
-        int skillCardCount = (SKILL_CARD_WEIGHT/totalWeight) * this.size;
+        int landCardCount = (int)(((double)LAND_CARD_WEIGHT/totalWeight) * this.size);
+        int characterCardCount = (int)(((double)CHARACTER_CARD_WEIGHT/totalWeight) * this.size);
+        int skillCardCount = (int)(((double)SKILL_CARD_WEIGHT/totalWeight) * this.size);
+
+        System.out.println(landCardCount + " " + characterCardCount + " " + skillCardCount);
 
         Random random = new Random();
 

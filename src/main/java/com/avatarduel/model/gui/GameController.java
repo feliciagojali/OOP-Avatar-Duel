@@ -90,7 +90,7 @@ public class GameController{
     @FXML
     public void setHandInterface()
     {
-        this.handController = new HandController(this.activePlayer, this);
+        this.handController = new HandController(this);
         this.handSlot.setContent(this.handController);
     }
     
@@ -100,7 +100,7 @@ public class GameController{
     {
         this.deckSlot.getChildren().clear();
         
-        this.deckController = new DeckController(this.activePlayer, this.handController);
+        this.deckController = new DeckController(this);
         this.deckSlot.getChildren().add(this.deckController);
     }
     
@@ -142,10 +142,16 @@ public class GameController{
     {
         Player otherPlayer = this.activePlayer;
         this.activePlayer = this.activePlayer == this.playerA ? this.playerB : this.playerA;
+
         this.setHandInterface();
         this.setDeckInterface();
+
+        this.activePlayer.getElementStats().resetStats();
         this.setStatsInterface();
+
         this.setFieldInterface(this.activePlayer, otherPlayer);
+
+        this.cardInfoSlot.getChildren().clear();
         
     }
 

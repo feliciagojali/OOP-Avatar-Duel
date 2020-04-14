@@ -5,8 +5,8 @@ public class Stats {
     private int max;
 
     public Stats(){
-        this.current = 99;
-        this.max = 99;
+        this.current = 0;
+        this.max = 0;
     }
     public int getCurrent(){
         return this.current;

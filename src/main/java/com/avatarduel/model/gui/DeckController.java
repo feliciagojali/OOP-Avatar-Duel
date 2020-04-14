@@ -16,10 +16,9 @@ import javafx.fxml.FXMLLoader;
 public class DeckController extends AnchorPane {
 
     @FXML private Label cardLeftLabel;
-    private Player activePlayer;
-    private HandController handController;
+    private GameController gameController;
 
-    public DeckController(Player player, HandController handController)
+    public DeckController(GameController controller)
     {
         FXMLLoader deckLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/deck.fxml"));
         deckLoader.setRoot(this);
@@ -28,9 +27,8 @@ public class DeckController extends AnchorPane {
         try
         {
             deckLoader.load();
-            this.activePlayer = player;
-            this.handController = handController;
-            this.cardLeftLabel.setText(Integer.toString(this.activePlayer.getDeck().getCardsLeft()));
+            this.gameController = controller;
+            this.cardLeftLabel.setText(Integer.toString(this.gameController.getActivePlayer().getDeck().getCardsLeft()));
         }
         catch(IOException e)
         {
@@ -43,9 +41,9 @@ public class DeckController extends AnchorPane {
     @FXML
     public void drawCard()
     {
-        this.activePlayer.drawCard();
-        this.setCardLeftLabelText(this.activePlayer.getDeck().getCardsLeft());
-        this.handController.displayHand();
+        this.gameController.getActivePlayer().drawCard();
+        this.setCardLeftLabelText(this.gameController.getActivePlayer().getDeck().getCardsLeft());
+        this.gameController.getHandController().displayHand();
     }
 
     @FXML
