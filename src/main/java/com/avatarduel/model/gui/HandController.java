@@ -8,6 +8,7 @@ import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.*;
 import com.avatarduel.model.player.Deck;
 import com.avatarduel.model.player.Player;
+import com.avatarduel.model.player.Phase;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.AnchorPane;
@@ -17,8 +18,9 @@ import javafx.fxml.FXMLLoader;
 public class HandController extends HBox{
 
     private Player activePlayer;
+    private Phase phase;
 
-    public HandController(Player player)
+    public HandController(Player player,Phase phase)
     {
         FXMLLoader handLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/hand.fxml"));
         handLoader.setRoot(this);
@@ -28,6 +30,7 @@ public class HandController extends HBox{
         {
             handLoader.load();
             this.activePlayer = player;
+            this.phase = phase;
             this.displayHand();
         }
         catch(IOException e)

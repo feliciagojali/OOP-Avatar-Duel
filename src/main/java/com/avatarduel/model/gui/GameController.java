@@ -2,6 +2,8 @@ package com.avatarduel.model.gui;
 
 import java.util.LinkedList;
 
+import javax.xml.bind.annotation.XmlElement.DEFAULT;
+
 import com.avatarduel.model.cards.Card;
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.cards.CharacterCardList;
@@ -20,6 +22,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.input.MouseEvent;
 
+
+
 public class GameController{
     static GameController gameControllerInstance = null;
     
@@ -37,6 +41,7 @@ public class GameController{
     private Player playerA;
     private Player playerB;
 
+    private Phase phase;
     // For storing current active player's reference
     private Player activePlayer;
 
@@ -48,6 +53,7 @@ public class GameController{
         this.playerA = new Player("A");
         this.playerB = new Player("B");
         this.activePlayer = this.playerA;
+        this.phase = Phase.draw;
         this.setHandInterface();
         this.setDeckInterface();
         this.setStatsInterface();
@@ -106,7 +112,7 @@ public class GameController{
     @FXML
     public void setHandInterface()
     {
-        this.handController = new HandController(this.activePlayer);
+        this.handController = new HandController(this.activePlayer,this.phase);
         this.handSlot.setContent(this.handController);
     }
     
@@ -116,7 +122,7 @@ public class GameController{
     {
         this.deckSlot.getChildren().clear();
         
-        this.deckController = new DeckController(this.activePlayer, this.handController);
+        this.deckController = new DeckController(this.activePlayer, this.handController,this.phase);
         this.deckSlot.getChildren().add(this.deckController);
     }
     
@@ -152,15 +158,50 @@ public class GameController{
         this.cardInfoSlot.getChildren().add(new CardController(c));        
     }
 
-    // Switch turns between player A and B
     @FXML
-    public void changeTurn()
+    public void changePhase(){
+        try {
+            change();
+        } catch (ErrorException e) {
+            //TODO: handle exception
+            ShowError.showError(e.getMessage());
+        }
+    }
+    public void change() throws ErrorException
     {
-        this.activePlayer = this.activePlayer == this.playerA ? this.playerB : this.playerA;
+        switch (this.phase) {
+            case draw:
+                if(!this.deckController.hasDraw()){
+                    throw new ErrorException("You need to draw first");
+                }
+                this.phase = Phase.main1;
+                break;
+            case main1:
+                this.phase = Phase.battle;
+                break;
+            case battle:
+                this.phase = Phase.end;
+                break;
+            case end:
+                changeTurn();
+                this.phase = Phase.draw;
+                break;
+
+            default:
+                break;
+            }
         this.setHandInterface();
         this.setDeckInterface();
         this.setStatsInterface();
+   
     }
+
+    public void changeTurn(){
+        this.activePlayer = this.activePlayer == this.playerA ? this.playerB : this.playerA;
+
+    }
+
+    
 
 
 }
