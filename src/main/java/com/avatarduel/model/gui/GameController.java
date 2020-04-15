@@ -42,6 +42,8 @@ public class GameController{
     private Player playerA;
     private Player playerB;
 
+    
+    private boolean landCard;
     private Phase phase;
     // For storing current active player's reference
     private Player activePlayer;
@@ -59,6 +61,7 @@ public class GameController{
         this.setStatsInterface();
         this.setFieldInterface(this.activePlayer, this.playerB);
         this.phase = Phase.draw;
+        this.landCard = false;
     }
 
     // Get active player
@@ -196,11 +199,20 @@ public class GameController{
         this.setFieldInterface(this.activePlayer, otherPlayer);
 
         this.cardInfoSlot.getChildren().clear();
+        this.landCard = false;
 
     }
 
     public Phase getPhase(){
         return this.phase;
+    }
+
+    public void useLand(){
+        this.landCard = true;
+    }
+
+    public boolean landCard(){
+        return this.landCard;
     }
     
 

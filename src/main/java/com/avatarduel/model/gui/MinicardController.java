@@ -105,12 +105,16 @@ public class MinicardController extends AnchorPane {
         int cardIndex = ((HBox)this.getParent()).getChildren().indexOf(this);
         System.out.println(cardIndex);
         try {
+            if (this.gameController.landCard() && card instanceof LandCard){
+                throw new ErrorException("You can only use land card once!");
+            }
             this.gameController.getActivePlayer().useCard(cardIndex);
             
             if(card instanceof LandCard)
             {
                 this.gameController.setStatsInterface();
                 ((HBox)this.getParent()).getChildren().remove(this);
+                this.gameController.useLand();
             }
         
         } catch (ErrorException e) {
