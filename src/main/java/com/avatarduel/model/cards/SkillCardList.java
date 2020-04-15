@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -83,6 +84,16 @@ public class SkillCardList
             skillCardListInstance = new SkillCardList();
         
         final String[] cardData = skillCardListInstance.getSkillCardList().get(id);
+        Random r = new Random();
+        Effect effect;
+        int x = r.nextInt(10);
+        if (x < 5){
+            effect = Effect.aura;
+        } else if ( x < 7){
+            effect = Effect.destroy;
+        } else {
+            effect = Effect.powerup;
+        }
 
         return new SkillCard(
             id,
@@ -92,7 +103,8 @@ public class SkillCardList
             cardData[4],
             Integer.parseInt(cardData[6]),
             Integer.parseInt(cardData[7]),
-            Integer.parseInt(cardData[5])
+            Integer.parseInt(cardData[5]),
+            effect
         );
     }
      
