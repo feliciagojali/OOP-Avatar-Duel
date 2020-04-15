@@ -95,7 +95,15 @@ public class FieldController extends GridPane{
     }
 
     @FXML
-    public void putCard(MouseEvent event)
+    public void putCard(MouseEvent event){
+        try {
+            putCards(event);
+        } catch (ErrorException e) {
+            //TODO: handle exception
+            ShowError.showError(e.getMessage());
+        }
+    }
+    public void putCards(MouseEvent event) throws ErrorException
     {
         // Get the clicked slot
         StackPane slot = this.slotsMap.get(((StackPane)event.getSource()).getId().toString());
@@ -116,15 +124,20 @@ public class FieldController extends GridPane{
         System.out.println(isTopSlot);
         
         if((isCharacter && !isTopSlot) || (!isCharacter && isTopSlot))
-            throw new RuntimeException("Invalid card position");
+            throw new ErrorException("Invalid card position");
 
         if(!isCharacter && this.gameController.getActivePlayer().getField().getCharacterCards()[slotIndex] == null)
-            throw new RuntimeException("Skill cards must be used in conjuction of character cards");
-        
-        this.gameController.getActivePlayer().playCard(slotIndex);
-        this.displayField();
-        this.gameController.getHandController().displayHand();
-        this.gameController.getStatsController().displayStats();
+            throw new ErrorException("Skill cards must be used in conjuction of character cards");
+        try {
+            this.gameController.getActivePlayer().playCard(slotIndex);
+            this.displayField();
+            this.gameController.getHandController().displayHand();
+            this.gameController.getStatsController().displayStats();
+            
+        } catch (ErrorException e) {
+            //TODO: handle exception
+            ShowError.showError(e.getMessage());
+        }
     }
 
 

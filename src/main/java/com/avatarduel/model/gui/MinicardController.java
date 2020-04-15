@@ -9,6 +9,7 @@ import com.avatarduel.model.cards.Card;
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.cards.LandCard;
 import com.avatarduel.model.cards.SkillCard;
+import com.avatarduel.model.player.Phase;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -88,23 +89,42 @@ public class MinicardController extends AnchorPane {
     }
 
     @FXML
-    public void useCard()
+    public void useCard(){
+        try {
+            useCards();
+        } catch (ErrorException e) {
+            //TODO: handle exception
+            ShowError.showError(e.getMessage());
+        }
+    }
+    public void useCards() throws ErrorException 
     {
+        if (this.gameController.getPhase() != Phase.main1){
+            throw new ErrorException("You can not do this now!");
+        }
         int cardIndex = ((HBox)this.getParent()).getChildren().indexOf(this);
         System.out.println(cardIndex);
-        this.gameController.getActivePlayer().useCard(cardIndex);
-        if(card instanceof LandCard)
-        {
-            this.gameController.setStatsInterface();
-            ((HBox)this.getParent()).getChildren().remove(this);
+        try {
+            this.gameController.getActivePlayer().useCard(cardIndex);
+            
+            if(card instanceof LandCard)
+            {
+                this.gameController.setStatsInterface();
+                ((HBox)this.getParent()).getChildren().remove(this);
+            }
+        
+        } catch (ErrorException e) {
+            //TODO: handle exception
+            ShowError.showError(e.getMessage());
         }
+
     }
 
     // @FXML
     // public void putCard()
     // {
-    //     int slotIndex = ((HBox)this.getParent()).getChildren().indexOf(this)
-    //     this.gameController.getActivePlayer().playCard();
+    //     int slotIndex = ((HBox)this.getParent()).getChildren().indexOf(this);
+    //     this.gameController.getActivePlayer().playCard(slotIndex);
     // }
     
     @FXML

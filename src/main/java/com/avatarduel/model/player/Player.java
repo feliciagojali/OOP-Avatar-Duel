@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import com.avatarduel.model.cards.*;
+import com.avatarduel.model.gui.ErrorException;
 
 public class Player {
     // General player fields
@@ -79,9 +80,9 @@ public class Player {
         }
     }
 
-    public void useCard(int pos) {
+    public void useCard(int pos) throws ErrorException {
         if (!this.hand.isPosValid(pos))
-            throw new RuntimeException("Invalid hand position");
+            throw new ErrorException("Invalid hand position");
 
         if (this.hand.getCard(pos) instanceof LandCard) {
             this.stats.addStats(this.hand.getCard(pos).getElement());
@@ -92,7 +93,7 @@ public class Player {
 
             // If power > current stats, throw exception
             if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent())
-            throw new RuntimeException("Insufficent element stats");
+            throw new ErrorException("Insufficent element stats");
             
             this.selectedCardIndex = pos;
         }
@@ -102,17 +103,17 @@ public class Player {
         
             // If power > current stats, throw exception
             if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent())
-                throw new RuntimeException("Insufficent element stats");
+                throw new ErrorException("Insufficent element stats");
             
             this.selectedCardIndex = pos;
         }
         System.out.println(this.selectedCardIndex);
     }
 
-    public void playCard(int posField){
+    public void playCard(int posField) throws ErrorException{
         // If havent selected any card (-1)..
         if(this.selectedCardIndex == -1)
-            throw new RuntimeException("No card selected");
+            throw new ErrorException("No card selected");
         
         if (this.hand.getCard(this.selectedCardIndex) instanceof CharacterCard)
         {
@@ -166,12 +167,16 @@ public class Player {
         }
     }
 
+
     // ini attack kalau di field lawan udah gaada kartu samsek
     public void AttackEnemy(Player enemy,int pos){
         int attack = this.field.getCharacterCard(pos).getAttack();
         enemy.setHp(enemy.getHp()-attack);
 
     }
+
+   
+
     
    
 
