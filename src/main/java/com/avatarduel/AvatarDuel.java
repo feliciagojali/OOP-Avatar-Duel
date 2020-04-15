@@ -14,10 +14,10 @@ public class AvatarDuel extends Application {
     FXMLLoader gameLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/game.fxml"));
     BorderPane gameRoot = gameLoader.load();
     
-    Media media = new Media(AvatarDuel.class.getResource("music/song.mp3").toString());
-    MediaPlayer mp = new MediaPlayer(media);
-    mp.setVolume(0.1);
-    mp.play();
+    // Media media = new Media(AvatarDuel.class.getResource("music/song.mp3").toString());
+    // MediaPlayer mp = new MediaPlayer(media);
+    // mp.setVolume(0.1);
+    // mp.play();
 
     Scene scene = new Scene(gameRoot, 1200, 1000);
 

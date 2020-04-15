@@ -18,7 +18,7 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button fx:id="changeTurn" mnemonicParsing="false" onMouseClicked="#changeTurn" prefHeight="61.0" prefWidth="127.0" text="changeTurn()" />
+                        <Button fx:id="nextPhase" mnemonicParsing="false" onMouseClicked="#changePhase" prefHeight="61.0" prefWidth="127.0" text="Next Phase" />
                      </children>
                   </VBox>
                </children>
