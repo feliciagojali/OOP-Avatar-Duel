@@ -89,6 +89,11 @@ public class GameController{
         return this.statsController;
     }
 
+    public int getSelectedCardIndex()
+    {
+        return this.selectedCardIndex;
+    }
+
     public void setSelectedCardIndex(int idx)
     {
         this.selectedCardIndex = idx;

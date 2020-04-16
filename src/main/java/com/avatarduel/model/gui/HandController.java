@@ -44,11 +44,11 @@ public class HandController extends HBox{
         for(Card card : this.gameController.getActivePlayer().getHand().getCards())
         {
             if(card instanceof CharacterCard)
-                this.getChildren().add(new MinicardController((CharacterCard)card, this.gameController));
+                this.getChildren().add(new CharacterMinicardController(this.gameController, (CharacterCard)card));
             else if(card instanceof LandCard)
-                this.getChildren().add(new MinicardController((LandCard)card, this.gameController));
+                this.getChildren().add(new LandMinicardController(this.gameController, (LandCard)card));
             else
-                this.getChildren().add(new MinicardController((SkillCard)card, this.gameController));
+                this.getChildren().add(new SkillMinicardController(this.gameController, (SkillCard)card));
         }
     }
 }

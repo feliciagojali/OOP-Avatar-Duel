@@ -47,7 +47,7 @@ public class SkillMinicardController extends MinicardController implements Field
     {
         try
         {
-            if(this.gameController.getPhase() == Phase.MAIN) { throw new ErrorException("You can't do this action in this phase.") }
+            if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("You can't do this action in this phase."); }
             
             this.gameController.getActivePlayer().selectCard(this.getMinicardIndexInHand());
             this.gameController.setSelectedCardIndex(this.getMinicardIndexInHand());

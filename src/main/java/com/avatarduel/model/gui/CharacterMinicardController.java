@@ -30,6 +30,7 @@ public class CharacterMinicardController extends MinicardController implements F
         try{
             if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("You can't do this action in this phase."); }
 
+            System.out.println(this.getMinicardIndexInHand());
             this.gameController.getActivePlayer().selectCard(this.getMinicardIndexInHand());
             this.gameController.setSelectedCardIndex(this.getMinicardIndexInHand());
         }

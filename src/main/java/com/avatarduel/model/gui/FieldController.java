@@ -43,7 +43,7 @@ public class FieldController extends GridPane{
         FXMLLoader fieldLoader = new FXMLLoader(AvatarDuel.class.getResource(fxmlPath));
         fieldLoader.setRoot(this);
         fieldLoader.setController(this);
-        
+
         try
         {
             fieldLoader.load();
@@ -85,15 +85,15 @@ public class FieldController extends GridPane{
     {
         for(int i=0;i<6;i++)
         {
-            if(this.owner.getField().getCharacterCards()[i] != null)
+            if(this.owner.getField().getCharacterCard(i) != null)
             {
-                MinicardController minicard = new MinicardController(this.owner.getField().getCharacterCard(i), this.gameController);
+                MinicardController minicard = new CharacterMinicardController(this.gameController, this.owner.getField().getCharacterCard(i));
                 minicard.removeCardUseButton();
                 this.topSlots[i].getChildren().add(minicard);
             }
-            if(this.owner.getField().getSkillCards()[i] != null)
+            if(this.owner.getField().getSkillCard(i) != null)
             {
-                MinicardController minicard = new MinicardController(this.owner.getField().getSkillCard(i), this.gameController);
+                MinicardController minicard = new SkillMinicardController(this.gameController, this.owner.getField().getSkillCard(i));
                 minicard.removeCardUseButton();
                 this.bottomSlots[i].getChildren().add(minicard);
             }
@@ -104,37 +104,38 @@ public class FieldController extends GridPane{
     public void putCard(MouseEvent event) {
         // Get the clicked slot
         StackPane slot = this.slotsMap.get(((StackPane)event.getSource()).getId().toString());
-
+        System.out.println(slot);
+        
         boolean isTopSlot = true;
-
+        
+        // If source not found from bottom slots...
         int slotIndex = Arrays.asList(this.topSlots).indexOf(slot);
+        System.out.println("pisang");
+        
+        // If source not found from top slots...
         if(slotIndex == -1)
         {
-            slotIndex = Arrays.asList(this.bottomSlots).indexOf(slot);
             isTopSlot = false;
+            slotIndex = Arrays.asList(this.bottomSlots).indexOf(slot);
         }
 
         // Check whether the card is a character
-        boolean isCharacter = this.gameController.getActivePlayer().getHand().getCard(this.gameController.getActivePlayer().getSelectedCardIndex()) instanceof CharacterCard;
-        System.out.println(slotIndex);
-        System.out.println(isCharacter);
-        System.out.println(isTopSlot);
-        
+        boolean isCharacter = this.gameController.getActivePlayer().getHand().getCard(this.gameController.getSelectedCardIndex()) instanceof CharacterCard;
         
         try {
-            if((isCharacter && !isTopSlot) || (!isCharacter && isTopSlot))
-                throw new ErrorException("Invalid card position");
+            if((isCharacter && !isTopSlot) || (!isCharacter && isTopSlot)) { throw new ErrorException("Invalid card position"); }
     
             if(!isCharacter && this.gameController.getActivePlayer().getField().getCharacterCards()[slotIndex] == null)
-                throw new ErrorException("Skill cards must be used in conjuction of character cards");
+                { throw new ErrorException("Skill cards must be used in conjuction with character cards"); }
 
-            this.gameController.getActivePlayer().playCard(slotIndex);
+            this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), slotIndex);
+
+            // Reset display
             this.displayField();
             this.gameController.getHandController().displayHand();
             this.gameController.getStatsController().displayStats();
 
         } catch (ErrorException e) {
-            //TODO: handle exception
             ShowError.showError(e.getMessage());
         }
     }

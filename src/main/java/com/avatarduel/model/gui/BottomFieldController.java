@@ -32,7 +32,6 @@ public class BottomFieldController extends FieldController{
     public BottomFieldController(GameController controller, Player player)
     {
         super(controller, player, "gui/bottomField.fxml");
-        System.out.println("pisang");
         this.buttonsMap = new HashMap<String, Button>();
         this.buttonsMap.put("slotButton1", slotButton1);
         this.buttonsMap.put("slotButton2", slotButton2);

@@ -16,7 +16,6 @@ public class Player {
     private Hand hand;
     private Deck deck;
     private Field field;
-    private int selectedCardIndex;
 
     public Player(String name){
         this.name = name;
@@ -35,7 +34,6 @@ public class Player {
         
         this.field =  new Field();
         this.stats = new ElementStats();
-        this.selectedCardIndex = -1;
     }
     
     public Deck getDeck(){
@@ -58,15 +56,12 @@ public class Player {
         return this.hp;
     }
 
-    public int getSelectedCardIndex()
-    {
-        return this.selectedCardIndex;
-    }
-
+    // Set hp
     public void setHp(int x){
         this.hp = x;
     }
 
+    // Draw card from deck
     public void drawCard(){
         int x = this.deck.drawCard();
         
@@ -89,12 +84,13 @@ public class Player {
         
         if (this.hand.getCard(pos) instanceof LandCard) {
         }
-        System.out.println(this.selectedCardIndex);
     }
     
     // Assume position given is either a CharacterCard or a LandCard
     public void selectCard(int pos) throws ErrorException
     {
+        if (!this.hand.isPosValid(pos)) { throw new ErrorException("Invalid hand position"); }
+
         if(this.hand.getCard(pos) instanceof CharacterCard) {
             CharacterCard card = (CharacterCard)this.hand.getCard(pos);
     

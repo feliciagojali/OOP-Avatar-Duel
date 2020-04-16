@@ -34,6 +34,7 @@ public class MinicardController extends AnchorPane {
         minicardLoader.setController(this);
         try {
             minicardLoader.load();
+            this.gameController = controller;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
