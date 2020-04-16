@@ -76,6 +76,8 @@ public class BottomFieldController extends FieldController{
                     if(this.gameController.getOtherPlayer().getField().getCharacterCard(buttonIndex) != null)
                         throw new ErrorException("kenot atak, no enemi");
                     
+                    int enemyIndex = 6 - buttonIndex + 1;
+                    this.gameController.getActivePlayer().AttackEnemy(this.gameController.getOtherPlayer(), enemyIndex);
                     System.out.println("Attack: " + this.indexForAttack + " to " + (6 - buttonIndex + 1));
                     this.indexForAttack = -1;
                     

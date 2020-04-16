@@ -42,12 +42,12 @@ public class GameController{
     private Player playerA;
     private Player playerB;
 
-    private boolean landCard;
+    private boolean landCardUsed;
     private Phase phase;
     // For storing current active player's reference
     private Player activePlayer;
     private Player otherPlayer;
-
+    private int selectedCardIndex;
     
     public void initialize() {
         
@@ -56,13 +56,13 @@ public class GameController{
         this.playerB = new Player("B");
         this.activePlayer = this.playerA;
         this.otherPlayer = this.playerB;
-        this.phase = Phase.draw;
+        this.phase = Phase.DRAW;
         this.setHandInterface();
         this.setDeckInterface();
         this.setStatsInterface();
         this.setFieldInterface(this.activePlayer, this.otherPlayer);
-        this.phase = Phase.draw;
-        this.landCard = false;
+        this.phase = Phase.DRAW;
+        this.landCardUsed = false;
     }
 
     // Get active player
@@ -89,9 +89,14 @@ public class GameController{
         return this.statsController;
     }
 
+    public void setSelectedCardIndex(int idx)
+    {
+        this.selectedCardIndex = idx;
+    }
+
     // Set top field interface
     @FXML
-    public void setFieldInterface(Player bottomPlayer, Player topPlayer)
+    public void setFieldInterface(final Player bottomPlayer, final Player topPlayer)
     {
         this.bottomFieldSlot.getChildren().clear();
         this.bottomFieldController = new BottomFieldController(this, bottomPlayer);
@@ -132,21 +137,21 @@ public class GameController{
     
     // Set interface to current player's card info when hovered
     @FXML
-    public void setCardInfo(CharacterCard c)
+    public void setCardInfo(final CharacterCard c)
     {
         this.cardInfoSlot.getChildren().clear();
         this.cardInfoSlot.getChildren().add(new CardController(c));        
     }
 
     @FXML
-    public void setCardInfo(SkillCard c)
+    public void setCardInfo(final SkillCard c)
     {
         this.cardInfoSlot.getChildren().clear();
         this.cardInfoSlot.getChildren().add(new CardController(c));        
     }
 
     @FXML
-    public void setCardInfo(LandCard c)
+    public void setCardInfo(final LandCard c)
     {
         this.cardInfoSlot.getChildren().clear();
         this.cardInfoSlot.getChildren().add(new CardController(c));        
@@ -156,32 +161,32 @@ public class GameController{
     public void changePhase(){
         try {
             switch (this.phase) {
-                case draw:
+                case DRAW:
                     if(!this.deckController.hasDraw()){
                         throw new ErrorException("You need to draw first");
                     }
-                    this.phase = Phase.main1;
+                    this.phase = Phase.MAIN;
                     break;
-                case main1:
-                    this.phase = Phase.battle;
+                case MAIN:
+                    this.phase = Phase.BATTLE;
                     break;
-                case battle:
-                    this.phase = Phase.end;
+                case BATTLE:
+                    this.phase = Phase.END;
                     break;
-                case end:
+                case END:
                     changeTurn();
-                    this.phase = Phase.draw;
+                    this.phase = Phase.DRAW;
                     break;
     
                 default:
                     break;
                 }
-            if (this.phase != Phase.draw){
+            if (this.phase != Phase.DRAW){
                 this.setHandInterface();
                 this.setDeckInterface();
                 this.setStatsInterface();
             }
-        } catch (ErrorException e) {
+        } catch (final ErrorException e) {
             //TODO: handle exception
             ShowError.showError(e.getMessage());
         }
@@ -200,7 +205,7 @@ public class GameController{
         this.setFieldInterface(this.activePlayer, otherPlayer);
 
         this.cardInfoSlot.getChildren().clear();
-        this.landCard = false;
+        this.landCardUsed = false;
 
     }
 
@@ -208,12 +213,12 @@ public class GameController{
         return this.phase;
     }
 
-    public void useLand(){
-        this.landCard = true;
+    public void setLandCardUsed(){
+        this.landCardUsed = true;
     }
 
-    public boolean landCard(){
-        return this.landCard;
+    public boolean isLandCardUsed(){
+        return this.landCardUsed;
     }
 
 }

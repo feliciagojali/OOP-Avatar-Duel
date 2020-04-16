@@ -88,11 +88,11 @@ public class SkillCardList
         Effect effect;
         int x = r.nextInt(10);
         if (x < 5){
-            effect = Effect.aura;
+            effect = Effect.AURA;
         } else if ( x < 7){
-            effect = Effect.destroy;
+            effect = Effect.DESTROY;
         } else {
-            effect = Effect.powerup;
+            effect = Effect.POWER_UP;
         }
 
         return new SkillCard(

@@ -56,7 +56,7 @@ public class DeckController extends AnchorPane {
     public void drawCards() throws ErrorException {
         if (this.hasDraw){
             throw new ErrorException("You can only draw once!");
-        } else if (this.gameController.getPhase() != Phase.draw) {
+        } else if (this.gameController.getPhase() != Phase.DRAW) {
             throw new ErrorException("You can not do this now!");
         }
         this.gameController.getActivePlayer().drawCard();
