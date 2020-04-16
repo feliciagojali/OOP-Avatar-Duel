@@ -2,23 +2,13 @@ package com.avatarduel.model.gui;
 
 import java.io.IOException;
 
-import javax.management.RuntimeErrorException;
-
 import com.avatarduel.AvatarDuel;
-import com.avatarduel.model.cards.Card;
-import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.cards.Element;
-import com.avatarduel.model.cards.LandCard;
-import com.avatarduel.model.cards.SkillCard;
-import com.avatarduel.model.player.ElementStats;
-import com.avatarduel.model.player.Stats;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.input.MouseEvent;
 
 public class StatsController extends AnchorPane {
 
@@ -27,6 +17,8 @@ public class StatsController extends AnchorPane {
     @FXML private Label fireStats;
     @FXML private Label airStats;
     @FXML private Label energyStats;
+    @FXML private Label playerHealth;
+    @FXML private Label enemyHealth;
 
     private GameController gameController;
 
@@ -50,7 +42,8 @@ public class StatsController extends AnchorPane {
     
     public void displayStats()
     {
-        
+        this.playerHealth.setText(Integer.toString(this.gameController.getActivePlayer().getHp()));
+        this.playerHealth.setText(Integer.toString(this.gameController.getOtherPlayer().getHp()));
         this.waterStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.WATER).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.WATER).getMax());
         this.earthStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.EARTH).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.EARTH).getMax());
         this.fireStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.FIRE).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.FIRE).getMax());

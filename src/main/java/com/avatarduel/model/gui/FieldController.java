@@ -18,31 +18,29 @@ import javafx.scene.input.MouseEvent;
 
 public class FieldController extends GridPane{
 
-    @FXML private StackPane topSlot1;
-    @FXML private StackPane topSlot2;
-    @FXML private StackPane topSlot3;
-    @FXML private StackPane topSlot4;
-    @FXML private StackPane topSlot5;
-    @FXML private StackPane topSlot6;
-    @FXML private StackPane bottomSlot1;
-    @FXML private StackPane bottomSlot2;
-    @FXML private StackPane bottomSlot3;
-    @FXML private StackPane bottomSlot4;
-    @FXML private StackPane bottomSlot5;
-    @FXML private StackPane bottomSlot6;
+    @FXML protected StackPane topSlot1;
+    @FXML protected StackPane topSlot2;
+    @FXML protected StackPane topSlot3;
+    @FXML protected StackPane topSlot4;
+    @FXML protected StackPane topSlot5;
+    @FXML protected StackPane topSlot6;
+    @FXML protected StackPane bottomSlot1;
+    @FXML protected StackPane bottomSlot2;
+    @FXML protected StackPane bottomSlot3;
+    @FXML protected StackPane bottomSlot4;
+    @FXML protected StackPane bottomSlot5;
+    @FXML protected StackPane bottomSlot6;
 
-    private StackPane topSlots[];
-    private StackPane bottomSlots[];
-    private Map<String, StackPane> slotsMap;
+    protected StackPane topSlots[];
+    protected StackPane bottomSlots[];
+    protected Map<String, StackPane> slotsMap;
 
-    private GameController gameController;
-    private Player owner;
+    protected GameController gameController;
+    protected Player owner;
 
-    public FieldController(Player player, GameController controller, boolean flip)
+    public FieldController(GameController controller, Player player, String fxmlPath)
     {
-        FXMLLoader fieldLoader;
-        if(flip) fieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/fieldFlip.fxml"));
-        else fieldLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/field.fxml"));
+        FXMLLoader fieldLoader = new FXMLLoader(AvatarDuel.class.getResource(fxmlPath));
         fieldLoader.setRoot(this);
         fieldLoader.setController(this);
         
@@ -75,7 +73,7 @@ public class FieldController extends GridPane{
                 this.slotsMap.put("topSlot" + i, this.topSlots[i-1]);
                 this.slotsMap.put("bottomSlot" + i, this.bottomSlots[i-1]);
             }
-            this.displayField();
+            
         }
         catch(IOException e)
         {
@@ -88,23 +86,22 @@ public class FieldController extends GridPane{
         for(int i=0;i<6;i++)
         {
             if(this.owner.getField().getCharacterCards()[i] != null)
-                this.topSlots[i].getChildren().add(new MinicardController(this.owner.getField().getCharacterCards()[i], this.gameController));
+            {
+                MinicardController minicard = new MinicardController(this.owner.getField().getCharacterCard(i), this.gameController);
+                minicard.removeCardUseButton();
+                this.topSlots[i].getChildren().add(minicard);
+            }
             if(this.owner.getField().getSkillCards()[i] != null)
-                this.bottomSlots[i].getChildren().add(new MinicardController(this.owner.getField().getSkillCards()[i], this.gameController));
+            {
+                MinicardController minicard = new MinicardController(this.owner.getField().getSkillCard(i), this.gameController);
+                minicard.removeCardUseButton();
+                this.bottomSlots[i].getChildren().add(minicard);
+            }
         }
     }
 
     @FXML
-    public void putCard(MouseEvent event){
-        try {
-            putCards(event);
-        } catch (ErrorException e) {
-            //TODO: handle exception
-            ShowError.showError(e.getMessage());
-        }
-    }
-    public void putCards(MouseEvent event) throws ErrorException
-    {
+    public void putCard(MouseEvent event) {
         // Get the clicked slot
         StackPane slot = this.slotsMap.get(((StackPane)event.getSource()).getId().toString());
 
@@ -123,22 +120,22 @@ public class FieldController extends GridPane{
         System.out.println(isCharacter);
         System.out.println(isTopSlot);
         
-        if((isCharacter && !isTopSlot) || (!isCharacter && isTopSlot))
-            throw new ErrorException("Invalid card position");
-
-        if(!isCharacter && this.gameController.getActivePlayer().getField().getCharacterCards()[slotIndex] == null)
-            throw new ErrorException("Skill cards must be used in conjuction of character cards");
+        
         try {
+            if((isCharacter && !isTopSlot) || (!isCharacter && isTopSlot))
+                throw new ErrorException("Invalid card position");
+    
+            if(!isCharacter && this.gameController.getActivePlayer().getField().getCharacterCards()[slotIndex] == null)
+                throw new ErrorException("Skill cards must be used in conjuction of character cards");
+
             this.gameController.getActivePlayer().playCard(slotIndex);
             this.displayField();
             this.gameController.getHandController().displayHand();
             this.gameController.getStatsController().displayStats();
-            
+
         } catch (ErrorException e) {
             //TODO: handle exception
             ShowError.showError(e.getMessage());
         }
     }
-
-
 }

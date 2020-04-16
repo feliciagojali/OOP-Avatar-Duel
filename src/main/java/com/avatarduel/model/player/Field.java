@@ -72,9 +72,11 @@ public class Field {
             this.characterHasAtk[i] = false;
         }
     }
+    
     public boolean getCharacterStance (int pos){
         return(this.characterStance[pos]);
     }
+
     public boolean canAttack(int pos){
         return(!this.characterHasAtk[pos] && this.characterStance[pos]);
     }
@@ -86,6 +88,7 @@ public class Field {
     public void discardSkillCard(int pos){
         this.skillRow[pos] = null;
     }
+
     public void unableChange(int pos){
         this.canChangeStance[pos] = false;
     }

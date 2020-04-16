@@ -26,6 +26,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="cardUseButton" layoutX="57.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#useCard" text="Use" />
+      <Button fx:id="cardUseButton" layoutX="57.0" layoutY="148.0" mnemonicParsing="false" text="Use" />
    </children>
 </fx:root>

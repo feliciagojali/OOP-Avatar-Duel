@@ -7,7 +7,7 @@ public class Hand {
     private LinkedList<Card> cards;
 
     public Hand(){
-        this.cards = new LinkedList<Card>();        
+        this.cards = new LinkedList<Card>();
     }
     
     public LinkedList<Card> getCards(){

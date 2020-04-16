@@ -69,7 +69,6 @@ public class Player {
 
     public void drawCard(){
         int x = this.deck.drawCard();
-        System.out.println(x);
         
         if (LandCardList.isIdLandCard(x)){
             this.hand.addCard(LandCardList.getLandCardById(x));
