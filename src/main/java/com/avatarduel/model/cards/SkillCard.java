@@ -26,4 +26,8 @@ public class SkillCard extends Card{
     public int getPower(){
         return this.power;
     }
+    
+    public Effect getEffect(){
+        return this.effect;
+    }
 }

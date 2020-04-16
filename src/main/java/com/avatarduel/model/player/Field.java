@@ -17,7 +17,7 @@ public class Field {
         this.canChangeStance = new boolean[8];
         for (int i = 0; i<= 7 ; i++){
             this.characterHasAtk[i] = false;
-            this.characterStance[i] = false;
+            this.characterStance[i] = true;
             this.canChangeStance[i] = true;
         }
 
@@ -34,6 +34,10 @@ public class Field {
 
     public CharacterCard getCharacterCard(int pos){
         return this.characterRow[pos];
+    }
+
+    public SkillCard getSkillCard(int pos){
+        return this.skillRow[pos];
     }
 
     public boolean isPosSkillAvail(int pos){

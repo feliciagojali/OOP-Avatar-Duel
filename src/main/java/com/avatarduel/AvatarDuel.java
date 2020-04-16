@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.control.ScrollPane;
+import com.avatarduel.model.player.*;
+import com.avatarduel.model.cards.*;
+
 
 public class AvatarDuel extends Application {
   @Override
@@ -30,6 +33,6 @@ public class AvatarDuel extends Application {
   public static void main(String[] args) {
     
     launch();
+    
   }
-  
 }

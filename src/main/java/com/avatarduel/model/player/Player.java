@@ -142,9 +142,9 @@ public class Player {
 
     public void attack(Player enemy,int Pos, int enemyPos){
         if (canAttack(Pos)) {
-            if (!this.field.isPosCharacterAvail(enemyPos)) {
+            if (!enemy.getField().isPosCharacterAvail(enemyPos)) {
                 // posisi kartu enemy menyerang
-                if (enemy.getField().getCharacterStance(enemyPos)) {
+                if (enemy.getField().getCharacterStance(enemyPos) || this.field.getCharacterCard(Pos).getPowerUp()) {
                     if (enemy.getField().getCharacterCard(enemyPos).getAttack() < this.field.getCharacterCard(Pos).getAttack()) {
                         int selisihattack = this.field.getCharacterCard(Pos).getAttack() - enemy.getField().getCharacterCard(enemyPos).getAttack();
                         enemy.getField().discardCharaCard(enemyPos);
@@ -175,8 +175,37 @@ public class Player {
 
     }
 
+    public boolean canSkill(int pos){
+        return(!this.field.isPosSkillAvail(pos));
+    }
    
+    public void useSkill(Player player, int posSkill, int pos){
+        if (canSkill(posSkill)) {
+            if(!player.getField().isPosCharacterAvail(pos)){
+                SkillCard X = this.field.getSkillCard(posSkill);
+                CharacterCard Y = player.getField().getCharacterCard(pos);
+                switch (X.getEffect()) {
+                    case aura:
+                        int newatk = Y.getAttack() + X.getAttack();
+                        int newdef = Y.getDefense() + X.getDefense();
+                        Y.setAttack(newatk);
+                        Y.setDefense(newdef);
+                        break;
+                    
+                    case destroy:
+                        player.getField().discardCharaCard(pos);
+                        break;
+                    case powerup:
+                        player.getField().getCharacterCard(pos).setPowerUp();
+                        break;
+                    default:
+                        break;
+                }
+                this.field.discardSkillCard(posSkill);
+            }   
 
+        }
+    }
     
    
 
