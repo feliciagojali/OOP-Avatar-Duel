@@ -4,57 +4,76 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <fx:root fx:id="stats" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="278.0" prefWidth="262.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="waterStats" layoutX="139.0" layoutY="27.0" text="0 / 0">
+      <Label fx:id="waterStats" layoutX="147.0" layoutY="80.0" text="0 / 0">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="earthStats" layoutX="139.0" layoutY="72.0" text="0 / 0">
+      <Label fx:id="earthStats" layoutX="147.0" layoutY="115.0" text="0 / 0">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="fireStats" layoutX="139.0" layoutY="117.0" text="0 / 0">
+      <Label fx:id="fireStats" layoutX="147.0" layoutY="147.0" text="0 / 0">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="airStats" layoutX="139.0" layoutY="162.0" text="0 / 0">
+      <Label fx:id="airStats" layoutX="147.0" layoutY="182.0" text="0 / 0">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="energyStats" layoutX="139.0" layoutY="207.0" text="0 / 0">
+      <Label fx:id="energyStats" layoutX="147.0" layoutY="217.0" text="0 / 0">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="37.0" layoutY="32.0" text="WATER" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="58.0" layoutY="80.0" text="WATER" textAlignment="CENTER">
          <font>
             <Font name="System Italic" size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="40.0" layoutY="77.0" text="EARTH" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="61.0" layoutY="115.0" text="EARTH" textAlignment="CENTER">
          <font>
             <Font name="System Italic" size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="71.0" layoutY="122.0" text="FIRE" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="86.0" layoutY="147.0" text="FIRE" textAlignment="CENTER">
          <font>
             <Font name="System Italic" size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="75.0" layoutY="167.0" text="AIR" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="91.0" layoutY="182.0" text="AIR" textAlignment="CENTER">
          <font>
             <Font name="System Italic" size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="30.0" layoutY="212.0" text="ENERGY" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="43.0" layoutY="217.0" text="ENERGY" textAlignment="CENTER">
          <font>
             <Font name="System Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="playerHealth" layoutX="50.0" layoutY="41.0" text="99">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="enemyHealth" layoutX="177.0" layoutY="41.0" text="99">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="28.0" layoutY="14.0" text="Your HP" textAlignment="CENTER">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="147.0" layoutY="14.0" text="Enemy HP" textAlignment="CENTER">
+         <font>
+            <Font name="System Italic" size="18.0" />
          </font>
       </Label>
    </children>

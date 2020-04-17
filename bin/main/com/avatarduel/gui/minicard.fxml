@@ -5,27 +5,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#showCardInfo" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: black;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="150.0" style="-fx-border-color: black;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="cardName" alignment="CENTER" layoutX="22.0" layoutY="33.0" prefHeight="44.0" prefWidth="106.0" text="Name" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="cardName" alignment="CENTER" layoutX="22.0" layoutY="34.0" prefHeight="31.0" prefWidth="106.0" text="Name" textAlignment="CENTER" wrapText="true">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="cardElement" alignment="CENTER" layoutX="27.0" layoutY="77.0" prefHeight="17.0" prefWidth="96.0" text="Element">
+      <Label fx:id="cardElement" alignment="CENTER" layoutX="27.0" layoutY="67.0" prefHeight="17.0" prefWidth="96.0" text="Element">
          <font>
-            <Font name="System Italic" size="14.0" />
+            <Font name="System Italic" size="12.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="107.0" prefHeight="17.0" prefWidth="44.0" text="ATK" />
-      <Label alignment="CENTER" layoutX="92.0" layoutY="107.0" prefHeight="17.0" prefWidth="44.0" text="DEF" />
-      <Label fx:id="cardAttack" alignment="CENTER" layoutX="14.0" layoutY="131.0" prefHeight="17.0" prefWidth="44.0" text="val" />
-      <Label fx:id="cardDefense" alignment="CENTER" layoutX="92.0" layoutY="131.0" prefHeight="17.0" prefWidth="44.0" text="val" />
-      <Label fx:id="cardType" alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="17.0" prefWidth="96.0" text="Type">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="cardUseButton" layoutX="57.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#useCard" text="Use" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="96.0" prefHeight="17.0" prefWidth="44.0" text="ATK" />
+      <Label alignment="CENTER" layoutX="53.0" layoutY="96.0" prefHeight="17.0" prefWidth="44.0" text="DEF" />
+      <Label fx:id="cardAttack" alignment="CENTER" layoutX="14.0" layoutY="120.0" prefHeight="17.0" prefWidth="44.0" text="val" />
+      <Label fx:id="cardDefense" alignment="CENTER" layoutX="53.0" layoutY="120.0" prefHeight="17.0" prefWidth="44.0" text="val" />
+      <Label fx:id="cardType" alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="17.0" prefWidth="96.0" text="Type" />
+      <Button fx:id="cardUseButton" layoutX="57.0" layoutY="148.0" mnemonicParsing="false" text="Use" />
+      <Label alignment="CENTER" layoutX="93.0" layoutY="96.0" prefHeight="17.0" prefWidth="44.0" text="POW" />
+      <Label fx:id="cardPower" alignment="CENTER" layoutX="93.0" layoutY="120.0" prefHeight="17.0" prefWidth="44.0" text="val" />
    </children>
 </fx:root>

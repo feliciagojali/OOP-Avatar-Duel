@@ -30,8 +30,6 @@ public class Deck {
         int characterCardCount = (int)(((double)CHARACTER_CARD_WEIGHT/totalWeight) * this.size);
         int skillCardCount = (int)(((double)SKILL_CARD_WEIGHT/totalWeight) * this.size);
 
-        System.out.println(landCardCount + " " + characterCardCount + " " + skillCardCount);
-
         Random random = new Random();
 
         // Select random IDs for land cards
@@ -75,20 +73,24 @@ public class Deck {
         }
     }
 
+    // Shuffle cards
     public void shuffle() {
         Collections.shuffle(this.cards);
     }
 
+    // Take card id from deck
     public int drawCard()
     {
         return this.cards.pop();
     }
 
+    // Get cards left in deck
     public int getCardsLeft()
     {
         return this.cards.size();
     }
 
+    // Returns true when deck is empty
     public boolean isDeckEmpty()
     {
         return this.cards.isEmpty();

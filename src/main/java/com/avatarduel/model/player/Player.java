@@ -16,7 +16,6 @@ public class Player {
     private Hand hand;
     private Deck deck;
     private Field field;
-    private int selectedCardIndex;
 
     public Player(String name){
         this.name = name;
@@ -35,7 +34,6 @@ public class Player {
         
         this.field =  new Field();
         this.stats = new ElementStats();
-        this.selectedCardIndex = -1;
     }
     
     public Deck getDeck(){
@@ -58,18 +56,14 @@ public class Player {
         return this.hp;
     }
 
-    public int getSelectedCardIndex()
-    {
-        return this.selectedCardIndex;
-    }
-
+    // Set hp
     public void setHp(int x){
         this.hp = x;
     }
 
+    // Draw card from deck
     public void drawCard(){
         int x = this.deck.drawCard();
-        System.out.println(x);
         
         if (LandCardList.isIdLandCard(x)){
             this.hand.addCard(LandCardList.getLandCardById(x));
@@ -80,60 +74,61 @@ public class Player {
         }
     }
 
-    public void useCard(int pos) throws ErrorException {
-        if (!this.hand.isPosValid(pos))
-            throw new ErrorException("Invalid hand position");
-
+    // Assume position given is is a LandCard
+    public void useCard(int pos) throws ErrorException
+    {
+        if (!this.hand.isPosValid(pos)) { throw new ErrorException("Invalid hand position"); }
+        
+        this.stats.addStats(this.hand.getCard(pos).getElement());
+        this.hand.discardCard(pos);
+        
         if (this.hand.getCard(pos) instanceof LandCard) {
-            this.stats.addStats(this.hand.getCard(pos).getElement());
-            this.hand.discardCard(pos);
         }
-        else if(this.hand.getCard(pos) instanceof CharacterCard) {
-            CharacterCard card = (CharacterCard)this.hand.getCard(pos);
+    }
+    
+    // Assume position given is either a CharacterCard or a LandCard
+    public void selectCard(int pos) throws ErrorException
+    {
+        if (!this.hand.isPosValid(pos)) { throw new ErrorException("Invalid hand position"); }
 
+        if(this.hand.getCard(pos) instanceof CharacterCard) {
+            CharacterCard card = (CharacterCard)this.hand.getCard(pos);
+    
             // If power > current stats, throw exception
             if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent())
-            throw new ErrorException("Insufficent element stats");
-            
-            this.selectedCardIndex = pos;
+            { throw new ErrorException("Insufficent element stats"); }   
         }
         else 
         {
             SkillCard card = (SkillCard)this.hand.getCard(pos);
-        
-            // If power > current stats, throw exception
-            if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent())
-                throw new ErrorException("Insufficent element stats");
             
-            this.selectedCardIndex = pos;
+            // If power > current stats, throw exception
+            if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent()) { throw new ErrorException("Insufficent element stats"); }
         }
-        System.out.println(this.selectedCardIndex);
-    }
 
-    public void playCard(int posField) throws ErrorException{
-        // If havent selected any card (-1)..
-        if(this.selectedCardIndex == -1)
-            throw new ErrorException("No card selected");
-        
-        if (this.hand.getCard(this.selectedCardIndex) instanceof CharacterCard)
+    }
+    
+    // Assume position given is either a CharacterCard or a LandCard
+    public void playCard(int posHand, int posField) throws ErrorException{
+        if (this.hand.getCard(posHand) instanceof CharacterCard)
         {
             if(this.field.isPosCharacterAvail(posField)){
-                CharacterCard card = (CharacterCard)this.hand.getCard(this.selectedCardIndex);
-                this.hand.discardCard(this.selectedCardIndex);
+                CharacterCard card = (CharacterCard)this.hand.getCard(posHand);
+                this.hand.discardCard(posHand);
                 this.field.addCharacterRow(card, posField);
                 this.stats.reduceStats(card.getElement(), card.getPower());
             }   
         }
-        else{
+        else
+        {
             if (this.field.isPosSkillAvail(posField)){
-                SkillCard card = (SkillCard)this.hand.getCard(this.selectedCardIndex);
-                this.hand.discardCard(this.selectedCardIndex);
+                SkillCard card = (SkillCard)this.hand.getCard(posHand);
+                this.hand.discardCard(posHand);
                 this.field.addSkillRow(card, posField);
                 this.stats.reduceStats(card.getElement(), card.getPower());
             }
         }
 
-        this.selectedCardIndex = -1;
     }
     
     public boolean canAttack(int posisi){
@@ -185,23 +180,23 @@ public class Player {
                 SkillCard X = this.field.getSkillCard(posSkill);
                 CharacterCard Y = player.getField().getCharacterCard(pos);
                 switch (X.getEffect()) {
-                    case aura:
+                    case AURA:
                         int newatk = Y.getAttack() + X.getAttack();
                         int newdef = Y.getDefense() + X.getDefense();
                         Y.setAttack(newatk);
                         Y.setDefense(newdef);
                         break;
                     
-                    case destroy:
+                    case DESTROY:
                         player.getField().discardCharaCard(pos);
                         break;
-                    case powerup:
+                    case POWER_UP:
                         player.getField().getCharacterCard(pos).setPowerUp(true);
                         break;
                     default:
                         break;
                 }
-                if (X.getEffect() != Effect.destroy) {
+                if (X.getEffect() != Effect.DESTROY) {
                     player.getField().getAttachedList(pos).add(X);
                 }
             }   
@@ -222,7 +217,7 @@ public class Player {
         if (i <= this.getField().getSkillCards().length){
             player.getField().getAttachedList(pos).remove(posSkill);
             CharacterCard X = player.getField().getCharacterCard(pos);
-            if (A.getEffect() == Effect.aura){
+            if (A.getEffect() == Effect.AURA){
                 int oldatk = X.getAttack() - A.getAttack();
                 int olddef = X.getDefense() - A.getDefense();
                 X.setAttack(oldatk);

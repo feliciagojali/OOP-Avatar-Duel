@@ -13,13 +13,13 @@ public class Field {
     private ArrayList<ArrayList<SkillCard>> attachedSkill;
 
     public Field(){
-        this.characterRow = new CharacterCard [8];
-        this.skillRow = new SkillCard [8];
-        this.characterHasAtk = new boolean[8];
-        this.characterStance = new boolean[8];
-        this.canChangeStance = new boolean[8];
+        this.characterRow = new CharacterCard [6];
+        this.skillRow = new SkillCard [6];
+        this.characterHasAtk = new boolean[6];
+        this.characterStance = new boolean[6];
+        this.canChangeStance = new boolean[6];
         ArrayList<ArrayList<SkillCard>> list = new ArrayList<ArrayList<SkillCard>>();
-        for (int i = 0; i<= 7 ; i++){
+        for (int i = 0; i<= 5 ; i++){
             this.characterHasAtk[i] = false;
             this.characterStance[i] = true;
             this.canChangeStance[i] = true;
@@ -82,9 +82,11 @@ public class Field {
             this.characterHasAtk[i] = false;
         }
     }
+    
     public boolean getCharacterStance (int pos){
         return(this.characterStance[pos]);
     }
+
     public boolean canAttack(int pos){
         return(!this.characterHasAtk[pos] && this.characterStance[pos]);
     }
@@ -96,6 +98,7 @@ public class Field {
     public void discardSkillCard(int pos){
         this.skillRow[pos] = null;
     }
+
     public void unableChange(int pos){
         this.canChangeStance[pos] = false;
     }

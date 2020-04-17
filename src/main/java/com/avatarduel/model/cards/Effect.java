@@ -1,7 +1,7 @@
 package com.avatarduel.model.cards;
 
 public enum Effect {
-    aura,
-    destroy,
-    powerup
+    AURA,
+    DESTROY,
+    POWER_UP
 }

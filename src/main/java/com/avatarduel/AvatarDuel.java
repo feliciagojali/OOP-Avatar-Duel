@@ -23,7 +23,7 @@ public class AvatarDuel extends Application {
     // mp.setVolume(0.1);
     // mp.play();
 
-    Scene scene = new Scene(gameRoot, 2000, 1000);
+    Scene scene = new Scene(gameRoot, 800, 600);
 
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);
@@ -32,39 +32,39 @@ public class AvatarDuel extends Application {
 
   public static void main(String[] args) {
     
-    // launch();
-    Player A = new Player("A");
-    int pos = 0;
+    launch();
+    // Player A = new Player("A");
+    // int pos = 0;
 
-    while(pos<=A.getHand().getCards().size()){
-      Card X = A.getHand().getCard(pos);
-      if(SkillCardList.isIdSkillCard(X.getId())){
-        SkillCard Y = SkillCardList.getSkillCardById(X.getId());
-        A.getHand().discardCard(pos);
-        A.getField().addSkillRow(Y, 1);
-        break;
-      }
-      pos++;
-    }
+    // while(pos<=A.getHand().getCards().size()){
+    //   Card X = A.getHand().getCard(pos);
+    //   if(SkillCardList.isIdSkillCard(X.getId())){
+    //     SkillCard Y = SkillCardList.getSkillCardById(X.getId());
+    //     A.getHand().discardCard(pos);
+    //     A.getField().addSkillRow(Y, 1);
+    //     break;
+    //   }
+    //   pos++;
+    // }
 
-    pos = 0;
+    // pos = 0;
 
-    while(pos<=A.getHand().getCards().size()){
-      Card X = A.getHand().getCard(pos);
-      if(CharacterCardList.isIdCharacterCard(X.getId())){
-        CharacterCard Y = CharacterCardList.getCharacterCardById(X.getId());
-        A.getHand().discardCard(pos);
-        A.getField().addCharacterRow(Y, 1);
-        break;
-      }
-      pos++;
-    }
+    // while(pos<=A.getHand().getCards().size()){
+    //   Card X = A.getHand().getCard(pos);
+    //   if(CharacterCardList.isIdCharacterCard(X.getId())){
+    //     CharacterCard Y = CharacterCardList.getCharacterCardById(X.getId());
+    //     A.getHand().discardCard(pos);
+    //     A.getField().addCharacterRow(Y, 1);
+    //     break;
+    //   }
+    //   pos++;
+    // }
 
-    A.useSkill(A, 1, 1);
+    // A.useSkill(A, 1, 1);
 
-    A.detach(A, 1, 0);
+    // A.detach(A, 1, 0);
 
-    A.drawCard();
+    // A.drawCard();
     
 
     
