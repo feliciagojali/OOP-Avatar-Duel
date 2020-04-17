@@ -4,6 +4,7 @@ import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
 
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 
 public class CharacterMinicardController extends MinicardController implements FieldCard {
     
@@ -23,6 +24,12 @@ public class CharacterMinicardController extends MinicardController implements F
         this.cardUseButton.setOnAction(e -> {
             this.selectCard();
         });
+        this.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            this.gameController.setCardInfo(this.card);
+        });
+        this.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            this.gameController.getCardInfo().getChildren().clear();
+        });
     }
 
     public void selectCard()
@@ -38,12 +45,6 @@ public class CharacterMinicardController extends MinicardController implements F
         {
             ShowError.showError(e.getMessage());
         }
-    }
-
-    @FXML
-    public void showCardInfo()
-    {
-        this.gameController.setCardInfo(this.card);
     }
 
 }

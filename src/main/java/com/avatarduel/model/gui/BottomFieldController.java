@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.CharacterCard;
+import com.avatarduel.model.player.Phase;
 import com.avatarduel.model.player.Player;
 
 import javafx.fxml.FXML;
@@ -56,9 +57,15 @@ public class BottomFieldController extends FieldController{
             final int buttonIndex = i;
             this.buttonsMap.get("slotButton" + i).setText("Attack");
             this.buttonsMap.get("slotButton" + i).setOnAction(e ->{
-                System.out.println(buttonIndex);
-                this.indexForAttack = buttonIndex;
-                this.displayTargetButton();
+                try {
+                    if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("You can't do this action in this phase."); }
+                    this.indexForAttack = buttonIndex-1;
+                    this.displayTargetButton();
+                } catch (ErrorException msg) 
+                {
+                    ShowError.showError(msg.getMessage());
+                }
+
             });
         }
     }
@@ -70,15 +77,14 @@ public class BottomFieldController extends FieldController{
             final int buttonIndex = i;
             this.buttonsMap.get("slotButton" + i).setText("Target");
             this.buttonsMap.get("slotButton" + i).setOnAction(e ->{
-                System.out.println(buttonIndex);
                 try{
-                    if(this.gameController.getOtherPlayer().getField().getCharacterCard(buttonIndex) != null)
-                        throw new ErrorException("kenot atak, no enemi");
                     
-                    int enemyIndex = 6 - buttonIndex + 1;
-                    // this.gameController.getActivePlayer().AttackEnemy(this.gameController.getOtherPlayer(), enemyIndex);
-                    System.out.println("Attack: " + this.indexForAttack + " to " + (6 - buttonIndex + 1));
-                    this.gameController.getActivePlayer().attack(this.gameController.getOtherPlayer(), this.indexForAttack-1, enemyIndex-1);
+                    int enemyIndex = 6 - buttonIndex;
+
+                    if(this.gameController.getOtherPlayer().getField().getCharacterCard(enemyIndex) == null)
+                        throw new ErrorException("Can't attack here, there's no enemy.");
+                    
+                    this.gameController.getActivePlayer().attack(this.gameController.getOtherPlayer(), this.indexForAttack, enemyIndex);
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
                     this.indexForAttack = -1;
                     
