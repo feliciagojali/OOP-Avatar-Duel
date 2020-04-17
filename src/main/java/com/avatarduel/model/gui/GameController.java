@@ -156,6 +156,7 @@ public class GameController{
     }
     public void change() throws ErrorException
     {
+        System.exit(0);
         switch (this.phase) {
             case draw:
                 if(!this.deckController.hasDraw()){

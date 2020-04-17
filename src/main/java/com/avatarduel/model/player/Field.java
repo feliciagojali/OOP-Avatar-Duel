@@ -1,5 +1,7 @@
 package com.avatarduel.model.player;
 
+import java.util.ArrayList;
+
 import com.avatarduel.model.cards.*;
 
 public class Field {
@@ -8,6 +10,7 @@ public class Field {
     private boolean[] characterHasAtk;
     private boolean[] characterStance; // true menyerang false bertahan
     private boolean[] canChangeStance;
+    private ArrayList<ArrayList<SkillCard>> attachedSkill;
 
     public Field(){
         this.characterRow = new CharacterCard [8];
@@ -15,12 +18,14 @@ public class Field {
         this.characterHasAtk = new boolean[8];
         this.characterStance = new boolean[8];
         this.canChangeStance = new boolean[8];
+        ArrayList<ArrayList<SkillCard>> list = new ArrayList<ArrayList<SkillCard>>();
         for (int i = 0; i<= 7 ; i++){
             this.characterHasAtk[i] = false;
             this.characterStance[i] = true;
             this.canChangeStance[i] = true;
+            list.add(new ArrayList<SkillCard>());
         }
-
+        this.attachedSkill = list;
 
     }
 
@@ -39,6 +44,11 @@ public class Field {
     public SkillCard getSkillCard(int pos){
         return this.skillRow[pos];
     }
+
+    public ArrayList<SkillCard> getAttachedList(int pos){
+        return this.attachedSkill.get(pos);
+    }
+
 
     public boolean isPosSkillAvail(int pos){
         return(this.skillRow[pos] == null);
@@ -89,4 +99,9 @@ public class Field {
     public void unableChange(int pos){
         this.canChangeStance[pos] = false;
     }
+  
+    
+
+
+
 }

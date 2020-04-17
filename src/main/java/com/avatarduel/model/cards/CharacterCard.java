@@ -31,8 +31,8 @@ public class CharacterCard extends Card {
         return this.powerup;
     }
 
-    public void setPowerUp(){
-        this.powerup = true;
+    public void setPowerUp(boolean set){
+        this.powerup = set;
     }
     
     public void setAttack(int atk){

@@ -196,17 +196,45 @@ public class Player {
                         player.getField().discardCharaCard(pos);
                         break;
                     case powerup:
-                        player.getField().getCharacterCard(pos).setPowerUp();
+                        player.getField().getCharacterCard(pos).setPowerUp(true);
                         break;
                     default:
                         break;
                 }
-                this.field.discardSkillCard(posSkill);
+                if (X.getEffect() != Effect.destroy) {
+                    player.getField().getAttachedList(pos).add(X);
+                }
             }   
 
         }
     }
+
+
+    public void detach(Player player, int pos, int posSkill){
+        SkillCard A = player.getField().getAttachedList(pos).get(posSkill);
+        int i = 0;
+        while (i <= this.getField().getSkillCards().length){
+            if (this.getField().getSkillCard(i) == A){
+                break;
+            }
+            i++;
+        }
+        if (i <= this.getField().getSkillCards().length){
+            player.getField().getAttachedList(pos).remove(posSkill);
+            CharacterCard X = player.getField().getCharacterCard(pos);
+            if (A.getEffect() == Effect.aura){
+                int oldatk = X.getAttack() - A.getAttack();
+                int olddef = X.getDefense() - A.getDefense();
+                X.setAttack(oldatk);
+                X.setDefense(olddef);
+            } else {
+                X.setPowerUp(false);
+            }   
+
+            this.getField().discardSkillCard(i);
+        }
+    }
+}
     
    
 
-}
