@@ -48,6 +48,6 @@ public class CharacterMinicardController extends MinicardController implements F
 
     public void setStanceColor()
     {
-        this.setStyle("-fx-background-color: lightblue;");
+        this.setStyle("-fx-background-color: #64ffda;-fx-border-radius:5;-fx-border-color:#14cba8;");
     }
 }
