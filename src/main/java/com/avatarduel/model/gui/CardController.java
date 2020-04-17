@@ -3,7 +3,7 @@ package com.avatarduel.model.gui;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.*;
@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 
-public class CardController extends AnchorPane{
+public class CardController extends VBox{
     
     @FXML private Label cardName;
     @FXML private Label cardElement;

@@ -3,7 +3,6 @@ package com.avatarduel.model.gui;
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
 
-import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
 public class CharacterMinicardController extends MinicardController implements FieldCard {
@@ -47,4 +46,8 @@ public class CharacterMinicardController extends MinicardController implements F
         }
     }
 
+    public void setStanceColor()
+    {
+        this.setStyle("-fx-background-color: lightblue;");
+    }
 }

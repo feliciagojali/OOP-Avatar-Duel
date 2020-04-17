@@ -56,7 +56,4 @@ public class MinicardController extends AnchorPane {
     {
         ((HandController)this.getParent()).getChildren().remove(this);
     }
-
-
-
 }
