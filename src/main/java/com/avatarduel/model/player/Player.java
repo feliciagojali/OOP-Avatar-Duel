@@ -197,7 +197,7 @@ public class Player {
                         break;
                 }
                 if (X.getEffect() != Effect.DESTROY) {
-                    player.getField().getAttachedList(pos).add(X);
+                    player.getField().getAttachedList(pos).add(this.field.getSkillCard(posSkill));
                 }
             }   
 
@@ -206,16 +206,15 @@ public class Player {
 
 
     public void detach(Player player, int pos, int posSkill){
-        SkillCard A = player.getField().getAttachedList(pos).get(posSkill);
         int i = 0;
         while (i <= this.getField().getSkillCards().length){
-            if (this.getField().getSkillCard(i) == A){
+            if (this.getField().getSkillCard(i) == player.getField().getAttachedList(pos).get(posSkill)){
                 break;
             }
             i++;
         }
         if (i <= this.getField().getSkillCards().length){
-            player.getField().getAttachedList(pos).remove(posSkill);
+            SkillCard A = player.getField().getAttachedList(pos).remove(posSkill);
             CharacterCard X = player.getField().getCharacterCard(pos);
             if (A.getEffect() == Effect.AURA){
                 int oldatk = X.getAttack() - A.getAttack();
