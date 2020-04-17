@@ -3,6 +3,8 @@ package com.avatarduel.model.gui;
 import com.avatarduel.model.cards.LandCard;
 import com.avatarduel.model.player.Phase;
 
+import javafx.scene.input.MouseEvent;
+
 import javafx.fxml.FXML;
 
 public class LandMinicardController extends MinicardController implements OneUseCard {
@@ -19,8 +21,15 @@ public class LandMinicardController extends MinicardController implements OneUse
         this.cardAttack.setText("-");
         this.cardDefense.setText("-");
         this.cardPower.setText("-");
+
         this.cardUseButton.setOnAction(e -> {
             this.useCard();
+        });
+        this.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            this.gameController.setCardInfo(this.card);
+        });
+        this.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            this.gameController.getCardInfo().getChildren().clear();
         });
     }
     

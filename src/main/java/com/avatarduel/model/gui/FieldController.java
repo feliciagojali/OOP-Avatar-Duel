@@ -87,13 +87,13 @@ public class FieldController extends GridPane{
         {
             if(this.owner.getField().getCharacterCard(i) != null)
             {
-                MinicardController minicard = new CharacterMinicardController(this.gameController, this.owner.getField().getCharacterCard(i));
+                CharacterMinicardController minicard = new CharacterMinicardController(this.gameController, this.owner.getField().getCharacterCard(i));
                 minicard.removeCardUseButton();
                 this.topSlots[i].getChildren().add(minicard);
             }
             if(this.owner.getField().getSkillCard(i) != null)
             {
-                MinicardController minicard = new SkillMinicardController(this.gameController, this.owner.getField().getSkillCard(i));
+                SkillMinicardController minicard = new SkillMinicardController(this.gameController, this.owner.getField().getSkillCard(i));
                 minicard.removeCardUseButton();
                 this.bottomSlots[i].getChildren().add(minicard);
             }
@@ -141,4 +141,10 @@ public class FieldController extends GridPane{
             ShowError.showError(e.getMessage());
         }
     }
+
+    public CharacterMinicardController getCharacterMinicard(int pos)
+    {
+        return (CharacterMinicardController)this.slotsMap.get("topSlot" + pos).getChildren().get(0);
+    }
+
 }

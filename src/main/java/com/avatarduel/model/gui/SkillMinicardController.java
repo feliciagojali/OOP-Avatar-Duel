@@ -4,6 +4,8 @@ import com.avatarduel.model.cards.Effect;
 import com.avatarduel.model.cards.SkillCard;
 import com.avatarduel.model.player.Phase;
 
+import javafx.scene.input.MouseEvent;
+
 public class SkillMinicardController extends MinicardController implements FieldCard, OneUseCard {
 
     private SkillCard card;
@@ -36,6 +38,13 @@ public class SkillMinicardController extends MinicardController implements Field
                 this.selectCard();
             });
         }
+
+        this.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            this.gameController.setCardInfo(this.card);
+        });
+        this.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            this.gameController.getCardInfo().getChildren().clear();
+        });
     }
 
     public void useCard()
@@ -58,4 +67,5 @@ public class SkillMinicardController extends MinicardController implements Field
             ShowError.showError(e.getMessage());
         }
     }
+
 }

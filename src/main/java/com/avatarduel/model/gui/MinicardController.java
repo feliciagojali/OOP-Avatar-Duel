@@ -7,6 +7,8 @@ import com.avatarduel.model.cards.LandCard;
 import com.avatarduel.model.cards.SkillCard;
 import com.avatarduel.model.player.Phase;
 
+import org.w3c.dom.events.MouseEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -54,5 +56,4 @@ public class MinicardController extends AnchorPane {
     {
         ((HandController)this.getParent()).getChildren().remove(this);
     }
-
 }

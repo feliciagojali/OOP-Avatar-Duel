@@ -7,25 +7,24 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.control.ScrollPane;
-import com.avatarduel.model.player.*;
-import com.avatarduel.model.cards.*;
 
 
 public class AvatarDuel extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     FXMLLoader gameLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/game.fxml"));
-    ScrollPane gameRoot = gameLoader.load();
+    BorderPane gameRoot = gameLoader.load();
     
-    // Media media = new Media(AvatarDuel.class.getResource("music/song.mp3").toString());
-    // MediaPlayer mp = new MediaPlayer(media);
-    // mp.setVolume(0.1);
-    // mp.play();
+    Media media = new Media(AvatarDuel.class.getResource("music/song.mp3").toString());
+    MediaPlayer mp = new MediaPlayer(media);
+    mp.setVolume(0.1);
+    mp.play();
 
-    Scene scene = new Scene(gameRoot, 800, 600);
-
+    Scene scene = new Scene(gameRoot, 1200, 1000);
+    
     stage.setTitle("Avatar Duel");
+    // stage.setMaximized(true);
+    stage.setFullScreen(true);
     stage.setScene(scene);
     stage.show();
   }

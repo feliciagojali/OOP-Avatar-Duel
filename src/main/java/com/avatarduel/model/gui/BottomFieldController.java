@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.CharacterCard;
+import com.avatarduel.model.player.Phase;
 import com.avatarduel.model.player.Player;
 
 import javafx.fxml.FXML;
@@ -19,12 +20,19 @@ import javafx.scene.control.Button;
 
 public class BottomFieldController extends FieldController{
 
-    @FXML private Button slotButton1;
-    @FXML private Button slotButton2;
-    @FXML private Button slotButton3;
-    @FXML private Button slotButton4;
-    @FXML private Button slotButton5;
-    @FXML private Button slotButton6;
+    @FXML private Button attackButton1;
+    @FXML private Button attackButton2;
+    @FXML private Button attackButton3;
+    @FXML private Button attackButton4;
+    @FXML private Button attackButton5;
+    @FXML private Button attackButton6;
+
+    @FXML private Button stanceButton1;
+    @FXML private Button stanceButton2;
+    @FXML private Button stanceButton3;
+    @FXML private Button stanceButton4;
+    @FXML private Button stanceButton5;
+    @FXML private Button stanceButton6;
 
     private Map<String, Button> buttonsMap;
     private int indexForAttack;
@@ -33,12 +41,20 @@ public class BottomFieldController extends FieldController{
     {
         super(controller, player, "gui/bottomField.fxml");
         this.buttonsMap = new HashMap<String, Button>();
-        this.buttonsMap.put("slotButton1", slotButton1);
-        this.buttonsMap.put("slotButton2", slotButton2);
-        this.buttonsMap.put("slotButton3", slotButton3);
-        this.buttonsMap.put("slotButton4", slotButton4);
-        this.buttonsMap.put("slotButton5", slotButton5);
-        this.buttonsMap.put("slotButton6", slotButton6);
+        this.buttonsMap.put("attackButton1", attackButton1);
+        this.buttonsMap.put("attackButton2", attackButton2);
+        this.buttonsMap.put("attackButton3", attackButton3);
+        this.buttonsMap.put("attackButton4", attackButton4);
+        this.buttonsMap.put("attackButton5", attackButton5);
+        this.buttonsMap.put("attackButton6", attackButton6);
+        
+        this.buttonsMap.put("stanceButton1", stanceButton1);
+        this.buttonsMap.put("stanceButton2", stanceButton2);
+        this.buttonsMap.put("stanceButton3", stanceButton3);
+        this.buttonsMap.put("stanceButton4", stanceButton4);
+        this.buttonsMap.put("stanceButton5", stanceButton5);
+        this.buttonsMap.put("stanceButton6", stanceButton6);
+
         this.indexForAttack = -1;
         this.displayField();
     }
@@ -46,7 +62,12 @@ public class BottomFieldController extends FieldController{
     public void displayField()
     {
         super.displayField();
+        for(int i = 1; i <= 6; i++) if(!this.gameController.getActivePlayer().getField().getCharacterStance(i-1))
+        {
+            this.getCharacterMinicard(i).setStanceColor();
+        }
         this.displayAttackButton();
+        this.displayStanceButton();
     }
 
     public void displayAttackButton()
@@ -54,11 +75,17 @@ public class BottomFieldController extends FieldController{
         for(int i=1;i<=6;i++)
         {
             final int buttonIndex = i;
-            this.buttonsMap.get("slotButton" + i).setText("Attack");
-            this.buttonsMap.get("slotButton" + i).setOnAction(e ->{
-                System.out.println(buttonIndex);
-                this.indexForAttack = buttonIndex;
-                this.displayTargetButton();
+            this.buttonsMap.get("attackButton" + i).setText("Attack");
+            this.buttonsMap.get("attackButton" + i).setOnAction(e ->{
+                try {
+                    if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("You can't do this action in this phase."); }
+                    this.indexForAttack = buttonIndex-1;
+                    this.displayTargetButton();
+                } catch (ErrorException msg) 
+                {
+                    ShowError.showError(msg.getMessage());
+                }
+
             });
         }
     }
@@ -68,16 +95,17 @@ public class BottomFieldController extends FieldController{
         for(int i=1;i<=6;i++)
         {
             final int buttonIndex = i;
-            this.buttonsMap.get("slotButton" + i).setText("Target");
-            this.buttonsMap.get("slotButton" + i).setOnAction(e ->{
-                System.out.println(buttonIndex);
+            this.buttonsMap.get("attackButton" + i).setText("Target");
+            this.buttonsMap.get("attackButton" + i).setOnAction(e ->{
                 try{
-                    if(this.gameController.getOtherPlayer().getField().getCharacterCard(buttonIndex) != null)
-                        throw new ErrorException("kenot atak, no enemi");
                     
-                    int enemyIndex = 6 - buttonIndex + 1;
-                    this.gameController.getActivePlayer().AttackEnemy(this.gameController.getOtherPlayer(), enemyIndex);
-                    System.out.println("Attack: " + this.indexForAttack + " to " + (6 - buttonIndex + 1));
+                    int enemyIndex = 6 - buttonIndex;
+
+                    if(this.gameController.getOtherPlayer().getField().getCharacterCard(enemyIndex) == null)
+                        throw new ErrorException("Can't attack here, there's no enemy.");
+                    
+                    this.gameController.getActivePlayer().attack(this.gameController.getOtherPlayer(), this.indexForAttack, enemyIndex);
+                    this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
                     this.indexForAttack = -1;
                     
                     this.displayAttackButton();
@@ -88,5 +116,37 @@ public class BottomFieldController extends FieldController{
                 }
             });
         }
+    }
+
+    public void displayStanceButton()
+    {
+        for(int i = 1; i <= 6; i++)
+        {
+            final int buttonIndex = i;
+            this.buttonsMap.get("stanceButton" + i).setOnAction(e -> {
+                try
+                {
+                    if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("Can't change stance in this phase."); }
+
+                    // boolean isStanceAttack = this.gameController.getActivePlayer().getField().getCharacterStance(buttonIndex - 1);
+                    this.gameController.getActivePlayer().getField().changeStance(buttonIndex - 1);
+                    this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                }
+                catch(ErrorException msg)
+                {
+                    ShowError.showError(msg.getMessage());
+                }
+            });
+        }
+    }
+
+    public void disableStanceButton()
+    {
+
+    }
+
+    public void disableAttackButton()
+    {
+
     }
 }

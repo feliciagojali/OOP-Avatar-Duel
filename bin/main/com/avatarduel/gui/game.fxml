@@ -7,54 +7,58 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.GameController">
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" >
-   <bottom>
-      <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" BorderPane.alignment="CENTER">
-         <left>
-            <StackPane fx:id="deckSlot" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </left>
-         <right>
-            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Button fx:id="nextPhase" mnemonicParsing="false" onMouseClicked="#changePhase" prefHeight="61.0" prefWidth="127.0" text="Next Phase" />
-                     </children>
-                  </VBox>
-               </children>
-            </StackPane>
-         </right>
-         <center>
-            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ScrollPane fx:id="handSlot" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </BorderPane.margin>
-            </StackPane>
-         </center>
-      </BorderPane>
-   </bottom>
-   <center>
-      <StackPane prefHeight="579.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane fx:id="topFieldSlot" VBox.vgrow="ALWAYS" />
-                  <StackPane fx:id="bottomFieldSlot" VBox.vgrow="ALWAYS" />
-               </children>
-            </VBox>
-         </children></StackPane>
-   </center>
-   <left>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <StackPane fx:id="cardInfoSlot" prefHeight="301.0" prefWidth="252.0" />
-            <StackPane fx:id="statsSlot" layoutX="10.0" layoutY="10.0" prefHeight="301.0" prefWidth="252.0" />
-         </children>
-      </VBox>
-   </left>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.model.gui.GameController">
+<bottom>
+   <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" BorderPane.alignment="CENTER">
+      <left>
+         <StackPane fx:id="deckSlot" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      </left>
+      <right>
+         <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+               <VBox prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                     <Button fx:id="nextPhase" mnemonicParsing="false" onMouseClicked="#changePhase" prefHeight="61.0" prefWidth="127.0" text="Next Phase" />
+                  </children>
+               </VBox>
+            </children>
+         </StackPane>
+      </right>
+      <center>
+         <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+               <ScrollPane fx:id="handSlot" fitToHeight="true" fitToWidth="true" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" vbarPolicy="NEVER" StackPane.alignment="CENTER">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </ScrollPane>
+            </children>
+            <BorderPane.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+         </StackPane>
+      </center>
+   </BorderPane>
+</bottom>
+<center>
+   <StackPane prefHeight="579.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <children>
+         <VBox prefHeight="200.0" prefWidth="100.0">
+            <children>
+               <StackPane fx:id="topFieldSlot" VBox.vgrow="ALWAYS" />
+               <StackPane fx:id="bottomFieldSlot" VBox.vgrow="ALWAYS" />
+            </children>
+         </VBox>
+      </children>
+      </StackPane>
+</center>
+<left>
+   <VBox BorderPane.alignment="CENTER">
+      <children>
+         <StackPane fx:id="statsSlot" layoutX="10.0" layoutY="10.0" prefWidth="260.0" />
+         <StackPane fx:id="cardInfoSlot" prefWidth="270.0" />
+      </children>
+   </VBox>
+</left>
 </BorderPane>
-</ScrollPane>

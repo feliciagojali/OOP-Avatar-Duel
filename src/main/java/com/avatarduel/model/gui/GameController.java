@@ -77,6 +77,12 @@ public class GameController{
         return this.otherPlayer;
     }
 
+    // Get active card info
+    public StackPane getCardInfo()
+    {
+        return this.cardInfoSlot;
+    }
+
     // Get hand controller
     public HandController getHandController()
     {

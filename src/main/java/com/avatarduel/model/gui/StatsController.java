@@ -43,7 +43,7 @@ public class StatsController extends AnchorPane {
     public void displayStats()
     {
         this.playerHealth.setText(Integer.toString(this.gameController.getActivePlayer().getHp()));
-        this.playerHealth.setText(Integer.toString(this.gameController.getOtherPlayer().getHp()));
+        this.enemyHealth.setText(Integer.toString(this.gameController.getOtherPlayer().getHp()));
         this.waterStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.WATER).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.WATER).getMax());
         this.earthStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.EARTH).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.EARTH).getMax());
         this.fireStats.setText(this.gameController.getActivePlayer().getElementStats().getStats(Element.FIRE).getCurrent() + "/" + this.gameController.getActivePlayer().getElementStats().getStats(Element.FIRE).getMax());
