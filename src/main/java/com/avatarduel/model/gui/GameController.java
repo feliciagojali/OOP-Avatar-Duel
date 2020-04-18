@@ -14,7 +14,8 @@ import com.avatarduel.model.cards.SkillCardList;
 import com.avatarduel.model.player.Hand;
 import com.avatarduel.model.player.Player;
 import com.avatarduel.model.player.Phase;
-import com.avatarduel.util.ErrorException;
+import com.avatarduel.util.InvalidActionException;
+import com.avatarduel.util.AlertBox;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -173,7 +174,7 @@ public class GameController{
             switch (this.phase) {
                 case DRAW:
                     if(!this.deckController.hasDraw()){
-                        throw new ErrorException("You need to draw first");
+                        throw new InvalidActionException("You need to draw first");
                     }
                     this.phase = Phase.MAIN;
                     break;
@@ -196,9 +197,9 @@ public class GameController{
                 this.setDeckInterface();
                 this.setStatsInterface();
             }
-        } catch (final ErrorException e) {
+        } catch (final InvalidActionException e) {
             //TODO: handle exception
-            ShowError.showError(e.getMessage());
+            AlertBox.showError(e.getMessage());
         }
     }
 

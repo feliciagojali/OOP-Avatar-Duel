@@ -12,7 +12,8 @@ import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
 import com.avatarduel.model.player.Player;
-import com.avatarduel.util.ErrorException;
+import com.avatarduel.util.InvalidActionException;
+import com.avatarduel.util.AlertBox;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -139,12 +140,12 @@ public class BottomFieldController extends FieldController{
             this.buttonsMap.get("attackButton" + i).setText("Attack");
             this.buttonsMap.get("attackButton" + i).setOnAction(e ->{
                 try {
-                    if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("You can't do this action in this phase."); }
+                    if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("You can't do this action in this phase."); }
                     this.indexForAttack = buttonIndex-1;
                     this.displayTargetButton();
-                } catch (ErrorException msg) 
+                } catch (InvalidActionException msg) 
                 {
-                    ShowError.showError(msg.getMessage());
+                    AlertBox.showError(msg.getMessage());
                 }
 
             });
@@ -163,7 +164,7 @@ public class BottomFieldController extends FieldController{
                     int enemyIndex = 6 - buttonIndex;
 
                     if(this.gameController.getOtherPlayer().getField().getCharacterCard(enemyIndex) == null)
-                        throw new ErrorException("Can't attack here, there's no enemy.");
+                        throw new InvalidActionException("Can't attack here, there's no enemy.");
                     
                     this.gameController.getActivePlayer().attack(this.gameController.getOtherPlayer(), this.indexForAttack, enemyIndex);
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
@@ -171,9 +172,9 @@ public class BottomFieldController extends FieldController{
                     
                     this.displayAttackButton();
                 }
-                catch(ErrorException msg)
+                catch(InvalidActionException msg)
                 {
-                    ShowError.showError(msg.getMessage());
+                    AlertBox.showError(msg.getMessage());
                 }
             });
         }
@@ -187,15 +188,15 @@ public class BottomFieldController extends FieldController{
             this.buttonsMap.get("stanceButton" + i).setOnAction(e -> {
                 try
                 {
-                    if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("Can't change stance in this phase."); }
+                    if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("Can't change stance in this phase."); }
 
                     // boolean isStanceAttack = this.gameController.getActivePlayer().getField().getCharacterStance(buttonIndex - 1);
                     this.gameController.getActivePlayer().getField().toggleStance(buttonIndex - 1);
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
                 }
-                catch(ErrorException msg)
+                catch(InvalidActionException msg)
                 {
-                    ShowError.showError(msg.getMessage());
+                    AlertBox.showError(msg.getMessage());
                 }
             });
         }

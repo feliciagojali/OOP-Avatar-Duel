@@ -2,7 +2,7 @@ package com.avatarduel.model.gui;
 
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
-import com.avatarduel.util.ErrorException;
+import com.avatarduel.util.InvalidActionException;
 
 import javafx.scene.input.MouseEvent;
 
@@ -35,13 +35,13 @@ public class CharacterMinicardController extends MinicardController implements F
     public void selectCard()
     {
         try{
-            if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("You can't do this action in this phase."); }
+            if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("You can't do this action in this phase."); }
 
             System.out.println(this.getMinicardIndexInHand());
             this.gameController.getActivePlayer().selectCard(this.getMinicardIndexInHand());
             this.gameController.setSelectedCardIndex(this.getMinicardIndexInHand());
         }
-        catch(ErrorException e)
+        catch(InvalidActionException e)
         {
             ShowError.showError(e.getMessage());
         }

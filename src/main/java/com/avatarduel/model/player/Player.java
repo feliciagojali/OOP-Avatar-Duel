@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import com.avatarduel.model.cards.*;
-import com.avatarduel.util.ErrorException;
+import com.avatarduel.util.InvalidActionException;
 
 public class Player {
     // General player fields
@@ -75,9 +75,9 @@ public class Player {
     }
 
     // Assume position given is is a LandCard
-    public void useCard(int pos) throws ErrorException
+    public void useCard(int pos) throws InvalidActionException
     {
-        if (!this.hand.isPosValid(pos)) { throw new ErrorException("Invalid hand position"); }
+        if (!this.hand.isPosValid(pos)) { throw new InvalidActionException("Invalid hand position"); }
         
         this.stats.addStats(this.hand.getCard(pos).getElement());
         this.hand.discardCard(pos);
@@ -87,29 +87,29 @@ public class Player {
     }
     
     // Assume position given is either a CharacterCard or a LandCard
-    public void selectCard(int pos) throws ErrorException
+    public void selectCard(int pos) throws InvalidActionException
     {
-        if (!this.hand.isPosValid(pos)) { throw new ErrorException("Invalid hand position"); }
+        if (!this.hand.isPosValid(pos)) { throw new InvalidActionException("Invalid hand position"); }
 
         if(this.hand.getCard(pos) instanceof CharacterCard) {
             CharacterCard card = (CharacterCard)this.hand.getCard(pos);
     
             // If power > current stats, throw exception
             if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent())
-            { throw new ErrorException("Insufficent element stats"); }   
+            { throw new InvalidActionException("Insufficent element stats"); }   
         }
         else 
         {
             SkillCard card = (SkillCard)this.hand.getCard(pos);
             
             // If power > current stats, throw exception
-            if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent()) { throw new ErrorException("Insufficent element stats"); }
+            if(card.getPower() > this.stats.getStats(card.getElement()).getCurrent()) { throw new InvalidActionException("Insufficent element stats"); }
         }
 
     }
     
     // Assume position given is either a CharacterCard or a LandCard
-    public void playCard(int posHand, int posField) throws ErrorException{
+    public void playCard(int posHand, int posField) throws InvalidActionException{
         if (this.hand.getCard(posHand) instanceof CharacterCard)
         {
             if(this.field.isCharacterPositionAvailable(posField)){

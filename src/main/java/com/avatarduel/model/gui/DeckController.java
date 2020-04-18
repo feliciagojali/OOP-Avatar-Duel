@@ -9,7 +9,8 @@ import com.avatarduel.model.cards.Card;
 import com.avatarduel.model.player.Deck;
 import com.avatarduel.model.player.Player;
 import com.avatarduel.model.player.Phase;
-import com.avatarduel.util.ErrorException;
+import com.avatarduel.util.InvalidActionException;
+import com.avatarduel.util.AlertBox;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
@@ -48,16 +49,16 @@ public class DeckController extends AnchorPane {
     public void drawCard() {
         try {
             drawCards();
-        } catch (ErrorException e) {
-            ShowError.showError(e.getMessage());
+        } catch (InvalidActionException e) {
+            AlertBox.showError(e.getMessage());
         }
 
     }
-    public void drawCards() throws ErrorException {
+    public void drawCards() throws InvalidActionException {
         if (this.hasDraw){
-            throw new ErrorException("You can only draw once!");
+            throw new InvalidActionException("You can only draw once!");
         } else if (this.gameController.getPhase() != Phase.DRAW) {
-            throw new ErrorException("You can not do this now!");
+            throw new InvalidActionException("You can not do this now!");
         }
         this.gameController.getActivePlayer().drawCard();
         this.setCardLeftLabelText(this.gameController.getActivePlayer().getDeck().getCardsLeft());

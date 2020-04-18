@@ -1,9 +1,9 @@
 package com.avatarduel.util;
 
-public class ErrorException extends Exception{
+public class InvalidActionException extends Exception{
     private String message;
 
-    public ErrorException(String message){
+    public InvalidActionException(String message){
         this.message = message;
     }
     

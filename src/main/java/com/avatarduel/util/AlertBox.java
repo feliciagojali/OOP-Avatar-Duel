@@ -1,10 +1,10 @@
-package com.avatarduel.model.gui;
+package com.avatarduel.util;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class ShowError{
+public class AlertBox{
 
     @FXML
     public static void showError(String message){
@@ -12,7 +12,6 @@ public class ShowError{
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(message);
-
         alert.showAndWait();
     }
 }
