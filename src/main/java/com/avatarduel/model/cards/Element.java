@@ -1,11 +1,9 @@
 package com.avatarduel.model.cards;
 
 /**
- * Element is the enum that defines a card's element.
- * 
- * @author mkamadeus
+ * Enum for defining the possible elements of a card.
+ * @author Laboratorium Programming
  */
-
 public enum Element {
     WATER,
     FIRE,

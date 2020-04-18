@@ -3,6 +3,7 @@ package com.avatarduel.model.gui;
 import com.avatarduel.model.cards.Effect;
 import com.avatarduel.model.cards.SkillCard;
 import com.avatarduel.model.player.Phase;
+import com.avatarduel.util.ErrorException;
 
 import javafx.scene.input.MouseEvent;
 

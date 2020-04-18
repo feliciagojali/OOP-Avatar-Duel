@@ -1,10 +1,10 @@
 package com.avatarduel.model.cards;
 
 /**
- * SkillCard is the class that defines a skill card by extending
- * the base Card class.
- * 
+ * SkillCard is the class that defines a skill card by
+ * extending the base class Card.
  * @author mkamadeus
+ * @author feliciagojali
  */
 public class SkillCard extends Card{
     protected int attack;
@@ -13,16 +13,16 @@ public class SkillCard extends Card{
     protected Effect effect;
 
     /**
-     * SkillCard cosntructor for its required values.
+     * SkillCard constructor for its required values.
      * @param id SkillCard id
-     * @param name SkillCard name
+     * @param name SkiilCard name
      * @param element SkillCard element
      * @param description SkillCard description
-     * @param imagePath SkillCard image path
-     * @param attack CharcterCard attack value
+     * @param imagepath SkillCard image path relative to the AvatarDuel class
+     * @param attack SkillCard attack value
      * @param defense SkillCard defense value
-     * @param power SkillCard power value (works as card cost)
-     * @param effect SkillCard effect
+     * @param power SkillCard power value (works as cost)
+     * @param effect SKillCard effect using the Effect enum provided
      */
     public SkillCard(int id, String name, Element element, String description, String imagepath, int attack, int defense, int power,Effect effect){
         super(id, name, element, description, imagepath);
@@ -32,34 +32,33 @@ public class SkillCard extends Card{
         this.effect = effect;
     }
 
-
     /**
-     * Getter for card's attack value
-     * @return integer of card's attack value
+     * Getter for attack value
+     * @return integer of the skill card's attack value
      */
     public int getAttack(){
         return this.attack;
     }
-
+    
     /**
-     * Getter for card's defense value
-     * @return integer of card's defense value
+     * Getter for defense value
+     * @return integer of the skill card's defense value
      */
     public int getDefense(){
         return this.defense;
     }
-
+    
     /**
-     * Getter for card's power value
-     * @return integer of card's power value
+     * Getter for power value
+     * @return integer of the skill card's power value
      */
     public int getPower(){
         return this.power;
     }
     
     /**
-     * Getter for card's effect 
-     * @return Effect of card's effect
+     * Getter for effect on field
+     * @return integer of the skill card's effect on field
      */
     public Effect getEffect(){
         return this.effect;

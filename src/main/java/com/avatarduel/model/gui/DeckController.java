@@ -9,7 +9,7 @@ import com.avatarduel.model.cards.Card;
 import com.avatarduel.model.player.Deck;
 import com.avatarduel.model.player.Player;
 import com.avatarduel.model.player.Phase;
-
+import com.avatarduel.util.ErrorException;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;

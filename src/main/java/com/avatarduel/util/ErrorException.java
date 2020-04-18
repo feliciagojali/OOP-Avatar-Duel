@@ -1,4 +1,4 @@
-package com.avatarduel.model.gui;
+package com.avatarduel.util;
 
 public class ErrorException extends Exception{
     private String message;
@@ -6,6 +6,7 @@ public class ErrorException extends Exception{
     public ErrorException(String message){
         this.message = message;
     }
+    
     public String getMessage(){
         return this.message;
     }

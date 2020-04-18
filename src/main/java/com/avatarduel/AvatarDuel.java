@@ -32,54 +32,54 @@ public class AvatarDuel extends Application {
 
   public static void main(String[] args) {
     
-    // launch();
-    Player A = new Player("A");
-    Player B = new Player("B");
-    int pos = 0;
+    launch();
+    // Player A = new Player("A");
+    // Player B = new Player("B");
+    // int pos = 0;
 
-    while(pos<=A.getHand().getCards().size()){
-      Card X = A.getHand().getCard(pos);
-      if(SkillCardList.isIdSkillCard(X.getId())){
-        SkillCard Y = SkillCardList.getSkillCardById(X.getId());
-        if (Y.getEffect() == Effect.AURA){
-          A.getHand().discardCard(pos);
-          A.getField().addSkillRow(Y, 1);
-          break;
+    // while(pos<=A.getHand().getCards().size()){
+    //   Card X = A.getHand().getCard(pos);
+    //   if(SkillCardList.isIdSkillCard(X.getId())){
+    //     SkillCard Y = SkillCardList.getSkillCardById(X.getId());
+    //     if (Y.getEffect() == Effect.AURA){
+    //       A.getHand().discardCard(pos);
+    //       A.getField().addSkillCard(Y, 1);
+    //       break;
 
-        }
-      }
-      pos++;
-    }
+    //     }
+    //   }
+    //   pos++;
+    // }
 
-    pos = 0;
+    // pos = 0;
 
-    while(pos<=A.getHand().getCards().size()){
-      Card X = A.getHand().getCard(pos);
-      if(CharacterCardList.isIdCharacterCard(X.getId())){
-        CharacterCard Y = CharacterCardList.getCharacterCardById(X.getId());
-        A.getHand().discardCard(pos);
-        A.getField().addCharacterRow(Y, 1);
-        break;
-      }
-      pos++;
-    }
-    pos = 0;
-    while(pos<=B.getHand().getCards().size()){
-      Card X = B.getHand().getCard(pos);
-      if(CharacterCardList.isIdCharacterCard(X.getId())){
-        CharacterCard Y = CharacterCardList.getCharacterCardById(X.getId());
-        B.getHand().discardCard(pos);
-        B.getField().addCharacterRow(Y, 1);
-        break;
-      }
-      pos++;
-    }
-    A.useSkill(B, 1);
-    // A.attack(B, 1, 1);
+    // while(pos<=A.getHand().getCards().size()){
+    //   Card X = A.getHand().getCard(pos);
+    //   if(CharacterCardList.isIdCharacterCard(X.getId())){
+    //     CharacterCard Y = CharacterCardList.getCharacterCardById(X.getId());
+    //     A.getHand().discardCard(pos);
+    //     A.getField().addCharacterCard(Y, 1);
+    //     break;
+    //   }
+    //   pos++;
+    // }
+    // pos = 0;
+    // while(pos<=B.getHand().getCards().size()){
+    //   Card X = B.getHand().getCard(pos);
+    //   if(CharacterCardList.isIdCharacterCard(X.getId())){
+    //     CharacterCard Y = CharacterCardList.getCharacterCardById(X.getId());
+    //     B.getHand().discardCard(pos);
+    //     B.getField().addCharacterCard(Y, 1);
+    //     break;
+    //   }
+    //   pos++;
+    // }
+    // A.useSkill(B, 1);
+    // // A.attack(B, 1, 1);
 
-    A.detach(B, 1);
+    // A.detach(B, 1);
 
-    A.drawCard();
+    // A.drawCard();
     
 
     

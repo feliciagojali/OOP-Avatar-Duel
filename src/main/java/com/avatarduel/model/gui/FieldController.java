@@ -11,6 +11,7 @@ import java.util.Map;
 import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Player;
+import com.avatarduel.util.ErrorException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -125,7 +126,7 @@ public class FieldController extends GridPane{
         try {
             if((isCharacter && !isTopSlot) || (!isCharacter && isTopSlot)) { throw new ErrorException("Invalid card position"); }
     
-            if(!isCharacter && this.gameController.getActivePlayer().getField().getCharacterCards()[slotIndex] == null)
+            if(!isCharacter && this.gameController.getActivePlayer().getField().getCharacterCard(slotIndex) == null)
                 { throw new ErrorException("Skill cards must be used in conjuction with character cards"); }
 
             this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), slotIndex);

@@ -14,6 +14,7 @@ import com.avatarduel.model.cards.SkillCardList;
 import com.avatarduel.model.player.Hand;
 import com.avatarduel.model.player.Player;
 import com.avatarduel.model.player.Phase;
+import com.avatarduel.util.ErrorException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,8 +22,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.input.MouseEvent;
-
-
 
 public class GameController{
     
