@@ -11,7 +11,8 @@ import java.util.Map;
 import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Player;
-import com.avatarduel.util.ErrorException;
+import com.avatarduel.util.InvalidActionException;
+import com.avatarduel.util.AlertBox;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -124,10 +125,10 @@ public class FieldController extends GridPane{
         boolean isCharacter = this.gameController.getActivePlayer().getHand().getCard(this.gameController.getSelectedCardIndex()) instanceof CharacterCard;
         
         try {
-            if((isCharacter && !isTopSlot) || (!isCharacter && isTopSlot)) { throw new ErrorException("Invalid card position"); }
+            if((isCharacter && !isTopSlot) || (!isCharacter && isTopSlot)) { throw new InvalidActionException("Invalid card position"); }
     
             if(!isCharacter && this.gameController.getActivePlayer().getField().getCharacterCard(slotIndex) == null)
-                { throw new ErrorException("Skill cards must be used in conjuction with character cards"); }
+                { throw new InvalidActionException("Skill cards must be used in conjuction with character cards"); }
 
             this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), slotIndex);
             
@@ -138,8 +139,8 @@ public class FieldController extends GridPane{
             this.gameController.getHandController().displayHand();
             this.gameController.getStatsController().displayStats();
 
-        } catch (ErrorException e) {
-            ShowError.showError(e.getMessage());
+        } catch (InvalidActionException e) {
+            AlertBox.showError(e.getMessage());
         }
     }
 

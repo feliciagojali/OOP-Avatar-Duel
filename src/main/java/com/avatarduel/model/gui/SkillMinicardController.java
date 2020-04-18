@@ -3,7 +3,8 @@ package com.avatarduel.model.gui;
 import com.avatarduel.model.cards.Effect;
 import com.avatarduel.model.cards.SkillCard;
 import com.avatarduel.model.player.Phase;
-import com.avatarduel.util.ErrorException;
+import com.avatarduel.util.InvalidActionException;
+import com.avatarduel.util.AlertBox;
 
 import javafx.scene.input.MouseEvent;
 
@@ -57,15 +58,15 @@ public class SkillMinicardController extends MinicardController implements Field
     {
         try
         {
-            if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("You can't do this action in this phase."); }
+            if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("You can't do this action in this phase."); }
             
             this.gameController.getActivePlayer().selectCard(this.getMinicardIndexInHand());
             this.gameController.setSelectedCardIndex(this.getMinicardIndexInHand());
     
         }
-        catch(ErrorException e)
+        catch(InvalidActionException e)
         {
-            ShowError.showError(e.getMessage());
+            AlertBox.showError(e.getMessage());
         }
     }
 

@@ -2,7 +2,8 @@ package com.avatarduel.model.gui;
 
 import com.avatarduel.model.cards.LandCard;
 import com.avatarduel.model.player.Phase;
-import com.avatarduel.util.ErrorException;
+import com.avatarduel.util.InvalidActionException;
+import com.avatarduel.util.AlertBox;
 
 import javafx.scene.input.MouseEvent;
 
@@ -38,17 +39,17 @@ public class LandMinicardController extends MinicardController implements OneUse
     {
         try
         {
-            if (this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("You can not do this now!");}
-            if (this.gameController.isLandCardUsed()) { throw new ErrorException("Land card already used in this turn!"); }
+            if (this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("You can not do this now!");}
+            if (this.gameController.isLandCardUsed()) { throw new InvalidActionException("Land card already used in this turn!"); }
 
             this.gameController.getActivePlayer().useCard(this.getMinicardIndexInHand());
             this.gameController.setStatsInterface();
             this.gameController.setLandCardUsed();
             this.removeMinicard();
         }
-        catch(ErrorException e)
+        catch(InvalidActionException e)
         {
-            ShowError.showError(e.getMessage());
+            AlertBox.showError(e.getMessage());
         }
     }
     
