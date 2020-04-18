@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import com.avatarduel.model.cards.*;
-import com.avatarduel.model.gui.ErrorException;
+import com.avatarduel.util.ErrorException;
 
 public class Player {
     // General player fields
@@ -112,19 +112,19 @@ public class Player {
     public void playCard(int posHand, int posField) throws ErrorException{
         if (this.hand.getCard(posHand) instanceof CharacterCard)
         {
-            if(this.field.isPosCharacterAvail(posField)){
+            if(this.field.isCharacterPositionAvailable(posField)){
                 CharacterCard card = (CharacterCard)this.hand.getCard(posHand);
                 this.hand.discardCard(posHand);
-                this.field.addCharacterRow(card, posField);
+                this.field.addCharacterCard(card, posField);
                 this.stats.reduceStats(card.getElement(), card.getPower());
             }   
         }
         else
         {
-            if (this.field.isPosSkillAvail(posField)){
+            if (this.field.isSkillPositionAvailable(posField)){
                 SkillCard card = (SkillCard)this.hand.getCard(posHand);
                 this.hand.discardCard(posHand);
-                this.field.addSkillRow(card, posField);
+                this.field.addSkillCard(card, posField);
                 this.stats.reduceStats(card.getElement(), card.getPower());
             }
         }
@@ -132,27 +132,25 @@ public class Player {
     }
     
     public boolean canAttack(int posisi){
-        return (!this.field.isPosCharacterAvail(posisi) && this.field.canAttack(posisi));
+        return (!this.field.isCharacterPositionAvailable(posisi) && this.field.canAttack(posisi));
     }
 
     public void attack(Player enemy,int Pos, int enemyPos){
         if (canAttack(Pos)) {
-            if (!enemy.getField().isPosCharacterAvail(enemyPos)) {
+            if (!enemy.getField().isCharacterPositionAvailable(enemyPos)) {
                 // posisi kartu enemy menyerang
-                if (enemy.getField().getCharacterStance(enemyPos) || this.field.getCharacterCard(Pos).getPowerUp()) {
+                if (enemy.getField().getStance(enemyPos) || this.field.getCharacterCard(Pos).getPowerUp()) {
                     if (enemy.getField().getCharacterCard(enemyPos).getAttack() < this.field.getCharacterCard(Pos).getAttack()) {
                         int selisihattack = this.field.getCharacterCard(Pos).getAttack() - enemy.getField().getCharacterCard(enemyPos).getAttack();
-                        enemy.getField().discardCharaCard(enemyPos);
+                        enemy.getField().discardCharacterCard(enemyPos);
                         enemy.setHp(enemy.getHp()-selisihattack);
-                        this.field.setHasAtk(Pos);
-                        this.field.unableChange(Pos);
+                        this.field.setHasAttack(Pos);
                     }
                 } else {
                     // posisi kartu bertahan
                     if (enemy.getField().getCharacterCard(enemyPos).getDefense() < this.field.getCharacterCard(Pos).getDefense()){
-                        enemy.getField().discardCharaCard(enemyPos);
-                        this.field.setHasAtk(Pos);
-                        this.field.unableChange(Pos);
+                        enemy.getField().discardCharacterCard(enemyPos);
+                        this.field.setHasAttack(Pos);
 
                     }
                 }
@@ -171,12 +169,12 @@ public class Player {
     }
 
     public boolean canSkill(int pos){
-        return(!this.field.isPosSkillAvail(pos));
+        return(!this.field.isSkillPositionAvailable(pos));
     }
    
     public void useSkill(Player player, int posSkill, int pos){
         if (canSkill(posSkill)) {
-            if(!player.getField().isPosCharacterAvail(pos)){
+            if(!player.getField().isCharacterPositionAvailable(pos)){
                 SkillCard X = this.field.getSkillCard(posSkill);
                 CharacterCard Y = player.getField().getCharacterCard(pos);
                 switch (X.getEffect()) {
@@ -188,7 +186,7 @@ public class Player {
                         break;
                     
                     case DESTROY:
-                        player.getField().discardCharaCard(pos);
+                        player.getField().discardCharacterCard(pos);
                         break;
                     case POWER_UP:
                         player.getField().getCharacterCard(pos).setPowerUp(true);

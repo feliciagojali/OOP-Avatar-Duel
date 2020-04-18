@@ -2,6 +2,7 @@ package com.avatarduel.model.gui;
 
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
+import com.avatarduel.util.ErrorException;
 
 import javafx.scene.input.MouseEvent;
 

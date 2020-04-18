@@ -55,24 +55,18 @@ public class CharacterCard extends Card {
         return this.power;
     }
     
-    public boolean getPowerUp(){
-        return this.powerup;
-    }
-<<<<<<< HEAD
-
-    public void setPowerUp(boolean set){
-        this.powerup = set;
-=======
-    
-    public void setPowerUp(){
-        this.powerup = true;
->>>>>>> f/card-mech
-    }
-    
     /**
      * Getter for card's power value
      * @return integer of card's power value
      */
+    public boolean getPowerUp(){
+        return this.powerup;
+    }
+
+    public void setPowerUp(boolean set){
+        this.powerup = set;
+    }
+    
     public void setAttack(int atk){
         this.attack = atk;
     }

@@ -12,6 +12,7 @@ import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
 import com.avatarduel.model.player.Player;
+import com.avatarduel.util.ErrorException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -122,7 +123,7 @@ public class BottomFieldController extends FieldController{
     public void displayField()
     {
         super.displayField();
-        for(int i = 1; i <= 6; i++) if(!this.gameController.getActivePlayer().getField().getCharacterStance(i-1))
+        for(int i = 1; i <= 6; i++) if(!this.gameController.getActivePlayer().getField().getStance(i-1))
         {
             this.getCharacterMinicard(i).setStanceColor();
         }
@@ -189,7 +190,7 @@ public class BottomFieldController extends FieldController{
                     if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("Can't change stance in this phase."); }
 
                     // boolean isStanceAttack = this.gameController.getActivePlayer().getField().getCharacterStance(buttonIndex - 1);
-                    this.gameController.getActivePlayer().getField().changeStance(buttonIndex - 1);
+                    this.gameController.getActivePlayer().getField().toggleStance(buttonIndex - 1);
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
                 }
                 catch(ErrorException msg)
