@@ -11,6 +11,9 @@ public class Field {
     private boolean[] characterStance; // true menyerang false bertahan
     private boolean[] canChangeStance;
     private ArrayList<ArrayList<SkillCard>> attachedSkill;
+    private int[] attackAURA;
+    private int[] defenseAURA;
+    private boolean[] powerup;
 
     public Field(){
         this.characterRow = new CharacterCard [6];
@@ -18,12 +21,18 @@ public class Field {
         this.characterHasAtk = new boolean[6];
         this.characterStance = new boolean[6];
         this.canChangeStance = new boolean[6];
+        this.powerup = new boolean[6];
+        this.attackAURA = new int[6];
+        this.defenseAURA = new int[6];
         ArrayList<ArrayList<SkillCard>> list = new ArrayList<ArrayList<SkillCard>>();
         for (int i = 0; i<= 5 ; i++){
             this.characterHasAtk[i] = false;
             this.characterStance[i] = true;
             this.canChangeStance[i] = true;
             list.add(new ArrayList<SkillCard>());
+            this.attackAURA[i] = 0;
+            this.defenseAURA[i] = 0;
+            this.powerup[i] = false;
         }
         this.attachedSkill = list;
 
@@ -102,7 +111,30 @@ public class Field {
     public void unableChange(int pos){
         this.canChangeStance[pos] = false;
     }
-  
+    
+    public int getAtk(int pos){
+        return this.attackAURA[pos];
+    }
+
+    public int getDef(int pos){
+        return this.defenseAURA[pos];
+    }
+
+    public boolean getPowerUp(int pos){
+        return this.powerup[pos];
+    }
+    public void setAtk(int atk, int pos){
+        this.attackAURA[pos] = atk;
+    }
+
+    public void setDef(int def, int pos){
+        this.defenseAURA[pos] = def;
+    }
+    
+    public void setPowerUp(int pos,boolean bool){
+        this.powerup[pos] = bool;
+    }
+
     
 
 

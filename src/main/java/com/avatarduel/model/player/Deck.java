@@ -7,8 +7,11 @@ import java.util.Stack;
 import com.avatarduel.model.cards.*;
 
 
-
-
+/**
+ * Deck is a class that holds cards for each player.
+ *
+ * @author mkamadeus
+ */
 public class Deck {
     private Stack<Integer> cards;
     private int size;
@@ -16,11 +19,16 @@ public class Deck {
     private static final int CHARACTER_CARD_WEIGHT = 2;
     private static final int SKILL_CARD_WEIGHT = 1;
 
+    /**
+   * Deck cosntructor for its required values.
+   */
     public Deck() {
         this.cards = new Stack<>();
         this.size = 67;
     }
-
+    /**
+    * Filling the Deck with cards.
+    */
     public void initializeDeck() 
     {
         int totalWeight = LAND_CARD_WEIGHT + CHARACTER_CARD_WEIGHT + SKILL_CARD_WEIGHT;
@@ -73,24 +81,35 @@ public class Deck {
         }
     }
 
-    // Shuffle cards
+    /**
+    * Shuffling the cards in the deck.
+    */
     public void shuffle() {
         Collections.shuffle(this.cards);
     }
 
-    // Take card id from deck
+    /**
+    * Drawing a card from the deck.
+    * @return integer of the card's id.
+    */
     public int drawCard()
     {
         return this.cards.pop();
     }
 
-    // Get cards left in deck
+    /**
+    * Get how many cards left in the deck.
+    * @return integer of cards' count in the deck.
+    */
     public int getCardsLeft()
     {
         return this.cards.size();
     }
 
-    // Returns true when deck is empty
+    /**
+    * Checking if the deck is empty.
+    * @return boolean if the deck is empty.
+    */
     public boolean isDeckEmpty()
     {
         return this.cards.isEmpty();

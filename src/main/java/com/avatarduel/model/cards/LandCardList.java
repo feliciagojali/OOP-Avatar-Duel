@@ -11,6 +11,13 @@ import java.util.TreeSet;
 
 import com.avatarduel.util.*;
 
+
+/**
+ * LandCardList is the class that contains database for all Land Card.
+ * 
+ * @author mkamadeus
+ */
+
 public class LandCardList 
 {
     private static LandCardList landCardListInstance = null;

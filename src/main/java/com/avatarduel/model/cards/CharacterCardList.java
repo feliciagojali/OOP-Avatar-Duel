@@ -1,5 +1,11 @@
 package com.avatarduel.model.cards;
 
+/**
+ * CharacterCardList is the class that contains database for all Character Card.
+ * 
+ * @author mkamadeus
+ */
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,6 +24,7 @@ public class CharacterCardList
     private Map<Integer, String[]> characterCardList;
     private Set<Integer> characterCardIdList;
 
+    
     // Define filepaths to the CSV file
     private static final String CHARACTER_CARD_FILE_PATH = "../../card/data/character.csv";
 

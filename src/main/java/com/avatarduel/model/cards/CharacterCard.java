@@ -10,7 +10,6 @@ public class CharacterCard extends Card {
     private int attack;
     private int defense;
     private int power;
-    private boolean powerup;
 
     /**
      * CharacterCard cosntructor for its required values.
@@ -21,14 +20,12 @@ public class CharacterCard extends Card {
      * @param imagePath CharacterCard image path
      * @param attack CharcterCard attack value
      * @param defense CharacterCard defense value
-     * @param power CharacterCard power value (works as card cost)
      */
     public CharacterCard(int id, String name, Element element, String description, String imagePath, int attack, int defense, int power){
         super(id, name, element, description, imagePath);
         this.attack = attack;
         this.defense = defense;
         this.power = power;
-        this.powerup = false;
     }
 
     /**
@@ -55,29 +52,4 @@ public class CharacterCard extends Card {
         return this.power;
     }
     
-    public boolean getPowerUp(){
-        return this.powerup;
-    }
-<<<<<<< HEAD
-
-    public void setPowerUp(boolean set){
-        this.powerup = set;
-=======
-    
-    public void setPowerUp(){
-        this.powerup = true;
->>>>>>> f/card-mech
-    }
-    
-    /**
-     * Getter for card's power value
-     * @return integer of card's power value
-     */
-    public void setAttack(int atk){
-        this.attack = atk;
-    }
-
-    public void setDefense(int def){
-        this.defense = def;
-    }
 }

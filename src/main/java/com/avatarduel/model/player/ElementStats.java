@@ -2,6 +2,11 @@ package com.avatarduel.model.player;
 
 import com.avatarduel.model.cards.Element;
 
+/**
+ * ElemenStats is a class that holds stats for each elemen.
+ *
+ * @author mkamadeus
+ */
 public class ElementStats {
     private Stats water;
     private Stats earth;
@@ -9,6 +14,9 @@ public class ElementStats {
     private Stats air;
     private Stats energy;
     
+    /**
+     * The ElementStats class constructor.
+     */
     public ElementStats(){
         water = new Stats();
         earth = new Stats();
@@ -17,6 +25,11 @@ public class ElementStats {
         energy = new Stats();
     }
 
+    /**
+    * getter for Stats of each element
+    * @param Element.
+    * @return Stats of the Element
+    */
     public Stats getStats(Element element)
     {
         switch(element)
@@ -34,7 +47,10 @@ public class ElementStats {
         }
     }
 
-    // Add up stats
+    /**
+    * Adding stats of the element.
+    * @param Element.
+    */
     public void addStats(Element element)
     {
         switch(element)
@@ -62,7 +78,11 @@ public class ElementStats {
         }
     }
     
-    // Use stat
+    /**
+    * Reduce stats of an Element.
+    * @param Element you want to reduce.
+    * @param integer, value you want to reduce.
+    */
     public void reduceStats(Element element, int deduction)
     {
         switch(element)
@@ -86,7 +106,9 @@ public class ElementStats {
 
     }
 
-    // Reset stat to max
+    /**
+    * Reset stats to the max.
+    */
     public void resetStats()
     {
         water.setCurrent(water.getMax());

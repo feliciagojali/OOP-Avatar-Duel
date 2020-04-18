@@ -12,6 +12,13 @@ import java.util.TreeSet;
 
 import com.avatarduel.util.*;
 
+
+/**
+ * SkillCardList is the class that contains database for all Skill Card.
+ * 
+ * @author mkamadeus
+ */
+
 public class SkillCardList 
 {
     private static SkillCardList skillCardListInstance = null;

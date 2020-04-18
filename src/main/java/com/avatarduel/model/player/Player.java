@@ -138,21 +138,24 @@ public class Player {
     public void attack(Player enemy,int Pos, int enemyPos){
         if (canAttack(Pos)) {
             if (!enemy.getField().isPosCharacterAvail(enemyPos)) {
+                int attack = this.getField().getCharacterCard(Pos).getAttack() + this.getField().getAtk(Pos);
+                int defense = this.getField().getCharacterCard(Pos).getDefense() + this.getField().getDef(Pos);
+                int enemyatk = enemy.getField().getCharacterCard(enemyPos).getAttack() + enemy.getField().getAtk(enemyPos);
+                int enemydef = enemy.getField().getCharacterCard(enemyPos).getDefense() + enemy.getField().getDef(enemyPos);
+                boolean powerup = this.field.getPowerUp(Pos);
                 // posisi kartu enemy menyerang
-                if (enemy.getField().getCharacterStance(enemyPos) || this.field.getCharacterCard(Pos).getPowerUp()) {
-                    if (enemy.getField().getCharacterCard(enemyPos).getAttack() < this.field.getCharacterCard(Pos).getAttack()) {
-                        int selisihattack = this.field.getCharacterCard(Pos).getAttack() - enemy.getField().getCharacterCard(enemyPos).getAttack();
+                if (enemy.getField().getCharacterStance(enemyPos) || powerup) {
+                    if (enemyatk < attack) {
+                        int selisihattack = attack - enemyatk;
                         enemy.getField().discardCharaCard(enemyPos);
                         enemy.setHp(enemy.getHp()-selisihattack);
                         this.field.setHasAtk(Pos);
-                        this.field.unableChange(Pos);
                     }
                 } else {
                     // posisi kartu bertahan
-                    if (enemy.getField().getCharacterCard(enemyPos).getDefense() < this.field.getCharacterCard(Pos).getDefense()){
+                    if (enemydef < defense){
                         enemy.getField().discardCharaCard(enemyPos);
                         this.field.setHasAtk(Pos);
-                        this.field.unableChange(Pos);
 
                     }
                 }
@@ -165,7 +168,7 @@ public class Player {
 
     // ini attack kalau di field lawan udah gaada kartu samsek
     public void AttackEnemy(Player enemy,int pos){
-        int attack = this.field.getCharacterCard(pos).getAttack();
+        int attack = this.field.getCharacterCard(pos).getAttack() + this.getField().getAtk(pos);
         enemy.setHp(enemy.getHp()-attack);
 
     }
@@ -174,30 +177,29 @@ public class Player {
         return(!this.field.isPosSkillAvail(pos));
     }
    
-    public void useSkill(Player player, int posSkill, int pos){
+    public void useSkill(Player player, int posSkill){
         if (canSkill(posSkill)) {
-            if(!player.getField().isPosCharacterAvail(pos)){
+            if(!player.getField().isPosCharacterAvail(posSkill)){
                 SkillCard X = this.field.getSkillCard(posSkill);
-                CharacterCard Y = player.getField().getCharacterCard(pos);
                 switch (X.getEffect()) {
                     case AURA:
-                        int newatk = Y.getAttack() + X.getAttack();
-                        int newdef = Y.getDefense() + X.getDefense();
-                        Y.setAttack(newatk);
-                        Y.setDefense(newdef);
+                        int atk = X.getAttack();
+                        int def = X.getDefense();
+                        player.getField().setAtk(atk,posSkill);
+                        player.getField().setDef(def,posSkill);                
                         break;
                     
                     case DESTROY:
-                        player.getField().discardCharaCard(pos);
+                        player.getField().discardCharaCard(posSkill);
                         break;
                     case POWER_UP:
-                        player.getField().getCharacterCard(pos).setPowerUp(true);
+                        player.getField().setPowerUp(posSkill,true);
                         break;
                     default:
                         break;
                 }
                 if (X.getEffect() != Effect.DESTROY) {
-                    player.getField().getAttachedList(pos).add(this.field.getSkillCard(posSkill));
+                    player.getField().getAttachedList(posSkill).add(this.field.getSkillCard(posSkill));
                 }
             }   
 
@@ -205,29 +207,43 @@ public class Player {
     }
 
 
-    public void detach(Player player, int pos, int posSkill){
+    public void detach(Player enemy, int pos){
+        // cek di tempat sendiri
         int i = 0;
-        while (i <= this.getField().getSkillCards().length){
-            if (this.getField().getSkillCard(i) == player.getField().getAttachedList(pos).get(posSkill)){
+        while ( i < this.field.getAttachedList(pos).size()){
+            if (this.field.getAttachedList(pos).get(i) ==  this.field.getSkillCard(pos)){
+                SkillCard A = this.field.getAttachedList(pos).remove(i);
+                if (A.getEffect() == Effect.AURA){
+                    this.getField().setAtk(0,pos);
+                    this.getField().setDef(0,pos);
+                } else {
+                    this.getField().setPowerUp(pos,false);
+                }
                 break;
             }
             i++;
         }
-        if (i <= this.getField().getSkillCards().length){
-            SkillCard A = player.getField().getAttachedList(pos).remove(posSkill);
-            CharacterCard X = player.getField().getCharacterCard(pos);
-            if (A.getEffect() == Effect.AURA){
-                int oldatk = X.getAttack() - A.getAttack();
-                int olddef = X.getDefense() - A.getDefense();
-                X.setAttack(oldatk);
-                X.setDefense(olddef);
-            } else {
-                X.setPowerUp(false);
-            }   
-
-            this.getField().discardSkillCard(i);
+        if (i == this.field.getAttachedList(pos).size()){
+            int j = 0;
+            while ( j < enemy.getField().getAttachedList(pos).size()){
+                if (enemy.getField().getAttachedList(pos).get(j) == this.field.getSkillCard(pos)){
+                    SkillCard A = enemy.getField().getAttachedList(pos).remove(j);
+                    if (A.getEffect() == Effect.AURA){
+                        enemy.getField().setAtk(0,pos);
+                        enemy.getField().setDef(0,pos);
+                    } else {
+                        enemy.getField().setPowerUp(pos,false);
+                    }
+                    break;
+                }
+                j++;
+            }
         }
+        this.field.discardSkillCard(pos);   
+        
     }
+        
+    
 }
     
    
