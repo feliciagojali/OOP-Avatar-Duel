@@ -6,6 +6,7 @@ import com.avatarduel.model.cards.*;
 /**
  * Hand class is the class that defines the hand
  * that the players use in game.
+ * @author feliciagojali
  * @author mkamadeus
  */
 public class Hand {

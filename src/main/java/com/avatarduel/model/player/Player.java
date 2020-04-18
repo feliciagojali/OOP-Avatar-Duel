@@ -5,6 +5,11 @@ import java.net.URISyntaxException;
 
 import com.avatarduel.model.cards.*;
 import com.avatarduel.util.ErrorException;
+/**
+ * Stats is the class that defines a player.
+ * @author feliciagojali
+ * @author mkamadeus
+ */
 
 public class Player {
     // General player fields
@@ -17,6 +22,10 @@ public class Player {
     private Deck deck;
     private Field field;
 
+    /**
+     * Player constructor.
+     * @param name Player's name.
+     */
     public Player(String name){
         this.name = name;
         this.hp = 80;
@@ -35,33 +44,58 @@ public class Player {
         this.field =  new Field();
         this.stats = new ElementStats();
     }
-    
+    /**
+     * Getter for player's deck
+     * @return Deck of the player
+     */
     public Deck getDeck(){
         return this.deck;
     }
 
+    /**
+     * Getter for player's Hand
+     * @return Hand of the player
+     */
     public Hand getHand(){
         return this.hand;
     }
 
+    /**
+     * Getter for player's Field
+     * @return Field of the player
+     */
     public Field getField(){
         return this.field;
     }
 
+    /**
+     * Getter for player's Elemen status
+     * @return ElemenStats of the player
+     */
     public ElementStats getElementStats(){
         return this.stats;
     }
 
+    /**
+     * Getter for player's HP
+     * @return integer value of the player's hp
+     */
     public int getHp(){
         return this.hp;
     }
 
-    // Set hp
+    /**
+     * Setter for player's HP
+     * @param x player's HP
+     */
     public void setHp(int x){
         this.hp = x;
     }
 
-    // Draw card from deck
+    /**
+     * Drawing a card from player's deck.
+     * Adding the card to player's hand.
+     */
     public void drawCard(){
         int x = this.deck.drawCard();
         
@@ -74,7 +108,10 @@ public class Player {
         }
     }
 
-    // Assume position given is is a LandCard
+    /**
+     * Getting a card from the player's hand.
+     * @param pos position of the card in the player's hand.
+     */
     public void useCard(int pos) throws ErrorException
     {
         if (!this.hand.isPosValid(pos)) { throw new ErrorException("Invalid hand position"); }
@@ -86,6 +123,11 @@ public class Player {
         }
     }
     
+    /**
+     * Getting a card from the player's hand.
+     * Checking if the stats of the player is sufficient to play the card on field.
+     * @param pos position of the card in player's hand.
+     */
     // Assume position given is either a CharacterCard or a LandCard
     public void selectCard(int pos) throws ErrorException
     {
@@ -107,8 +149,12 @@ public class Player {
         }
 
     }
-    
-    // Assume position given is either a CharacterCard or a LandCard
+    /**
+     * Discard a card from the player's hand.
+     * Put the card on the player's field.
+     * @param posHand position of the card in player's hand.
+     * @param posField position of the player's field.
+     */
     public void playCard(int posHand, int posField) throws ErrorException{
         if (this.hand.getCard(posHand) instanceof CharacterCard)
         {
@@ -130,7 +176,11 @@ public class Player {
         }
 
     }
-    
+    /**
+     * Checking if a card can attack or not.
+     * @param posisi position of the card in player's field.
+     * @return boolean of the card's ability to attack.
+     */
     public boolean canAttack(int posisi){
         return (!this.field.isCharacterPositionAvailable(posisi) && this.field.canAttack(posisi));
     }

@@ -161,26 +161,56 @@ public class Field {
         this.skillRow[pos] = null;
     }
 
-    
+    /**
+     * Getter for attack value from skill's effect.
+     * @param pos the position of card
+     * @return integer value of the attack.
+     */
     public int getAtk(int pos){
         return this.attackAURA[pos];
     }
 
+    /**
+     * Getter for defense value from skill's effect.
+     * @param pos the position of card
+     * @return integer value of the defense.
+     */
     public int getDef(int pos){
         return this.defenseAURA[pos];
     }
 
+    /**
+     * Getter for boolean powerup from skill's effect.
+     * @param pos the position of card
+     * @return boolean, true if it's under the effect, false if not.
+     */
     public boolean getPowerUp(int pos){
         return this.powerup[pos];
     }
+
+    /**
+     * Setter for attack value from skill's effect.
+     * @param pos the position of card
+     * @param atk integer value of the skill's attack
+     */
     public void setAtk(int atk, int pos){
         this.attackAURA[pos] = atk;
     }
 
+    /**
+     * Setter for defense value from skill's effect.
+     * @param pos the position of card
+     * @param def integer value of the skill's defense
+     */
     public void setDef(int def, int pos){
         this.defenseAURA[pos] = def;
     }
     
+    /**
+     * Setter for powerup boolean from skill's effect.
+     * @param pos the position of card
+     * @param bool boolean value.
+     */
     public void setPowerUp(int pos,boolean bool){
         this.powerup[pos] = bool;
     }
