@@ -1,23 +1,18 @@
 package com.avatarduel.model.gui;
 
 import com.avatarduel.AvatarDuel;
-import com.avatarduel.model.cards.Card;
-import com.avatarduel.model.cards.CharacterCard;
-import com.avatarduel.model.cards.LandCard;
-import com.avatarduel.model.cards.SkillCard;
-import com.avatarduel.model.player.Phase;
-
-import org.w3c.dom.events.MouseEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
+/**
+ * MinicardController class is the base class
+ * for all of the minicards.
+ * @author mkamadeus
+ */
 public class MinicardController extends AnchorPane {
     @FXML protected Label cardType;
     @FXML protected Label cardName;
@@ -29,6 +24,9 @@ public class MinicardController extends AnchorPane {
     
     protected GameController gameController;
     
+    /**
+     * The Minicard base concstructor, loads the FXML only
+     */
     public MinicardController(GameController controller)
     {
         FXMLLoader minicardLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/minicard.fxml"));
@@ -42,16 +40,27 @@ public class MinicardController extends AnchorPane {
         }
     }
     
+    /**
+     * Removes the use button (for field usage)
+     */
     public void removeCardUseButton()
     {
         this.getChildren().remove(this.cardUseButton);
     }
 
+    /**
+     * Gets the current index of minicard when in hand
+     * @apiNote Use only when minicard is in hand
+     */
     public int getMinicardIndexInHand()
     {
         return ((HandController)this.getParent()).getChildren().indexOf(this);
     }
 
+    /**
+     * Remove self from hand
+     * @apiNote Use only when minicard is in hand
+     */
     public void removeMinicard()
     {
         ((HandController)this.getParent()).getChildren().remove(this);

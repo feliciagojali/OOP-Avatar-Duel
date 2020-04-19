@@ -1,24 +1,26 @@
 package com.avatarduel.model.gui;
 
-import javafx.scene.control.Label;
-
 import java.io.IOException;
 
 import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.*;
-import com.avatarduel.model.player.Deck;
-import com.avatarduel.model.player.Player;
-import com.avatarduel.model.player.Phase;
 
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.AnchorPane;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+/**
+ * HandController is the class to control the hand interface
+ * to store the minicards that is in the hand
+ * @author mkamadeus
+ */
 public class HandController extends HBox{
 
     private GameController gameController;
 
+    /**
+     * The constructor for hand controller
+     * @param controller the game root controller
+     */
     public HandController(GameController controller)
     {
         FXMLLoader handLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/hand.fxml"));
@@ -37,6 +39,10 @@ public class HandController extends HBox{
         }
     }
 
+    /**
+     * Procedure to display/reset the hand interface based
+     * on the current hand
+     */
     public void displayHand()
     {
         this.getChildren().clear();

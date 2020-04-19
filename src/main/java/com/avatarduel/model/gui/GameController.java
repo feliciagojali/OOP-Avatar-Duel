@@ -213,6 +213,9 @@ public class GameController {
     }
 
     /* -=-=-=-=-= TURN AND PHASE CHANGING =-=-=-=-=- */
+    /**
+     * Sets the draw condition
+     */
     private void setDrawCondition()
     {
         this.bottomFieldController.toggleAttackButton(true);
@@ -220,6 +223,9 @@ public class GameController {
         this.bottomFieldController.toggleAttachButton(false);
     }
     
+    /**
+     * Sets the main condition
+     */
     private void setMainCondition() throws InvalidActionException
     {
         if(!this.deckController.hasDrawn()) { throw new InvalidActionException("You haven't drawn a card!");}
@@ -228,13 +234,19 @@ public class GameController {
         this.bottomFieldController.toggleAttachButton(true);
     }
     
+    /**
+     * Sets the battle condition
+     */
     private void setBattleCondition() throws InvalidActionException
     {
         this.bottomFieldController.toggleAttackButton(false);
         this.bottomFieldController.toggleStanceButton(true);
         this.bottomFieldController.toggleAttachButton(false);
     }
-
+    
+    /**
+     * Sets the end condition
+     */
     private void setEndCondition() throws InvalidActionException
     {
         if(!this.bottomFieldController.getAttackDone()){ throw new InvalidActionException("Finish your Attack!"); }
@@ -283,7 +295,9 @@ public class GameController {
         }
     }
 
-
+    /**
+     * Procedure to change the turn and resets interfaces
+     */
     public void changeTurn(){
         this.activePlayer.getField().resetHasAttacked();
         this.otherPlayer = this.activePlayer;
@@ -302,15 +316,27 @@ public class GameController {
 
     }
 
+    /**
+     * Get the current phase
+     * @return
+     */
     public Phase getPhase(){
         return this.phase;
     }
 
-    public void setLandCardUsed(){
+    /**
+     * Used when land card is used
+     */
+    public void setLandCardUsed()
+    {
         this.landCardUsed = true;
     }
-
-    public boolean isLandCardUsed(){
+    
+    /**
+     * Getter to test whether land card has been used before or not
+     */
+    public boolean isLandCardUsed()
+    {
         return this.landCardUsed;
     }
 
