@@ -246,10 +246,10 @@ public class Player {
         return(!this.field.isSkillPositionAvailable(pos));
     }
    
-    public void useSkill(Player player, int posSkill){
-        if (canSkill(posSkill)) {
+    public void useSkill(Player player, int mySkill, int posSkill){
+        if (canSkill(mySkill)) {
             if(!player.getField().isCharacterPositionAvailable(posSkill)){
-                SkillCard X = this.field.getSkillCard(posSkill);
+                SkillCard X = this.field.getSkillCard(mySkill);
                 switch (X.getEffect()) {
                     case AURA:
                         int atk = X.getAttack();
@@ -268,7 +268,9 @@ public class Player {
                         break;
                 }
                 if (X.getEffect() != Effect.DESTROY) {
-                    player.getField().getAttachedList(posSkill).add(this.field.getSkillCard(posSkill));
+                    player.getField().getAttachedList(posSkill).add(this.field.getSkillCard(mySkill));
+                } else {
+                    this.getField().discardSkillCard(mySkill);
                 }
             }   
 

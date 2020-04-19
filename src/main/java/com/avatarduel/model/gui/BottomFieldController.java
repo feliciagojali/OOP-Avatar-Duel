@@ -240,9 +240,8 @@ public class BottomFieldController extends FieldController{
                 {
                     if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("Can't do this action in this phase."); }
                     if(this.gameController.getActivePlayer().getField().isCharacterPositionAvailable(buttonIndex - 1)) {throw new InvalidActionException("You have no card to attach to."); }
-                    
                     this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), buttonIndex - 1);
-                    this.gameController.getActivePlayer().useSkill(this.gameController.getActivePlayer(), buttonIndex - 1);
+                    this.gameController.getActivePlayer().useSkill(this.gameController.getActivePlayer(), buttonIndex - 1, buttonIndex -1);
                 }
                 catch(InvalidActionException msg)
                 {
@@ -251,6 +250,7 @@ public class BottomFieldController extends FieldController{
                 finally
                 {
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                    this.gameController.setHandInterface();
                 }
             });
             this.buttonsMap.get("attachEnemyButton" + i).setOnAction(e -> {
@@ -258,11 +258,11 @@ public class BottomFieldController extends FieldController{
                 {
                     
                     if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("Can't do this action in this phase."); }
-                    if(this.gameController.getActivePlayer().getField().isCharacterPositionAvailable(buttonIndex - 1)) {throw new InvalidActionException("You have no card to attach to."); }
-                    if(this.gameController.getOtherPlayer().getField().isCharacterPositionAvailable(buttonIndex - 1)) {throw new InvalidActionException("There's no enemy to attach to."); }
+                    if(this.gameController.getOtherPlayer().getField().isCharacterPositionAvailable(6 - buttonIndex)) {throw new InvalidActionException("There's no enemy to attach to."); }
                     
                     this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), buttonIndex - 1);
-                    this.gameController.getOtherPlayer().useSkill(this.gameController.getOtherPlayer(), 6 - buttonIndex);
+                    this.gameController.getActivePlayer().useSkill(this.gameController.getOtherPlayer(), buttonIndex -1, 6- buttonIndex);
+                
                 }
                 catch(InvalidActionException msg)
                 {
@@ -271,6 +271,7 @@ public class BottomFieldController extends FieldController{
                 finally
                 {
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                    this.gameController.setHandInterface();
                 }
             });
         }
