@@ -229,7 +229,7 @@ public class BottomFieldController extends FieldController{
             });
         }
     }
-
+    
     public void displayAttachButton()
     {
         for(int i = 1; i <= 6; i++)
@@ -251,6 +251,7 @@ public class BottomFieldController extends FieldController{
                 finally
                 {
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                    this.gameController.setHandInterface();
                 }
             });
             this.buttonsMap.get("attachEnemyButton" + i).setOnAction(e -> {
@@ -271,11 +272,12 @@ public class BottomFieldController extends FieldController{
                 finally
                 {
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                    this.gameController.setHandInterface();
                 }
             });
         }
     }
-
+    
     public void displayDetachButton()
     {
         for(int i = 1; i <= 6; i++)
