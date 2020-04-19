@@ -12,8 +12,8 @@ import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
 import com.avatarduel.model.player.Player;
-import com.avatarduel.util.InvalidActionException;
 import com.avatarduel.util.AlertBox;
+import com.avatarduel.util.InvalidActionException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,6 +69,7 @@ public class BottomFieldController extends FieldController{
     private Map<String, Button> buttonsMap;
     private Map<String, Label> labelsMap;
     private int indexForAttack;
+    private boolean attackDone;
 
     public BottomFieldController(GameController controller, Player player)
     {
@@ -119,6 +120,7 @@ public class BottomFieldController extends FieldController{
         this.labelsMap.put("attachLabel6", attachLabel6);
         
         this.indexForAttack = -1;
+        this.attackDone = true;
         this.displayField();
     }
 
@@ -144,9 +146,24 @@ public class BottomFieldController extends FieldController{
             this.buttonsMap.get("attackButton" + i).setText("Attack");
             this.buttonsMap.get("attackButton" + i).setOnAction(e ->{
                 try {
-                    if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("You can't do this action in this phase."); }
+                    
+                    if(this.gameController.getPhase() != Phase.BATTLE) { throw new InvalidActionException("You can't do this action in this phase."); }
                     this.indexForAttack = buttonIndex-1;
-                    this.displayTargetButton();
+                    if (!this.gameController.getActivePlayer().canAttack(this.indexForAttack)){
+                        throw new InvalidActionException("You cannot attack with this card");
+                    }
+                    if (this.gameController.getOtherPlayer().getField().isFieldEmpty()){
+                        this.gameController.getActivePlayer().AttackEnemy(this.gameController.getOtherPlayer(),this.indexForAttack);
+                        this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                        if (this.gameController.getOtherPlayer().getHp() <= 0) {
+                            AlertBox.endGame(this.gameController.getActivePlayer().getName());
+                        }
+                        this.gameController.getStatsController().displayStats();
+                        this.displayAttackButton();
+                    } else {
+                        this.attackDone = false;
+                        this.displayTargetButton();
+                    }
                 } catch (InvalidActionException msg) 
                 {
                     AlertBox.showError(msg.getMessage());
@@ -166,19 +183,26 @@ public class BottomFieldController extends FieldController{
                 try{
                     
                     int enemyIndex = 6 - buttonIndex;
-
                     if(this.gameController.getOtherPlayer().getField().getCharacterCard(enemyIndex) == null)
-                        throw new InvalidActionException("Can't attack here, there's no enemy.");
+                    throw new InvalidActionException("Can't attack here, there's no enemy.");
+                    
                     
                     this.gameController.getActivePlayer().attack(this.gameController.getOtherPlayer(), this.indexForAttack, enemyIndex);
+                    
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
                     this.indexForAttack = -1;
-                    
+                    if (this.gameController.getOtherPlayer().getHp() <= 0) {
+                        AlertBox.endGame(this.gameController.getActivePlayer().getName());
+                    }
+                    this.attackDone = true;
                     this.displayAttackButton();
+                    this.gameController.getStatsController().displayStats();
+
                 }
                 catch(InvalidActionException msg)
                 {
                     AlertBox.showError(msg.getMessage());
+                    displayAttackButton();
                 }
             });
         }
@@ -303,9 +327,11 @@ public class BottomFieldController extends FieldController{
 
     public void toggleAttachButton(int buttonIndex, boolean visible)
     {
-        // ((HBox)this.buttonsMap.get("attachSelfButton" + buttonIndex).getParent()).getChildren().(this.buttonsMap.get("attachSelfButton" + buttonIndex));
-        // ((HBox)this.buttonsMap.get("attachEnemyButton" + buttonIndex).getParent()).getChildren().remove(this.buttonsMap.get("attachEnemyButton" + buttonIndex));
         this.buttonsMap.get("attachSelfButton" + buttonIndex).setVisible(visible);
         this.buttonsMap.get("attachEnemyButton" + buttonIndex).setVisible(visible);
+    }
+
+    public boolean getAttackDone(){
+        return this.attackDone;
     }
 }

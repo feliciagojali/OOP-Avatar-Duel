@@ -64,6 +64,9 @@ public class DeckController extends AnchorPane {
         this.setCardLeftLabelText(this.gameController.getActivePlayer().getDeck().getCardsLeft());
         this.gameController.getHandController().displayHand();
         this.hasDraw = true;
+        if (this.gameController.getActivePlayer().getDeck().isDeckEmpty()){
+            AlertBox.endGame(this.gameController.getOtherPlayer().getName());
+        }
     }
     
 

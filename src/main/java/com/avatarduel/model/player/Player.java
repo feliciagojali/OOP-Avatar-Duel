@@ -87,6 +87,14 @@ public class Player {
     }
 
     /**
+     * Getter for player's name
+     * @return String value of the player's name
+     */
+    public String getName(){
+        return this.name;
+    }
+
+    /**
      * Setter for player's HP
      * @param x player's HP
      */
@@ -189,25 +197,28 @@ public class Player {
         return (!this.field.isCharacterPositionAvailable(posisi) && this.field.canAttack(posisi));
     }
 
-    public void attack(Player enemy,int Pos, int enemyPos){
+    public void attack(Player enemy,int Pos, int enemyPos) throws InvalidActionException{
         if (canAttack(Pos)) {
             if (!enemy.getField().isCharacterPositionAvailable(enemyPos)) {
                 int attack = this.getField().getCharacterCard(Pos).getAttack() + this.getField().getAtk(Pos);
-                int defense = this.getField().getCharacterCard(Pos).getDefense() + this.getField().getDef(Pos);
                 int enemyatk = enemy.getField().getCharacterCard(enemyPos).getAttack() + enemy.getField().getAtk(enemyPos);
                 int enemydef = enemy.getField().getCharacterCard(enemyPos).getDefense() + enemy.getField().getDef(enemyPos);
                 boolean powerup = this.field.getPowerUp(Pos);
                 // posisi kartu enemy menyerang
                 if (enemy.getField().getStance(enemyPos) || powerup) {
-                    if (enemyatk < attack) {
+                    if (enemyatk >= attack) {
+                        throw new InvalidActionException("Your attack is not enough!");
+                    }
                         int selisihattack = attack - enemyatk;
                         enemy.getField().discardCharacterCard(enemyPos);
                         enemy.setHp(enemy.getHp()-selisihattack);
                         this.field.setHasAttack(Pos);
-                    }
+                
                 } else {
                     // posisi kartu bertahan
-                    if (enemydef < defense){
+                    if (enemydef >= attack){
+                        throw new InvalidActionException("Your attack is not enough!");
+                    }
                         enemy.getField().discardCharacterCard(enemyPos);
                         this.field.setHasAttack(Pos);
 
@@ -217,13 +228,17 @@ public class Player {
 
             }
         }
-    }
+    
 
 
     // ini attack kalau di field lawan udah gaada kartu samsek
     public void AttackEnemy(Player enemy,int pos){
-        int attack = this.field.getCharacterCard(pos).getAttack() + this.getField().getAtk(pos);
-        enemy.setHp(enemy.getHp()-attack);
+        if (canAttack(pos)){
+            int attack = this.field.getCharacterCard(pos).getAttack() + this.getField().getAtk(pos);
+            enemy.setHp(enemy.getHp()-attack);
+            this.field.setHasAttack(pos);
+        } 
+            
 
     }
 
@@ -296,7 +311,17 @@ public class Player {
         this.field.discardSkillCard(pos);   
         
     }
-        
+ 
+    public Player whoseSkill(Player player,int pos){
+        int i = 0;
+        while (i < this.field.getAttachedList(pos).size()){
+            if (this.field.getAttachedList(pos).get(i) == this.field.getSkillCard(pos)){
+                return this;
+            }
+            i++;
+        }
+        return player;
+    }
     
 }
     
