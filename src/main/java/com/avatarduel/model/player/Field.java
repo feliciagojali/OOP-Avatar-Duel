@@ -225,7 +225,11 @@ public class Field {
         return (j==6);
     }
     
-
+    public void resetHasAttacked(){
+        for(int i =0 ; i<=5;i++){
+            this.hasAttack[i] = false;
+        } 
+    }
 
 
 }

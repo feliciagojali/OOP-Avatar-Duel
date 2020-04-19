@@ -291,14 +291,14 @@ public class Player {
         }
         if (i == this.field.getAttachedList(pos).size()){
             int j = 0;
-            while ( j < enemy.getField().getAttachedList(pos).size()){
-                if (enemy.getField().getAttachedList(pos).get(j) == this.field.getSkillCard(pos)){
-                    SkillCard A = enemy.getField().getAttachedList(pos).remove(j);
+            while ( j < enemy.getField().getAttachedList(5-pos).size()){
+                if (enemy.getField().getAttachedList(5-pos).get(j) == this.field.getSkillCard(pos)){
+                    SkillCard A = enemy.getField().getAttachedList(5-pos).remove(j);
                     if (A.getEffect() == Effect.AURA){
-                        enemy.getField().setAtk(0,pos);
-                        enemy.getField().setDef(0,pos);
+                        enemy.getField().setAtk(0,5-pos);
+                        enemy.getField().setDef(0,5-pos);
                     } else {
-                        enemy.getField().setPowerUp(pos,false);
+                        enemy.getField().setPowerUp(5-pos,false);
                     }
                     break;
                 }

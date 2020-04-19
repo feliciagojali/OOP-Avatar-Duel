@@ -204,6 +204,7 @@ public class GameController{
     }
 
     public void changeTurn(){
+        this.activePlayer.getField().resetHasAttacked();
         this.otherPlayer = this.activePlayer;
         this.activePlayer = this.activePlayer == this.playerA ? this.playerB : this.playerA;
         
