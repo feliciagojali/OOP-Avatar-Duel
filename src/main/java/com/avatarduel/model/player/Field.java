@@ -103,8 +103,8 @@ public class Field {
      * @param card the character card being added
      * @param pos the position where the character card want to be added
      */
-    public void addCharacterCard(CharacterCard x, int pos){
-        this.characterRow[pos] = x;
+    public void addCharacterCard(CharacterCard card, int pos){
+        this.characterRow[pos] = card;
     }
     
     /**

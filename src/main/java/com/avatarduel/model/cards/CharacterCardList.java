@@ -92,6 +92,7 @@ public class CharacterCardList
 
     /** 
      * Check whether a card is a character card or not
+     * @param id the card id
      */
     public static boolean isIdCharacterCard(final int id)
     {

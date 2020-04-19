@@ -333,6 +333,7 @@ public class BottomFieldController extends FieldController{
 
     /**
      * Procedure for disabling ALL detach buttons
+     * @param disabled true if disabled, false if not
      */
     public void disableDetachButton(boolean disabled)
     {
@@ -341,6 +342,8 @@ public class BottomFieldController extends FieldController{
 
     /**
      * Procedure for disabling one detach button at a time
+     * @param buttonIndex the index of the button
+     * @param disabled true if disabled, false if not
      */
     public void disableDetachButton(int buttonIndex, boolean disabled)
     {
@@ -349,6 +352,7 @@ public class BottomFieldController extends FieldController{
 
     /**
      * Procedure for disabling ALL stance buttons
+     * @param disabled true if disabled, false if not
      */
     public void disableStanceButton(boolean disabled)
     {
@@ -357,6 +361,8 @@ public class BottomFieldController extends FieldController{
     
     /**
      * Method overloading to disable one stance button at a time
+     * @param buttonIndex the index of the button
+     * @param disabled true if disabled, false if not
      */
     public void disableStanceButton(int buttonIndex, boolean disabled)
     {
@@ -365,6 +371,7 @@ public class BottomFieldController extends FieldController{
     
     /**
      * Procedure for disabling ALL attack buttons
+     * @param disabled true if disabled, false if not
      */
     public void disableAttackButton(boolean disabled)
     {
@@ -373,6 +380,8 @@ public class BottomFieldController extends FieldController{
     
     /**
      * Method overloading to disable one attack button at a time
+     * @param buttonIndex the index of the button
+     * @param disabled true if disabled, false if not
      */
     public void disableAttackButton(int buttonIndex, boolean disabled)
     {
@@ -381,6 +390,7 @@ public class BottomFieldController extends FieldController{
 
     /**
      * Method to toggle the visibility of attach buttons
+     * @param visible true if visible, false if not
      */
     public void toggleAttachButton(boolean visible)
     {
@@ -389,6 +399,8 @@ public class BottomFieldController extends FieldController{
     
     /**
      * Method overloading to toggle the visibility of one attach button at a time
+     * @param buttonIndex the index of the button
+     * @param visible true if visible, false if not
      */
     public void toggleAttachButton(int buttonIndex, boolean visible)
     {
@@ -398,6 +410,7 @@ public class BottomFieldController extends FieldController{
     
     /**
      * Setter for the label to show where the card is connected
+     * @param buttonIndex the index of the button
      */
     public void setAttachLabel(int buttonIndex)
     {

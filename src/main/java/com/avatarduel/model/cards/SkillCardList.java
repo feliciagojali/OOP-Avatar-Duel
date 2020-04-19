@@ -86,6 +86,7 @@ public class SkillCardList
     
     /** 
      * Check whether a card is a skill card or not
+     * @param id the card id
      */
     public static boolean isIdSkillCard(final int id) 
     {

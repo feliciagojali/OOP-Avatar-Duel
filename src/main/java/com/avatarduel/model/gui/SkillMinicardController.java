@@ -8,10 +8,19 @@ import com.avatarduel.util.AlertBox;
 
 import javafx.scene.input.MouseEvent;
 
+/**
+ * SkillMinicardController extends the base MinicardController class and it implements
+ * the FieldCard interface signifies that it can be put on the field
+ */
 public class SkillMinicardController extends MinicardController implements FieldCard {
 
     private SkillCard card;
 
+    /**
+     * The SkillMinicardController constructor
+     * @param controller the game root controller
+     * @param card the card shown
+     */
     public SkillMinicardController(GameController controller, SkillCard card)
     {
         super(controller);
@@ -46,6 +55,9 @@ public class SkillMinicardController extends MinicardController implements Field
         });
     }
     
+    /**
+     * The method to select this card as the current selected card
+     */
     public void selectCard()
     {
         try

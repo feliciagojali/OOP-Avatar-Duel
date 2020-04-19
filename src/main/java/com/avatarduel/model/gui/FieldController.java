@@ -18,6 +18,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * FieldController is the base class for both the top and bottom fields
+ * @author mkamadeus
+ */
 public class FieldController extends GridPane{
 
     @FXML protected StackPane topSlot1;
@@ -40,6 +44,12 @@ public class FieldController extends GridPane{
     protected GameController gameController;
     protected Player owner;
 
+    /**
+     * THe constructor for FieldController
+     * @param controller the game root controller
+     * @param player the owner of the field
+     * @param fxmlPath the path to the fxml file
+     */
     public FieldController(GameController controller, Player player, String fxmlPath)
     {
         FXMLLoader fieldLoader = new FXMLLoader(AvatarDuel.class.getResource(fxmlPath));
@@ -83,6 +93,9 @@ public class FieldController extends GridPane{
         }
     }
 
+    /**
+     * The method for displaying the field.
+     */
     public void displayField()
     {
         for(int i=0;i<6;i++)
@@ -102,6 +115,10 @@ public class FieldController extends GridPane{
         }
     }
 
+    /**
+     * The method to put a card in a position called from FXML loading.
+     * @param event the mouse event received
+     */
     @FXML
     public void putCard(MouseEvent event) {
         // Get the clicked slot
@@ -141,6 +158,11 @@ public class FieldController extends GridPane{
         }
     }
 
+    /**
+     * Getter for characer minicard position position
+     * @param pos the position
+     * @return the CharacterMinicardController
+     */
     public CharacterMinicardController getCharacterMinicard(int pos)
     {
         return (CharacterMinicardController)this.slotsMap.get("topSlot" + pos).getChildren().get(0);

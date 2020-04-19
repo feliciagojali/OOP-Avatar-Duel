@@ -91,6 +91,7 @@ public class LandCardList
 
     /** 
      * Check whether a card is a land card or not
+     * @param id the card id
      */
     public static boolean isIdLandCard(final int id)
     {

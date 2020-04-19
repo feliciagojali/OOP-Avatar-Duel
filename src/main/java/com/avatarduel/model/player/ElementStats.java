@@ -27,7 +27,7 @@ public class ElementStats {
 
     /**
     * getter for Stats of each element
-    * @param Element.
+    * @param element element added
     * @return Stats of the Element
     */
     public Stats getStats(Element element)
@@ -49,7 +49,7 @@ public class ElementStats {
 
     /**
     * Adding stats of the element.
-    * @param Element.
+    * @param element the element added
     */
     public void addStats(Element element)
     {
@@ -80,8 +80,8 @@ public class ElementStats {
     
     /**
     * Reduce stats of an Element.
-    * @param Element you want to reduce.
-    * @param integer, value you want to reduce.
+    * @param element you want to reduce.
+    * @param deduction value you want to reduce.
     */
     public void reduceStats(Element element, int deduction)
     {

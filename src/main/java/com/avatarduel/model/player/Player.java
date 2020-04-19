@@ -117,8 +117,8 @@ public class Player {
     /**
      * Getting a card from the player's hand.
      * @param pos position of the card in the player's hand.
+     * @throws InvalidActionException when position given is not valid
      */
-    // Assume position given is is a LandCard
     public void useCard(int pos) throws InvalidActionException
     {
         if (!this.hand.isPosValid(pos)) { throw new InvalidActionException("Invalid hand position"); }
@@ -130,9 +130,9 @@ public class Player {
     /**
      * Getting a card from the player's hand.
      * Checking if the stats of the player is sufficient to play the card on field.
-     * @param pos position of the card in player's hand.
+     * @param pos position of the card in player's hand
+     * @throws InvalidActionException when position given is not valid
      */
-    // Assume position given is either a CharacterCard or a LandCard
     public void selectCard(int pos) throws InvalidActionException
     {
         if (!this.hand.isPosValid(pos)) { throw new InvalidActionException("Invalid hand position"); }
@@ -158,6 +158,7 @@ public class Player {
      * Put the card on the player's field.
      * @param posHand position of the card in player's hand.
      * @param posField position of the player's field.
+     * @throws InvalidActionException
      */
     // Assume position given is either a CharacterCard or a LandCard
     public void playCard(int posHand, int posField) throws InvalidActionException{
@@ -190,13 +191,19 @@ public class Player {
         return (!this.field.isCharacterPositionAvailable(posisi) && this.field.canAttack(posisi));
     }
 
-    public void attack(Player enemy,int Pos, int enemyPos) throws InvalidActionException{
-        if (canAttack(Pos)) {
+    /**
+     * Attack method for player
+     * @param enemy the player attacked
+     * @param pos the character position
+     * @param enemyPos the enemy position
+     */
+    public void attack(Player enemy,int pos, int enemyPos) throws InvalidActionException{
+        if (canAttack(pos)) {
             if (!enemy.getField().isCharacterPositionAvailable(enemyPos)) {
-                int attack = this.getField().getCharacterCard(Pos).getAttack() + this.getField().getAtk(Pos);
+                int attack = this.getField().getCharacterCard(pos).getAttack() + this.getField().getAtk(pos);
                 int enemyatk = enemy.getField().getCharacterCard(enemyPos).getAttack() + enemy.getField().getAtk(enemyPos);
                 int enemydef = enemy.getField().getCharacterCard(enemyPos).getDefense() + enemy.getField().getDef(enemyPos);
-                boolean powerup = this.field.getPowerUp(Pos);
+                boolean powerup = this.field.getPowerUp(pos);
                 // posisi kartu enemy menyerang
                 if (enemy.getField().getStance(enemyPos) || powerup) {
                     if (enemyatk >= attack || attack < 0) {
@@ -205,7 +212,7 @@ public class Player {
                         int selisihattack = attack - enemyatk;
                         discardCharacterCard(enemy, enemyPos);
                         enemy.setHp(enemy.getHp()-selisihattack);
-                        this.field.setHasAttack(Pos);
+                        this.field.setHasAttack(pos);
                 
                 } else {
                     // posisi kartu bertahan
@@ -213,7 +220,7 @@ public class Player {
                         throw new InvalidActionException("Your attack is not enough!");
                     }
                     discardCharacterCard(enemy, enemyPos);
-                    this.field.setHasAttack(Pos);
+                    this.field.setHasAttack(pos);
                     
                     }
                 }

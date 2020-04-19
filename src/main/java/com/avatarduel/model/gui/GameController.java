@@ -321,7 +321,7 @@ public class GameController {
 
     /**
      * Get the current phase
-     * @return
+     * @return current phase
      */
     public Phase getPhase(){
         return this.phase;
@@ -337,6 +337,7 @@ public class GameController {
     
     /**
      * Getter to test whether land card has been used before or not
+     * @return boolean whether land card has used or not, true if have, false if haven't
      */
     public boolean isLandCardUsed()
     {

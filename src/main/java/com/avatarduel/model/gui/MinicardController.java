@@ -26,6 +26,7 @@ public class MinicardController extends AnchorPane {
     
     /**
      * The Minicard base concstructor, loads the FXML only
+     * @param controller the game root controller
      */
     public MinicardController(GameController controller)
     {
@@ -50,7 +51,6 @@ public class MinicardController extends AnchorPane {
 
     /**
      * Gets the current index of minicard when in hand
-     * @apiNote Use only when minicard is in hand
      */
     public int getMinicardIndexInHand()
     {
@@ -59,7 +59,6 @@ public class MinicardController extends AnchorPane {
 
     /**
      * Remove self from hand
-     * @apiNote Use only when minicard is in hand
      */
     public void removeMinicard()
     {

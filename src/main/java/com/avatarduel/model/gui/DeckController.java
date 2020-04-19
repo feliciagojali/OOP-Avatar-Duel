@@ -13,6 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+/**
+ * DeckController is the class that defines the deck interface.
+ * @author mkamadeus
+ */
 public class DeckController extends AnchorPane {
 
     @FXML private Label cardLeftLabel;
@@ -37,40 +41,46 @@ public class DeckController extends AnchorPane {
             throw new RuntimeException(e);
         }
 
-        // this.cardLeftLabel.setText(Integer.toString(this.deck.getCardsLeft()));
     }
     
+    /**
+     * The method to draw a card via the GUI.
+     */
     @FXML
     public void drawCard() {
         try {
-            drawCards();
+            if (this.hasDraw){
+                throw new InvalidActionException("You can only draw once!");
+            } else if (this.gameController.getPhase() != Phase.DRAW) {
+                throw new InvalidActionException("You can not do this now!");
+            }
+            this.gameController.getActivePlayer().drawCard();
+            this.setCardLeftLabelText(this.gameController.getActivePlayer().getDeck().getCardsLeft());
+            this.gameController.getHandController().displayHand();
+            this.hasDraw = true;
+            if (this.gameController.getActivePlayer().getDeck().isDeckEmpty()){
+                AlertBox.endGame(this.gameController.getOtherPlayer().getName());
+            }
         } catch (InvalidActionException e) {
             AlertBox.showError(e.getMessage());
         }
 
-    }
-    public void drawCards() throws InvalidActionException {
-        if (this.hasDraw){
-            throw new InvalidActionException("You can only draw once!");
-        } else if (this.gameController.getPhase() != Phase.DRAW) {
-            throw new InvalidActionException("You can not do this now!");
-        }
-        this.gameController.getActivePlayer().drawCard();
-        this.setCardLeftLabelText(this.gameController.getActivePlayer().getDeck().getCardsLeft());
-        this.gameController.getHandController().displayHand();
-        this.hasDraw = true;
-        if (this.gameController.getActivePlayer().getDeck().isDeckEmpty()){
-            AlertBox.endGame(this.gameController.getOtherPlayer().getName());
-        }
-    }
-    
+    }    
 
+    /**
+     * The method to change the card left label/
+     * @param x
+     */
     @FXML
     public void setCardLeftLabelText(int x)
     {
         this.cardLeftLabel.setText(Integer.toString(x));
     }
 
+    /**
+     * The method to check whether a player has drawn a card or not.
+     * @return true if has drawn a card, false if has not
+     */
     public boolean hasDrawn(){
         return this.hasDraw;
     }
