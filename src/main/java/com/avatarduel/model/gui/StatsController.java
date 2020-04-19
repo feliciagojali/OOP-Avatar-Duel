@@ -10,6 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * StatsController is the class to control the stats info of
+ * the active player
+ * @author mkamadeus
+ */
 public class StatsController extends AnchorPane {
 
     @FXML private Label waterStats;
@@ -22,6 +27,10 @@ public class StatsController extends AnchorPane {
 
     private GameController gameController;
 
+    /**
+     * The constructor of the stats controller
+     * @param controller the root game controller
+     */
     public StatsController(GameController controller)
     {
         FXMLLoader statsLoader = new FXMLLoader(AvatarDuel.class.getResource("gui/stats.fxml"));
@@ -40,6 +49,10 @@ public class StatsController extends AnchorPane {
         }
     }
     
+    /**
+     * Procedure to show and sync the display of the StatsController
+     * with the current values.
+     */
     public void displayStats()
     {
         this.playerHealth.setText(Integer.toString(this.gameController.getActivePlayer().getHp()));

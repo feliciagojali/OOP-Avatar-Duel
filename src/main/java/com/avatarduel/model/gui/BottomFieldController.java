@@ -12,7 +12,8 @@ import com.avatarduel.AvatarDuel;
 import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
 import com.avatarduel.model.player.Player;
-import com.avatarduel.util.ErrorException;
+import com.avatarduel.util.AlertBox;
+import com.avatarduel.util.InvalidActionException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -140,25 +141,25 @@ public class BottomFieldController extends FieldController{
             this.buttonsMap.get("attackButton" + i).setOnAction(e ->{
                 try {
                     
-                    if(this.gameController.getPhase() != Phase.BATTLE) { throw new ErrorException("You can't do this action in this phase."); }
+                    if(this.gameController.getPhase() != Phase.BATTLE) { throw new InvalidActionException("You can't do this action in this phase."); }
                     this.indexForAttack = buttonIndex-1;
                     if (!this.gameController.getActivePlayer().canAttack(this.indexForAttack)){
-                        throw new ErrorException("You cannot attack with this card");
+                        throw new InvalidActionException("You cannot attack with this card");
                     }
                     if (this.gameController.getOtherPlayer().getField().isFieldEmpty()){
                         this.gameController.getActivePlayer().AttackEnemy(this.gameController.getOtherPlayer(),this.indexForAttack);
                         this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
                         if (this.gameController.getOtherPlayer().getHp() <= 0) {
-                            ShowError.endGame(this.gameController.getActivePlayer().getName());
+                            AlertBox.endGame(this.gameController.getActivePlayer().getName());
                         }
                         this.gameController.getStatsController().displayStats();
                         this.displayAttackButton();
                     } else {
                         this.displayTargetButton();
                     }
-                } catch (ErrorException msg) 
+                } catch (InvalidActionException msg) 
                 {
-                    ShowError.showError(msg.getMessage());
+                    AlertBox.showError(msg.getMessage());
                 }
 
             });
@@ -176,7 +177,7 @@ public class BottomFieldController extends FieldController{
                     
                     int enemyIndex = 6 - buttonIndex;
                     if(this.gameController.getOtherPlayer().getField().getCharacterCard(enemyIndex) == null)
-                    throw new ErrorException("Can't attack here, there's no enemy.");
+                    throw new InvalidActionException("Can't attack here, there's no enemy.");
                     
                     
                     this.gameController.getActivePlayer().attack(this.gameController.getOtherPlayer(), this.indexForAttack, enemyIndex);
@@ -184,16 +185,16 @@ public class BottomFieldController extends FieldController{
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
                     this.indexForAttack = -1;
                     if (this.gameController.getOtherPlayer().getHp() <= 0) {
-                        ShowError.endGame(this.gameController.getActivePlayer().getName());
+                        AlertBox.endGame(this.gameController.getActivePlayer().getName());
                     }
                     
                     this.displayAttackButton();
                     this.gameController.getStatsController().displayStats();
 
                 }
-                catch(ErrorException msg)
+                catch(InvalidActionException msg)
                 {
-                    ShowError.showError(msg.getMessage());
+                    AlertBox.showError(msg.getMessage());
                 }
             });
         }
@@ -207,15 +208,15 @@ public class BottomFieldController extends FieldController{
             this.buttonsMap.get("stanceButton" + i).setOnAction(e -> {
                 try
                 {
-                    if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("Can't change stance in this phase."); }
+                    if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("Can't change stance in this phase."); }
 
                     // boolean isStanceAttack = this.gameController.getActivePlayer().getField().getCharacterStance(buttonIndex - 1);
                     this.gameController.getActivePlayer().getField().toggleStance(buttonIndex - 1);
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
                 }
-                catch(ErrorException msg)
+                catch(InvalidActionException msg)
                 {
-                    ShowError.showError(msg.getMessage());
+                    AlertBox.showError(msg.getMessage());
                 }
             });
         }
