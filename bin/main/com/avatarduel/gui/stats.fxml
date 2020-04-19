@@ -76,5 +76,25 @@
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
+      <Label fx:id="playerName" layoutX="73.0" layoutY="302.0" text="99">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="phase" layoutX="163.0" layoutY="302.0" text="99">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="28.0" layoutY="277.0" text="Player Turn" textAlignment="CENTER">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="167.0" layoutY="277.0" text="Phase" textAlignment="CENTER">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Label>
    </children>
 </fx:root>

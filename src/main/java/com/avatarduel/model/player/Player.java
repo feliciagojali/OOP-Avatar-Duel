@@ -197,25 +197,28 @@ public class Player {
         return (!this.field.isCharacterPositionAvailable(posisi) && this.field.canAttack(posisi));
     }
 
-    public void attack(Player enemy,int Pos, int enemyPos){
+    public void attack(Player enemy,int Pos, int enemyPos) throws InvalidActionException{
         if (canAttack(Pos)) {
             if (!enemy.getField().isCharacterPositionAvailable(enemyPos)) {
                 int attack = this.getField().getCharacterCard(Pos).getAttack() + this.getField().getAtk(Pos);
-                int defense = this.getField().getCharacterCard(Pos).getDefense() + this.getField().getDef(Pos);
                 int enemyatk = enemy.getField().getCharacterCard(enemyPos).getAttack() + enemy.getField().getAtk(enemyPos);
                 int enemydef = enemy.getField().getCharacterCard(enemyPos).getDefense() + enemy.getField().getDef(enemyPos);
                 boolean powerup = this.field.getPowerUp(Pos);
                 // posisi kartu enemy menyerang
                 if (enemy.getField().getStance(enemyPos) || powerup) {
-                    if (enemyatk < attack) {
+                    if (enemyatk >= attack) {
+                        throw new InvalidActionException("Your attack is not enough!");
+                    }
                         int selisihattack = attack - enemyatk;
                         enemy.getField().discardCharacterCard(enemyPos);
                         enemy.setHp(enemy.getHp()-selisihattack);
                         this.field.setHasAttack(Pos);
-                    }
+                
                 } else {
                     // posisi kartu bertahan
-                    if (enemydef < defense){
+                    if (enemydef >= attack){
+                        throw new InvalidActionException("Your attack is not enough!");
+                    }
                         enemy.getField().discardCharacterCard(enemyPos);
                         this.field.setHasAttack(Pos);
 
@@ -225,7 +228,7 @@ public class Player {
 
             }
         }
-    }
+    
 
 
     // ini attack kalau di field lawan udah gaada kartu samsek

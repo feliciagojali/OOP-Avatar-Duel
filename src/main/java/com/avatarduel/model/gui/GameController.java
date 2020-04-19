@@ -182,6 +182,9 @@ public class GameController{
                     this.phase = Phase.BATTLE;
                     break;
                 case BATTLE:
+                    if(!this.bottomFieldController.getAttackDone()){
+                        throw new InvalidActionException("Finish the Attack!");
+                    }
                     this.phase = Phase.END;
                     break;
                 case END:
@@ -197,6 +200,7 @@ public class GameController{
                 this.setDeckInterface();
                 this.setStatsInterface();
             }
+            this.statsController.displayStats();
         } catch (final InvalidActionException e) {
             //TODO: handle exception
             AlertBox.showError(e.getMessage());

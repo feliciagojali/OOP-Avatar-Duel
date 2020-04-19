@@ -68,6 +68,7 @@ public class BottomFieldController extends FieldController{
     private Map<String, Button> buttonsMap;
     private Map<String, Label> labelsMap;
     private int indexForAttack;
+    private boolean attackDone;
 
     public BottomFieldController(GameController controller, Player player)
     {
@@ -118,6 +119,7 @@ public class BottomFieldController extends FieldController{
         this.labelsMap.put("attachLabel6", attachLabel6);
         
         this.indexForAttack = -1;
+        this.attackDone = true;
         this.displayField();
     }
 
@@ -155,6 +157,7 @@ public class BottomFieldController extends FieldController{
                         this.gameController.getStatsController().displayStats();
                         this.displayAttackButton();
                     } else {
+                        this.attackDone = false;
                         this.displayTargetButton();
                     }
                 } catch (InvalidActionException msg) 
@@ -187,7 +190,7 @@ public class BottomFieldController extends FieldController{
                     if (this.gameController.getOtherPlayer().getHp() <= 0) {
                         AlertBox.endGame(this.gameController.getActivePlayer().getName());
                     }
-                    
+                    this.attackDone = true;
                     this.displayAttackButton();
                     this.gameController.getStatsController().displayStats();
 
@@ -195,6 +198,7 @@ public class BottomFieldController extends FieldController{
                 catch(InvalidActionException msg)
                 {
                     AlertBox.showError(msg.getMessage());
+                    displayAttackButton();
                 }
             });
         }
@@ -240,5 +244,9 @@ public class BottomFieldController extends FieldController{
     public void disableAttackButton(int buttonIndex)
     {
         this.buttonsMap.get("attackButton" + buttonIndex).setDisable(true);
+    }
+
+    public boolean getAttackDone(){
+        return this.attackDone;
     }
 }
