@@ -8,7 +8,7 @@ import com.avatarduel.util.AlertBox;
 
 import javafx.scene.input.MouseEvent;
 
-public class SkillMinicardController extends MinicardController implements FieldCard, OneUseCard {
+public class SkillMinicardController extends MinicardController implements FieldCard {
 
     private SkillCard card;
 
@@ -21,25 +21,12 @@ public class SkillMinicardController extends MinicardController implements Field
         this.cardElement.setText(card.getElement().toString());
         this.cardUseButton.setText("Select");
 
-        if(card.getEffect() == Effect.DESTROY)
-        {
-            this.cardAttack.setText("-");
-            this.cardDefense.setText("-");
-            this.cardPower.setText("-");
-            this.cardUseButton.setOnAction(e -> {
-                this.selectCard();
-                this.useCard();
-            });
-        }
-        else
-        {
-            this.cardAttack.setText(Integer.toString(card.getAttack()));
-            this.cardDefense.setText(Integer.toString(card.getDefense()));
-            this.cardPower.setText(Integer.toString(card.getPower()));
-            this.cardUseButton.setOnAction(e -> {
-                this.selectCard();
-            });
-        }
+        this.cardAttack.setText(Integer.toString(card.getAttack()));
+        this.cardDefense.setText(Integer.toString(card.getDefense()));
+        this.cardPower.setText(Integer.toString(card.getPower()));
+        this.cardUseButton.setOnAction(e -> {
+            this.selectCard();
+        });
 
         this.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             this.gameController.setCardInfo(this.card);
@@ -47,11 +34,6 @@ public class SkillMinicardController extends MinicardController implements Field
         this.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
             this.gameController.getCardInfo().getChildren().clear();
         });
-    }
-
-    public void useCard()
-    {
-        // ..?
     }
     
     public void selectCard()

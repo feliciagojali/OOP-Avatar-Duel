@@ -106,13 +106,11 @@ public class FieldController extends GridPane{
     public void putCard(MouseEvent event) {
         // Get the clicked slot
         StackPane slot = this.slotsMap.get(((StackPane)event.getSource()).getId().toString());
-        // System.out.println(slot);
         
         boolean isTopSlot = true;
         
         // If source not found from bottom slots...
         int slotIndex = Arrays.asList(this.topSlots).indexOf(slot);
-        System.out.println("pisang");
         
         // If source not found from top slots...
         if(slotIndex == -1)

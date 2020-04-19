@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 
 public class BottomFieldController extends FieldController{
 
@@ -124,12 +125,15 @@ public class BottomFieldController extends FieldController{
     public void displayField()
     {
         super.displayField();
-        for(int i = 1; i <= 6; i++) if(!this.gameController.getActivePlayer().getField().getStance(i-1))
-        {
-            this.getCharacterMinicard(i).setStanceColor();
-        }
         this.displayAttackButton();
         this.displayStanceButton();
+        this.displayAttachButton();
+        this.displayDetachButton();
+        for(int i = 1; i <= 6; i++)
+        {
+            if(!this.gameController.getActivePlayer().getField().getStance(i-1)) { this.getCharacterMinicard(i).setStanceColor(); }
+            this.toggleAttachButton(i, this.gameController.getActivePlayer().getField().isSkillPositionAvailable(i-1));
+        }
     }
 
     public void displayAttackButton()
@@ -179,7 +183,7 @@ public class BottomFieldController extends FieldController{
             });
         }
     }
-
+    
     public void displayStanceButton()
     {
         for(int i = 1; i <= 6; i++)
@@ -202,6 +206,76 @@ public class BottomFieldController extends FieldController{
         }
     }
 
+    public void displayAttachButton()
+    {
+        for(int i = 1; i <= 6; i++)
+        {
+            final int buttonIndex = i;
+            this.buttonsMap.get("attachSelfButton" + i).setOnAction(e -> {
+                try
+                {
+                    if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("Can't do this action in this phase."); }
+                    if(this.gameController.getActivePlayer().getField().isCharacterPositionAvailable(buttonIndex - 1)) {throw new InvalidActionException("You have no card to attach to."); }
+                    
+                    this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), buttonIndex - 1);
+                    this.gameController.getActivePlayer().useSkill(this.gameController.getActivePlayer(), buttonIndex - 1);
+                }
+                catch(InvalidActionException msg)
+                {
+                    AlertBox.showError(msg.getMessage());
+                }
+                finally
+                {
+                    this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                }
+            });
+            this.buttonsMap.get("attachEnemyButton" + i).setOnAction(e -> {
+                try
+                {
+                    
+                    if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("Can't do this action in this phase."); }
+                    if(this.gameController.getActivePlayer().getField().isCharacterPositionAvailable(buttonIndex - 1)) {throw new InvalidActionException("You have no card to attach to."); }
+                    if(this.gameController.getOtherPlayer().getField().isCharacterPositionAvailable(buttonIndex - 1)) {throw new InvalidActionException("There's no enemy to attach to."); }
+                    
+                    this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), buttonIndex - 1);
+                    this.gameController.getOtherPlayer().useSkill(this.gameController.getOtherPlayer(), 6 - buttonIndex);
+                }
+                catch(InvalidActionException msg)
+                {
+                    AlertBox.showError(msg.getMessage());
+                }
+                finally
+                {
+                    this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                }
+            });
+        }
+    }
+
+    public void displayDetachButton()
+    {
+        for(int i = 1; i <= 6; i++)
+        {
+            final int buttonIndex = i;
+            this.buttonsMap.get("detachButton" + i).setOnAction(e -> {
+                try
+                {
+                    if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("Can't do this action in this phase."); }
+                    if(!this.gameController.getActivePlayer().getField().isSkillPositionAvailable(buttonIndex - 1)) { throw new InvalidActionException("Theres no skill card to detach."); }
+
+                }
+                catch(InvalidActionException msg)
+                {
+                    AlertBox.showError(msg.getMessage());
+                }
+                finally{
+                    this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                }
+            });
+
+        }
+    }
+
     public void disableStanceButton()
     {
         for(int i = 1; i <= 6; i++) { this.disableStanceButton(i); }
@@ -220,5 +294,18 @@ public class BottomFieldController extends FieldController{
     public void disableAttackButton(int buttonIndex)
     {
         this.buttonsMap.get("attackButton" + buttonIndex).setDisable(true);
+    }
+
+    public void toggleAttachButton(boolean visible)
+    {
+        for(int i = 1; i <=6; i++) {this.toggleAttachButton(i, visible);}
+    }
+
+    public void toggleAttachButton(int buttonIndex, boolean visible)
+    {
+        // ((HBox)this.buttonsMap.get("attachSelfButton" + buttonIndex).getParent()).getChildren().(this.buttonsMap.get("attachSelfButton" + buttonIndex));
+        // ((HBox)this.buttonsMap.get("attachEnemyButton" + buttonIndex).getParent()).getChildren().remove(this.buttonsMap.get("attachEnemyButton" + buttonIndex));
+        this.buttonsMap.get("attachSelfButton" + buttonIndex).setVisible(visible);
+        this.buttonsMap.get("attachEnemyButton" + buttonIndex).setVisible(visible);
     }
 }
