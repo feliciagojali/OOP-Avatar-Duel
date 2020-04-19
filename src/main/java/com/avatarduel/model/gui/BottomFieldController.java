@@ -203,6 +203,7 @@ public class BottomFieldController extends FieldController{
                 {
                     AlertBox.showError(msg.getMessage());
                     displayAttackButton();
+                    this.attackDone = true;
                 }
             });
         }
@@ -241,7 +242,7 @@ public class BottomFieldController extends FieldController{
                     if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("Can't do this action in this phase."); }
                     if(this.gameController.getActivePlayer().getField().isCharacterPositionAvailable(buttonIndex - 1)) {throw new InvalidActionException("You have no card to attach to."); }
                     this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), buttonIndex - 1);
-                    this.gameController.getActivePlayer().useSkill(this.gameController.getActivePlayer(), buttonIndex - 1, buttonIndex -1);
+                    this.gameController.getActivePlayer().useSkill(this.gameController.getActivePlayer(),this.gameController.getOtherPlayer(), buttonIndex - 1, buttonIndex -1);
                 }
                 catch(InvalidActionException msg)
                 {
@@ -261,7 +262,7 @@ public class BottomFieldController extends FieldController{
                     if(this.gameController.getOtherPlayer().getField().isCharacterPositionAvailable(6 - buttonIndex)) {throw new InvalidActionException("There's no enemy to attach to."); }
                     
                     this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), buttonIndex - 1);
-                    this.gameController.getActivePlayer().useSkill(this.gameController.getOtherPlayer(), buttonIndex -1, 6- buttonIndex);
+                    this.gameController.getActivePlayer().useSkill(this.gameController.getOtherPlayer(),this.gameController.getActivePlayer(), buttonIndex -1, 6- buttonIndex);
                 
                 }
                 catch(InvalidActionException msg)
@@ -286,8 +287,9 @@ public class BottomFieldController extends FieldController{
                 try
                 {
                     if(this.gameController.getPhase() != Phase.MAIN) { throw new InvalidActionException("Can't do this action in this phase."); }
-                    if(!this.gameController.getActivePlayer().getField().isSkillPositionAvailable(buttonIndex - 1)) { throw new InvalidActionException("Theres no skill card to detach."); }
-
+                    if(this.gameController.getActivePlayer().getField().isSkillPositionAvailable(buttonIndex - 1)) { throw new InvalidActionException("Theres no skill card to detach."); }
+                    
+                    this.gameController.getActivePlayer().detach(this.gameController.getOtherPlayer(), buttonIndex -1);
                 }
                 catch(InvalidActionException msg)
                 {

@@ -148,7 +148,11 @@ public class Field {
      */
     public void discardCharacterCard(int pos){
         this.characterRow[pos] = null;
-        this.skillRow[pos] = null;
+        this.attackAURA[pos] = 0;
+        this.defenseAURA[pos] = 0;
+        this.hasAttack[pos] = false;
+        this.stance[pos] = true;
+        this.powerup[pos] = false;
         this.getAttachedList(pos).clear();
     }
 

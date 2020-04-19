@@ -97,7 +97,7 @@ public class SkillCardList
         if (x < 5){
             effect = Effect.AURA;
         } else if ( x < 7){
-            effect = Effect.DESTROY;
+            effect = Effect.POWER_UP;
         } else {
             effect = Effect.POWER_UP;
         }
