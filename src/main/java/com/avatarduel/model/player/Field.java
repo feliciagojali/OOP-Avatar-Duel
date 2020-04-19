@@ -216,14 +216,13 @@ public class Field {
     }
 
     public boolean isFieldEmpty(){
-        boolean answ = false;
+        int j = 0;
         for (int i = 0; i<=5 ; i++){
             if (characterRow[i] == null){
-                answ = true;
-                break;
+                j++;
             }
         }
-        return answ;
+        return (j==6);
     }
     
 

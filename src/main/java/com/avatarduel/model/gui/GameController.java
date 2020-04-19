@@ -214,8 +214,8 @@ public class GameController{
         this.setStatsInterface();
 
         this.setFieldInterface(this.activePlayer, otherPlayer);
-        this.bottomFieldController.disableAttackButton();
-        this.bottomFieldController.disableStanceButton();
+        // this.bottomFieldController.disableAttackButton();
+        // this.bottomFieldController.disableStanceButton();
 
         this.cardInfoSlot.getChildren().clear();
         this.landCardUsed = false;
