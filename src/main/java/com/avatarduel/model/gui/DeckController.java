@@ -76,7 +76,7 @@ public class DeckController extends AnchorPane {
         this.cardLeftLabel.setText(Integer.toString(x));
     }
 
-    public boolean hasDraw(){
+    public boolean hasDrawn(){
         return this.hasDraw;
     }
 }

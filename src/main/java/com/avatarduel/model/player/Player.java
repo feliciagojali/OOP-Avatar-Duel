@@ -39,7 +39,7 @@ public class Player {
         
         // Draw 7 cards from deck to hand
         this.hand = new Hand();
-        for(int i=0;i<7;i++) {
+        for(int i=0;i<50;i++) {
             this.drawCard();
         }
         
@@ -232,7 +232,7 @@ public class Player {
 
 
     // ini attack kalau di field lawan udah gaada kartu samsek
-    public void AttackEnemy(Player enemy,int pos){
+    public void attackEnemy(Player enemy,int pos){
         if (canAttack(pos)){
             int attack = this.field.getCharacterCard(pos).getAttack() + this.getField().getAtk(pos);
             enemy.setHp(enemy.getHp()-attack);
@@ -314,7 +314,7 @@ public class Player {
         
     }
  
-    public Player whoseSkill(Player player,int pos){
+    public Player getSkillOwner(Player player,int pos){
         int i = 0;
         while (i < this.field.getAttachedList(pos).size()){
             if (this.field.getAttachedList(pos).get(i) == this.field.getSkillCard(pos)){

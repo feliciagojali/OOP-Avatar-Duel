@@ -1,30 +1,27 @@
 package com.avatarduel.model.gui;
 
-import java.util.LinkedList;
-
-import javax.xml.bind.annotation.XmlElement.DEFAULT;
-
-import com.avatarduel.model.cards.Card;
 import com.avatarduel.model.cards.CharacterCard;
-import com.avatarduel.model.cards.CharacterCardList;
 import com.avatarduel.model.cards.LandCard;
-import com.avatarduel.model.cards.LandCardList;
 import com.avatarduel.model.cards.SkillCard;
-import com.avatarduel.model.cards.SkillCardList;
-import com.avatarduel.model.player.Hand;
 import com.avatarduel.model.player.Player;
 import com.avatarduel.model.player.Phase;
 import com.avatarduel.util.InvalidActionException;
 import com.avatarduel.util.AlertBox;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.input.MouseEvent;
 
-public class GameController{
+/**
+ * GameController class is the controller class for the root game GUI.
+ * It is used to store core informations about the game, such as the phase,
+ * currently playing player, and other things for the game like showing card information.
+ * 
+ * @author mkamadeus
+ * @author feliciagojali
+ * 
+ */
+public class GameController {
     
     @FXML private StackPane cardInfoSlot;
     @FXML private StackPane deckSlot;
@@ -44,14 +41,19 @@ public class GameController{
 
     private boolean landCardUsed;
     private Phase phase;
+
     // For storing current active player's reference
     private Player activePlayer;
     private Player otherPlayer;
+    
+    // Storing selected card index
     private int selectedCardIndex;
     
-    public void initialize() {
-        
-        // Initialize game controller requirements
+    /**
+     * Used to initialize things required for the game,
+     * ran by the FXMLLoader.
+     */
+    public void initialize() {    
         this.playerA = new Player("A");
         this.playerB = new Player("B");
         this.activePlayer = this.playerA;
@@ -63,49 +65,78 @@ public class GameController{
         this.setFieldInterface(this.activePlayer, this.otherPlayer);
         this.phase = Phase.DRAW;
         this.landCardUsed = false;
+
+        setDrawCondition();
     }
 
-    // Get active player
+    /**
+     * Get currently active player
+     * @return the active player; passed the reference by value
+     */
     public Player getActivePlayer()
     {
         return this.activePlayer;
     }
-
-    // Get active player
+    
+    /**
+     * Get the other (inactive) player
+     * @return the other player; passed the reference by value
+     */
     public Player getOtherPlayer()
     {
         return this.otherPlayer;
     }
-
-    // Get active card info
+    
+    /**
+     * Get card info on the left bar
+     * @return the card information in StackPane, ready to be appended
+     */
     public StackPane getCardInfo()
     {
         return this.cardInfoSlot;
     }
 
-    // Get hand controller
+    /**
+     * Get hand in the bottom bar
+     * @return the hand in HandController, ready to be appended
+     */
     public HandController getHandController()
     {
         return this.handController;
     }
 
-    // Get stats controller
+    /**
+     * Get the stats in the side bar
+     * @return the stats in StatsController, 
+     */
     public StatsController getStatsController()
     {
         return this.statsController;
     }
 
+    /**
+     * Get current selected card index by the active player
+     * @return integer of the card index, 0-indexed
+     */
     public int getSelectedCardIndex()
     {
         return this.selectedCardIndex;
     }
 
+    /**
+     * Setter for the current selected index
+     * @param idx the index of the card selected, 0-indexed
+     */
     public void setSelectedCardIndex(int idx)
     {
         this.selectedCardIndex = idx;
     }
 
-    // Set top field interface
+    /**
+     * Sets the bottom interface
+     * @param bottomPlayer the player on the bottom
+     * @param topPlayer the player on the top
+     */
     @FXML
     public void setFieldInterface(final Player bottomPlayer, final Player topPlayer)
     {
@@ -118,7 +149,9 @@ public class GameController{
         this.topFieldSlot.getChildren().add(this.topFieldController);
     }
 
-    // Set interface to current player's hand
+    /**
+     * Sets the hand interface on the bottom
+     */
     @FXML
     public void setHandInterface()
     {
@@ -126,7 +159,9 @@ public class GameController{
         this.handSlot.setContent(this.handController);
     }
     
-    // Set interface to current player's deck
+    /**
+     * Sets the deck interface in the bottom left corner
+     */
     @FXML
     public void setDeckInterface()
     {
@@ -136,8 +171,9 @@ public class GameController{
         this.deckSlot.getChildren().add(this.deckController);
     }
     
-    // Set interface to current player's stats
-    @FXML
+    /**
+     * Sets the stats interface in the top left corner
+     */
     public void setStatsInterface()
     {
         this.statsSlot.getChildren().clear();
@@ -146,66 +182,107 @@ public class GameController{
         this.statsSlot.getChildren().add(this.statsController);
     }
     
-    // Set interface to current player's card info when hovered
-    @FXML
-    public void setCardInfo(final CharacterCard c)
+    /**
+     * Sets card info for CharacterCard
+     * @param card CharacterCard info shown
+     */
+    public void setCardInfo(CharacterCard card)
     {
         this.cardInfoSlot.getChildren().clear();
-        this.cardInfoSlot.getChildren().add(new CardController(c));        
+        this.cardInfoSlot.getChildren().add(new CardController(card));        
     }
 
-    @FXML
-    public void setCardInfo(final SkillCard c)
+    /**
+     * Sets card info for SkillCard
+     * @param card SkillCard info shown
+     */
+    public void setCardInfo(SkillCard card)
     {
         this.cardInfoSlot.getChildren().clear();
-        this.cardInfoSlot.getChildren().add(new CardController(c));        
+        this.cardInfoSlot.getChildren().add(new CardController(card));        
     }
-
-    @FXML
-    public void setCardInfo(final LandCard c)
+    
+    /**
+     * Sets card info for LandCard
+     * @param card LandCard info shown
+     */
+    public void setCardInfo(LandCard card)
     {
         this.cardInfoSlot.getChildren().clear();
-        this.cardInfoSlot.getChildren().add(new CardController(c));        
+        this.cardInfoSlot.getChildren().add(new CardController(card));        
     }
 
+    /* -=-=-=-=-= TURN AND PHASE CHANGING =-=-=-=-=- */
+    private void setDrawCondition()
+    {
+        this.bottomFieldController.toggleAttackButton(true);
+        this.bottomFieldController.toggleStanceButton(true);
+        this.bottomFieldController.toggleAttachButton(false);
+    }
+    
+    private void setMainCondition() throws InvalidActionException
+    {
+        if(!this.deckController.hasDrawn()) { throw new InvalidActionException("You haven't drawn a card!");}
+        
+        this.bottomFieldController.toggleStanceButton(false);
+        this.bottomFieldController.toggleAttachButton(true);
+    }
+    
+    private void setBattleCondition() throws InvalidActionException
+    {
+        this.bottomFieldController.toggleAttackButton(false);
+        this.bottomFieldController.toggleStanceButton(true);
+        this.bottomFieldController.toggleAttachButton(false);
+    }
+
+    private void setEndCondition() throws InvalidActionException
+    {
+        if(!this.bottomFieldController.getAttackDone()){ throw new InvalidActionException("Finish your Attack!"); }
+
+        this.bottomFieldController.toggleAttackButton(true);
+        this.bottomFieldController.toggleStanceButton(true);
+
+    }
+
+    /**
+     * Procedure to set what are needed to change phase
+     */
     @FXML
     public void changePhase(){
         try {
             switch (this.phase) {
                 case DRAW:
-                    if(!this.deckController.hasDraw()){
-                        throw new InvalidActionException("You need to draw first");
-                    }
+                    setMainCondition();
                     this.phase = Phase.MAIN;
                     break;
                 case MAIN:
+                    setBattleCondition();
                     this.phase = Phase.BATTLE;
                     break;
                 case BATTLE:
-                    if(!this.bottomFieldController.getAttackDone()){
-                        throw new InvalidActionException("Finish the Attack!");
-                    }
+                    setEndCondition();
                     this.phase = Phase.END;
                     break;
                 case END:
                     changeTurn();
+                    setDrawCondition();
                     this.phase = Phase.DRAW;
                     break;
-    
+        
                 default:
                     break;
-                }
-            if (this.phase != Phase.DRAW){
-                this.setHandInterface();
-                this.setDeckInterface();
-                this.setStatsInterface();
             }
+
+            // Reset GUI
+            this.setHandInterface();
+            this.setDeckInterface();
+            this.setStatsInterface();
             this.statsController.displayStats();
-        } catch (final InvalidActionException e) {
-            //TODO: handle exception
+        } catch (InvalidActionException e) {
             AlertBox.showError(e.getMessage());
         }
     }
+
 
     public void changeTurn(){
         this.activePlayer.getField().resetHasAttacked();
@@ -219,8 +296,6 @@ public class GameController{
         this.setStatsInterface();
 
         this.setFieldInterface(this.activePlayer, otherPlayer);
-        // this.bottomFieldController.disableAttackButton();
-        // this.bottomFieldController.disableStanceButton();
 
         this.cardInfoSlot.getChildren().clear();
         this.landCardUsed = false;

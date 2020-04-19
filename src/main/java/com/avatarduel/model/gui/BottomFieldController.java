@@ -135,6 +135,7 @@ public class BottomFieldController extends FieldController{
         {
             if(!this.gameController.getActivePlayer().getField().getStance(i-1)) { this.getCharacterMinicard(i).setStanceColor(); }
             this.toggleAttachButton(i, this.gameController.getActivePlayer().getField().isSkillPositionAvailable(i-1));
+            this.setAttachLabel(i);
         }
     }
 
@@ -146,20 +147,26 @@ public class BottomFieldController extends FieldController{
             this.buttonsMap.get("attackButton" + i).setText("Attack");
             this.buttonsMap.get("attackButton" + i).setOnAction(e ->{
                 try {
+                    this.indexForAttack = buttonIndex - 1;
                     
                     if(this.gameController.getPhase() != Phase.BATTLE) { throw new InvalidActionException("You can't do this action in this phase."); }
-                    this.indexForAttack = buttonIndex-1;
-                    if (!this.gameController.getActivePlayer().canAttack(this.indexForAttack)){
-                        throw new InvalidActionException("You cannot attack with this card");
-                    }
-                    if (this.gameController.getOtherPlayer().getField().isFieldEmpty()){
-                        this.gameController.getActivePlayer().AttackEnemy(this.gameController.getOtherPlayer(),this.indexForAttack);
+                    if (!this.gameController.getActivePlayer().canAttack(this.indexForAttack)){ throw new InvalidActionException("You cannot attack with this card"); }
+
+                    if (this.gameController.getOtherPlayer().getField().isFieldEmpty())
+                    {
+                        // Reset interface
+                        this.gameController.getActivePlayer().attackEnemy(this.gameController.getOtherPlayer(), this.indexForAttack);
                         this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+
+                        // Check win condition
                         if (this.gameController.getOtherPlayer().getHp() <= 0) {
                             AlertBox.endGame(this.gameController.getActivePlayer().getName());
+                            System.exit(0);
                         }
+
+
                         this.gameController.getStatsController().displayStats();
-                        this.displayAttackButton();
+                        // this.displayAttackButton();
                     } else {
                         this.attackDone = false;
                         this.displayTargetButton();
@@ -301,24 +308,24 @@ public class BottomFieldController extends FieldController{
         }
     }
 
-    public void disableStanceButton()
+    public void toggleStanceButton(boolean disabled)
     {
-        for(int i = 1; i <= 6; i++) { this.disableStanceButton(i); }
+        for(int i = 1; i <= 6; i++) { this.toggleStanceButton(i, disabled); }
     }
     
-    public void disableStanceButton(int buttonIndex)
+    public void toggleStanceButton(int buttonIndex, boolean disabled)
     {
-        this.buttonsMap.get("stanceButton" + buttonIndex).setDisable(true);
+        this.buttonsMap.get("stanceButton" + buttonIndex).setDisable(disabled);
     }
     
-    public void disableAttackButton()
+    public void toggleAttackButton(boolean disabled)
     {
-        for(int i = 1; i <= 6; i++) { this.disableAttackButton(i); }
+        for(int i = 1; i <= 6; i++) { this.toggleAttackButton(i, disabled); }
     }
     
-    public void disableAttackButton(int buttonIndex)
+    public void toggleAttackButton(int buttonIndex, boolean disabled)
     {
-        this.buttonsMap.get("attackButton" + buttonIndex).setDisable(true);
+        this.buttonsMap.get("attackButton" + buttonIndex).setDisable(disabled);
     }
 
     public void toggleAttachButton(boolean visible)
@@ -330,6 +337,20 @@ public class BottomFieldController extends FieldController{
     {
         this.buttonsMap.get("attachSelfButton" + buttonIndex).setVisible(visible);
         this.buttonsMap.get("attachEnemyButton" + buttonIndex).setVisible(visible);
+    }
+
+    public void setAttachLabel(int buttonIndex)
+    {
+        if(!this.gameController.getActivePlayer().getField().isSkillPositionAvailable(buttonIndex - 1))
+        {
+            this.labelsMap.get("attachLabel" + buttonIndex).setText(
+                "Attached to " + this.gameController.getActivePlayer().getSkillOwner(this.gameController.getActivePlayer(), buttonIndex-1).getName()
+            );
+        }
+        else
+        {
+            this.labelsMap.get("attachLabel" + buttonIndex).setText("N/A");
+        }
     }
 
     public boolean getAttackDone(){
