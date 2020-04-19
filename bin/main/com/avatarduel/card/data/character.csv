@@ -47,3 +47,6 @@ id	name	element	description	imagepath	attack	defense	power
 62	June	EARTH	Bounty hunter with a shirshu as her pet.	June.png	5	8	2
 63	Suki	EARTH	Leader of Kyoshi Warrior.	Suki.png	8	8	3
 64	Pipsqueak	EARTH	Strongest member of Freedom Fighters.	Pipsqueak.png	3	10	2
+65	Paladin	ENERGY	The true protector of the energy nation.	Paladin.png	10	9	5
+66	Dark Magician	ENERGY	The greatest spellcaster	Magician.png	6	12	3
+67	White Dragon	ENERGY	The legendary blue eyes white dragon	Dragon.png	15	10	8
