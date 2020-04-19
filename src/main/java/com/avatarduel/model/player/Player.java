@@ -311,7 +311,17 @@ public class Player {
         this.field.discardSkillCard(pos);   
         
     }
-        
+ 
+    public Player whoseSkill(Player player,int pos){
+        int i = 0;
+        while (i < this.field.getAttachedList(pos).size()){
+            if (this.field.getAttachedList(pos).get(i) == this.field.getSkillCard(pos)){
+                return this;
+            }
+            i++;
+        }
+        return player;
+    }
     
 }
     

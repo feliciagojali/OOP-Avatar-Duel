@@ -215,6 +215,10 @@ public class Field {
         this.powerup[pos] = bool;
     }
 
+    /**
+     * Checking if there is no character card in the field.
+     * @return boolan value.
+     */
     public boolean isFieldEmpty(){
         int j = 0;
         for (int i = 0; i<=5 ; i++){
@@ -224,7 +228,10 @@ public class Field {
         }
         return (j==6);
     }
-    
+
+    /**
+     * Reset all boolean in hasAttack to false.
+     */
     public void resetHasAttacked(){
         for(int i =0 ; i<=5;i++){
             this.hasAttack[i] = false;
