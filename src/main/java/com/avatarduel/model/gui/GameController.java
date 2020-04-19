@@ -218,8 +218,8 @@ public class GameController {
      */
     private void setDrawCondition()
     {
-        this.bottomFieldController.toggleAttackButton(true);
-        this.bottomFieldController.toggleStanceButton(true);
+        this.bottomFieldController.disableAttackButton(true);
+        this.bottomFieldController.disableStanceButton(true);
         this.bottomFieldController.toggleAttachButton(false);
     }
     
@@ -230,7 +230,7 @@ public class GameController {
     {
         if(!this.deckController.hasDrawn()) { throw new InvalidActionException("You haven't drawn a card!");}
         
-        this.bottomFieldController.toggleStanceButton(false);
+        this.bottomFieldController.disableStanceButton(false);
         this.bottomFieldController.toggleAttachButton(true);
     }
     
@@ -239,8 +239,8 @@ public class GameController {
      */
     private void setBattleCondition() throws InvalidActionException
     {
-        this.bottomFieldController.toggleAttackButton(false);
-        this.bottomFieldController.toggleStanceButton(true);
+        this.bottomFieldController.disableAttackButton(false);
+        this.bottomFieldController.disableStanceButton(true);
         this.bottomFieldController.toggleAttachButton(false);
     }
     
@@ -251,8 +251,8 @@ public class GameController {
     {
         if(!this.bottomFieldController.getAttackDone()){ throw new InvalidActionException("Finish your Attack!"); }
 
-        this.bottomFieldController.toggleAttackButton(true);
-        this.bottomFieldController.toggleStanceButton(true);
+        this.bottomFieldController.disableAttackButton(true);
+        this.bottomFieldController.disableStanceButton(true);
 
     }
 

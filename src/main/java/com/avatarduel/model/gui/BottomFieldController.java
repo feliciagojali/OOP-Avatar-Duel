@@ -1,27 +1,21 @@
 package com.avatarduel.model.gui;
 
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.avatarduel.AvatarDuel;
-import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
 import com.avatarduel.model.player.Player;
 import com.avatarduel.util.AlertBox;
 import com.avatarduel.util.InvalidActionException;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 
+/**
+ * BottomFieldController is the class to define the bottom field GUI
+ * @author mkamadeus
+ */
 public class BottomFieldController extends FieldController{
 
     @FXML private Button attackButton1;
@@ -71,6 +65,11 @@ public class BottomFieldController extends FieldController{
     private int indexForAttack;
     private boolean attackDone;
 
+    /**
+     * The constructor for the BottomFieldContainer
+     * @param controller the game root controller
+     * @param player the active player
+     */
     public BottomFieldController(GameController controller, Player player)
     {
         super(controller, player, "gui/bottomField.fxml");
@@ -124,6 +123,10 @@ public class BottomFieldController extends FieldController{
         this.displayField();
     }
 
+    /**
+     * The procedure for displaying the bottom field,
+     * calls the super method
+     */
     public void displayField()
     {
         super.displayField();
@@ -139,6 +142,9 @@ public class BottomFieldController extends FieldController{
         }
     }
 
+    /**
+     * The procedure for displaying the attack buttons
+     */
     public void displayAttackButton()
     {
         for(int i=1;i<=6;i++)
@@ -180,6 +186,9 @@ public class BottomFieldController extends FieldController{
         }
     }
     
+    /**
+     * The procedure for displaying the target button
+     */
     public void displayTargetButton()
     {
         for(int i=1;i<=6;i++)
@@ -216,6 +225,9 @@ public class BottomFieldController extends FieldController{
         }
     }
     
+    /**
+     * Procedure for displayin the stance button
+     */
     public void displayStanceButton()
     {
         for(int i = 1; i <= 6; i++)
@@ -238,6 +250,9 @@ public class BottomFieldController extends FieldController{
         }
     }
     
+    /**
+     * Procedure for displaying the attach buttons
+     */
     public void displayAttachButton()
     {
         for(int i = 1; i <= 6; i++)
@@ -285,6 +300,9 @@ public class BottomFieldController extends FieldController{
         }
     }
     
+    /**
+     * Procedure for displaying the detach buttons
+     */
     public void displayDetachButton()
     {
         for(int i = 1; i <= 6; i++)
@@ -310,37 +328,58 @@ public class BottomFieldController extends FieldController{
         }
     }
 
-    public void toggleStanceButton(boolean disabled)
+    /**
+     * Procedure for disabling ALL stance buttons
+     */
+    public void disableStanceButton(boolean disabled)
     {
-        for(int i = 1; i <= 6; i++) { this.toggleStanceButton(i, disabled); }
+        for(int i = 1; i <= 6; i++) { this.disableStanceButton(i, disabled); }
     }
     
-    public void toggleStanceButton(int buttonIndex, boolean disabled)
+    /**
+     * Method overloading to disable one stance button at a time
+     */
+    public void disableStanceButton(int buttonIndex, boolean disabled)
     {
         this.buttonsMap.get("stanceButton" + buttonIndex).setDisable(disabled);
     }
     
-    public void toggleAttackButton(boolean disabled)
+    /**
+     * Procedure for disabling ALL attack buttons
+     */
+    public void disableAttackButton(boolean disabled)
     {
-        for(int i = 1; i <= 6; i++) { this.toggleAttackButton(i, disabled); }
+        for(int i = 1; i <= 6; i++) { this.disableAttackButton(i, disabled); }
     }
     
-    public void toggleAttackButton(int buttonIndex, boolean disabled)
+    /**
+     * Method overloading to disable one attack button at a time
+     */
+    public void disableAttackButton(int buttonIndex, boolean disabled)
     {
         this.buttonsMap.get("attackButton" + buttonIndex).setDisable(disabled);
     }
 
+    /**
+     * Method to toggle the visibility of attach buttons
+     */
     public void toggleAttachButton(boolean visible)
     {
         for(int i = 1; i <=6; i++) {this.toggleAttachButton(i, visible);}
     }
-
+    
+    /**
+     * Method overloading to toggle the visibility of one attach button at a time
+     */
     public void toggleAttachButton(int buttonIndex, boolean visible)
     {
         this.buttonsMap.get("attachSelfButton" + buttonIndex).setVisible(visible);
         this.buttonsMap.get("attachEnemyButton" + buttonIndex).setVisible(visible);
     }
-
+    
+    /**
+     * Setter for the label to show where the card is connected
+     */
     public void setAttachLabel(int buttonIndex)
     {
         if(!this.gameController.getActivePlayer().getField().isSkillPositionAvailable(buttonIndex - 1))

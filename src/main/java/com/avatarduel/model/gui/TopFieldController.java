@@ -1,7 +1,5 @@
 package com.avatarduel.model.gui;
 
-import java.io.IOException;
-
 import com.avatarduel.model.player.Player;
 
 public class TopFieldController extends FieldController{

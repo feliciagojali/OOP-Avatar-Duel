@@ -8,9 +8,23 @@ import com.avatarduel.util.AlertBox;
 
 import javafx.scene.input.MouseEvent;
 
+/**
+ * CharacterMinicardController is the class that extends the base class
+ * MinicardController and it implements the FieldCard interface, 
+ * meaning it can be used on the field.
+ * This class is used to make a representation of a character card.
+ * @author mkamadeus
+ * 
+ */
 public class CharacterMinicardController extends MinicardController implements FieldCard {
     
     private CharacterCard card;
+
+    /**
+     * Constructor for CharacterMinicardController class
+     * @param controller the game root controller
+     * @param card the character card shown
+     */
 
     public CharacterMinicardController(GameController controller, CharacterCard card)
     {
@@ -34,6 +48,10 @@ public class CharacterMinicardController extends MinicardController implements F
         });
     }
 
+    /**
+     * Procedure for selecting a card
+     * Saves the index of the card selected in the root controller
+     */
     public void selectCard()
     {
         try{
@@ -48,6 +66,9 @@ public class CharacterMinicardController extends MinicardController implements F
         }
     }
 
+    /**
+     * Procedure to change the appearance of a character card on defense
+     */
     public void setStanceColor()
     {
         this.setStyle("-fx-background-color: #64ffda;-fx-border-radius:5;-fx-border-color:#14cba8;");

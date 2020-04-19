@@ -7,12 +7,22 @@ import com.avatarduel.util.AlertBox;
 
 import javafx.scene.input.MouseEvent;
 
-import javafx.fxml.FXML;
-
+/**
+ * LandMinicardController is the class that extends the base class
+ * MinicardController and it implements the OneUseCard interface, 
+ * meaning it is a one use card.
+ * This is used to make a representation of a land card.
+ * @author mkamadeus
+ */
 public class LandMinicardController extends MinicardController implements OneUseCard {
 
     private LandCard card;
 
+    /**
+     * Constructor for LandMinicardController class
+     * @param controller the game root controller
+     * @param card the land card shown
+     */
     public LandMinicardController(GameController controller, LandCard card)
     {
         super(controller);
@@ -34,7 +44,11 @@ public class LandMinicardController extends MinicardController implements OneUse
             this.gameController.getCardInfo().getChildren().clear();
         });
     }
-    
+
+    /**
+     * Implementation of the OneUseCard interface,
+     * called when the card is used
+     */
     public void useCard()
     {
         try
@@ -53,7 +67,9 @@ public class LandMinicardController extends MinicardController implements OneUse
         }
     }
     
-    @FXML
+    /**
+     * Show card info in the sidebar
+     */
     public void showCardInfo()
     {
         this.gameController.setCardInfo(this.card);
