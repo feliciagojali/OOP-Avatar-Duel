@@ -85,6 +85,14 @@ public class Player {
     }
 
     /**
+     * Getter for player's name
+     * @return String value of the player's name
+     */
+    public String getName(){
+        return this.name;
+    }
+
+    /**
      * Setter for player's HP
      * @param x player's HP
      */
@@ -218,8 +226,12 @@ public class Player {
 
     // ini attack kalau di field lawan udah gaada kartu samsek
     public void AttackEnemy(Player enemy,int pos){
-        int attack = this.field.getCharacterCard(pos).getAttack() + this.getField().getAtk(pos);
-        enemy.setHp(enemy.getHp()-attack);
+        if (canAttack(pos)){
+            int attack = this.field.getCharacterCard(pos).getAttack() + this.getField().getAtk(pos);
+            enemy.setHp(enemy.getHp()-attack);
+            this.field.setHasAttack(pos);
+        } 
+            
 
     }
 

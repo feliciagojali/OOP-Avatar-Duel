@@ -48,7 +48,7 @@ public class DeckController extends AnchorPane {
     public void drawCard() {
         try {
             drawCards();
-        } catch (ErrorException e) {
+        } catch (Exception e) {
             ShowError.showError(e.getMessage());
         }
 
@@ -63,6 +63,9 @@ public class DeckController extends AnchorPane {
         this.setCardLeftLabelText(this.gameController.getActivePlayer().getDeck().getCardsLeft());
         this.gameController.getHandController().displayHand();
         this.hasDraw = true;
+        if (this.gameController.getActivePlayer().getDeck().isDeckEmpty()){
+            ShowError.endGame(this.gameController.getOtherPlayer().getName());
+        }
     }
     
 

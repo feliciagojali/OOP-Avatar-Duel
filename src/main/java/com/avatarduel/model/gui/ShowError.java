@@ -15,4 +15,15 @@ public class ShowError{
 
         alert.showAndWait();
     }
+
+    @FXML
+    public static void endGame(String player){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Congratulations!");
+        alert.setHeaderText(null);
+        alert.setContentText(player + " has won the game!");
+
+        alert.showAndWait();
+        System.exit(0);
+    }
 }

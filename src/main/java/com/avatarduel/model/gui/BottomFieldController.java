@@ -139,9 +139,23 @@ public class BottomFieldController extends FieldController{
             this.buttonsMap.get("attackButton" + i).setText("Attack");
             this.buttonsMap.get("attackButton" + i).setOnAction(e ->{
                 try {
-                    if(this.gameController.getPhase() != Phase.MAIN) { throw new ErrorException("You can't do this action in this phase."); }
+                    
+                    if(this.gameController.getPhase() != Phase.BATTLE) { throw new ErrorException("You can't do this action in this phase."); }
                     this.indexForAttack = buttonIndex-1;
-                    this.displayTargetButton();
+                    if (!this.gameController.getActivePlayer().canAttack(this.indexForAttack)){
+                        throw new ErrorException("You cannot attack with this card");
+                    }
+                    if (this.gameController.getOtherPlayer().getField().isFieldEmpty()){
+                        this.gameController.getActivePlayer().AttackEnemy(this.gameController.getOtherPlayer(),this.indexForAttack);
+                        this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                        if (this.gameController.getOtherPlayer().getHp() <= 0) {
+                            ShowError.endGame(this.gameController.getActivePlayer().getName());
+                        }
+                        this.gameController.getStatsController().displayStats();
+                        this.displayAttackButton();
+                    } else {
+                        this.displayTargetButton();
+                    }
                 } catch (ErrorException msg) 
                 {
                     ShowError.showError(msg.getMessage());
@@ -161,15 +175,21 @@ public class BottomFieldController extends FieldController{
                 try{
                     
                     int enemyIndex = 6 - buttonIndex;
-
                     if(this.gameController.getOtherPlayer().getField().getCharacterCard(enemyIndex) == null)
-                        throw new ErrorException("Can't attack here, there's no enemy.");
+                    throw new ErrorException("Can't attack here, there's no enemy.");
+                    
                     
                     this.gameController.getActivePlayer().attack(this.gameController.getOtherPlayer(), this.indexForAttack, enemyIndex);
+                    
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
                     this.indexForAttack = -1;
+                    if (this.gameController.getOtherPlayer().getHp() <= 0) {
+                        ShowError.endGame(this.gameController.getActivePlayer().getName());
+                    }
                     
                     this.displayAttackButton();
+                    this.gameController.getStatsController().displayStats();
+
                 }
                 catch(ErrorException msg)
                 {

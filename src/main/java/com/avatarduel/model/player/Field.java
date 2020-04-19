@@ -215,6 +215,16 @@ public class Field {
         this.powerup[pos] = bool;
     }
 
+    public boolean isFieldEmpty(){
+        boolean answ = false;
+        for (int i = 0; i<=5 ; i++){
+            if (characterRow[i] == null){
+                answ = true;
+                break;
+            }
+        }
+        return answ;
+    }
     
 
 
