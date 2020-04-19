@@ -1,10 +1,6 @@
 package com.avatarduel.model.player;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import com.avatarduel.model.cards.*;
-import com.avatarduel.util.AlertBox;
 import com.avatarduel.util.InvalidActionException;
 
 /**
@@ -39,7 +35,7 @@ public class Player {
         
         // Draw 7 cards from deck to hand
         this.hand = new Hand();
-        for(int i=0;i<50;i++) {
+        for(int i=0;i<7;i++) {
             this.drawCard();
         }
         
@@ -129,9 +125,6 @@ public class Player {
         
         this.stats.addStats(this.hand.getCard(pos).getElement());
         this.hand.discardCard(pos);
-        
-        if (this.hand.getCard(pos) instanceof LandCard) {
-        }
     }
     
     /**

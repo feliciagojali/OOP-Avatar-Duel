@@ -12,8 +12,8 @@ public class Stats {
      * The default stats constructor
      */
     public Stats(){
-        this.current = 99;
-        this.max = 99;
+        this.current = 0;
+        this.max = 0;
     }
 
     /**

@@ -59,7 +59,6 @@ public class Hand {
      */
     public void discardCard(int pos){
         this.cards.remove(pos);
-        
     }
 
 

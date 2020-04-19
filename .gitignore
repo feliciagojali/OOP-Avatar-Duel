@@ -48,3 +48,10 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/java,gradle
 
 .idea
+
+out/
+build/
+bin/
+.gradle/
+.settings/
+.classpath/

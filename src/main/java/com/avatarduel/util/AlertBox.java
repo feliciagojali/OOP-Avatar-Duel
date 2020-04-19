@@ -4,6 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * AlertBox is a class that is used to hold
+ * static methods relating to the AlertBox
+ * @author feliciagojali
+ */
 public class AlertBox{
 
     @FXML
