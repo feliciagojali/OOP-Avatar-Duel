@@ -229,7 +229,7 @@ public class BottomFieldController extends FieldController{
             });
         }
     }
-
+    
     public void displayAttachButton()
     {
         for(int i = 1; i <= 6; i++)
@@ -276,7 +276,7 @@ public class BottomFieldController extends FieldController{
             });
         }
     }
-
+    
     public void displayDetachButton()
     {
         for(int i = 1; i <= 6; i++)

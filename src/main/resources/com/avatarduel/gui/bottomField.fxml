@@ -57,7 +57,7 @@
             <Insets />
          </opaqueInsets>
       </StackPane>
-      <StackPane fx:id="bottomSlot1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#putCard" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.rowIndex="2">
+      <StackPane fx:id="bottomSlot1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -80,7 +80,7 @@
                </children>
             </HBox>
          </children></StackPane>
-      <StackPane fx:id="bottomSlot2" layoutX="1061.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#putCard" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <StackPane fx:id="bottomSlot2" layoutX="1061.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -103,7 +103,7 @@
                </children>
             </HBox>
          </children></StackPane>
-      <StackPane fx:id="bottomSlot3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#putCard" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <StackPane fx:id="bottomSlot3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -126,7 +126,7 @@
                </children>
             </HBox>
          </children></StackPane>
-      <StackPane fx:id="bottomSlot4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#putCard" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="3" GridPane.rowIndex="2">
+      <StackPane fx:id="bottomSlot4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -149,7 +149,7 @@
                </children>
             </HBox>
          </children></StackPane>
-      <StackPane fx:id="bottomSlot5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#putCard" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="4" GridPane.rowIndex="2">
+      <StackPane fx:id="bottomSlot5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="4" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -172,7 +172,7 @@
                </children>
             </HBox>
          </children></StackPane>
-      <StackPane fx:id="bottomSlot6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#putCard" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="5" GridPane.rowIndex="2">
+      <StackPane fx:id="bottomSlot6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="120.0" style="-fx-border-color: #CCCCCC; -fx-background-color: #eeeeee; -fx-border-radius: 5;" GridPane.columnIndex="5" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
