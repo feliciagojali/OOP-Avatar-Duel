@@ -18,7 +18,7 @@ You will notice that it will open a window that display 'Avatar Duel'.
 
 ## Screenshots
 
-
+![](./images/interface01.png)
 
 ## Credit
 

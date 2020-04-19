@@ -5,9 +5,6 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 
 import com.avatarduel.AvatarDuel;
-import com.avatarduel.model.cards.Card;
-import com.avatarduel.model.player.Deck;
-import com.avatarduel.model.player.Player;
 import com.avatarduel.model.player.Phase;
 import com.avatarduel.util.InvalidActionException;
 import com.avatarduel.util.AlertBox;
@@ -16,8 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 public class DeckController extends AnchorPane {
 
     @FXML private Label cardLeftLabel;

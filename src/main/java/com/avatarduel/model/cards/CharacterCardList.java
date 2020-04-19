@@ -17,6 +17,11 @@ import java.util.TreeSet;
 
 import com.avatarduel.util.*;
 
+/**
+ * CharacterCardList is the class that uses the singleton pattern
+ * for generating new cards using its id.
+ * @author mkamadeus
+ */
 public class CharacterCardList 
 {
     private static CharacterCardList characterCardListInstance = null;
@@ -52,23 +57,31 @@ public class CharacterCardList
                 this.characterCardIdList.add(Integer.parseInt(characterCardEntry[0]));
             }
         } catch (final URISyntaxException | IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
 
     }
 
+    /** 
+     * Get the list of character in map form 
+     */
     public Map<Integer, String[]> getCharacterCardList()
     {
         return this.characterCardList;
     }
 
+    /**
+     * Get the id list for the defined id
+     */
     public Set<Integer> getCharacterCardIdList()
     {
         return this.characterCardIdList;
     }
 
+    /**
+     * Get count of character cards
+     */
     public static int getCharacterCardCount() 
     {
         if(characterCardListInstance == null)
@@ -77,6 +90,9 @@ public class CharacterCardList
         return characterCardListInstance.getCharacterCardIdList().size();
     }
 
+    /** 
+     * Check whether a card is a character card or not
+     */
     public static boolean isIdCharacterCard(final int id)
     {
         if(characterCardListInstance == null)
@@ -85,6 +101,11 @@ public class CharacterCardList
         return characterCardListInstance.getCharacterCardIdList().contains(new Integer(id));
     }
 
+    /**
+     * Get character card by id
+     * @param id the card id
+     * @return CharacterCard with data specified from the csv file
+     */
     public static CharacterCard getCharacterCardById(final int id) 
     {
         if(characterCardListInstance == null)

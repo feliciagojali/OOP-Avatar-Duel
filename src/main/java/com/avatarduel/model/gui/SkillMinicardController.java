@@ -21,9 +21,19 @@ public class SkillMinicardController extends MinicardController implements Field
         this.cardElement.setText(card.getElement().toString());
         this.cardUseButton.setText("Select");
 
-        this.cardAttack.setText(Integer.toString(card.getAttack()));
-        this.cardDefense.setText(Integer.toString(card.getDefense()));
-        this.cardPower.setText(Integer.toString(card.getPower()));
+        if(card.getEffect() != Effect.DESTROY)
+        {
+            this.cardAttack.setText(Integer.toString(card.getAttack()));
+            this.cardDefense.setText(Integer.toString(card.getDefense()));
+            this.cardPower.setText(Integer.toString(card.getPower()));
+        }
+        else
+        {
+            this.cardAttack.setText("-");
+            this.cardDefense.setText("-");
+            this.cardPower.setText("-");    
+        }
+
         this.cardUseButton.setOnAction(e -> {
             this.selectCard();
         });

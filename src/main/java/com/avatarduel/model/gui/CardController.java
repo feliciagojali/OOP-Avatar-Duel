@@ -82,7 +82,6 @@ public class CardController extends VBox{
             this.cardAttack.setText(Integer.toString(c.getAttack()));
             this.cardDefense.setText(Integer.toString(c.getDefense()));
             this.cardPower.setText(Integer.toString(c.getPower()));
-            
         }
         catch (Exception e)
         {
@@ -109,9 +108,20 @@ public class CardController extends VBox{
             this.cardImage.setImage(img);
             this.cardType.setText("SKILL");
             this.cardDescription.setText(c.getDescription());
-            this.cardAttack.setText(Integer.toString(c.getAttack()));
-            this.cardDefense.setText(Integer.toString(c.getDefense()));
-            this.cardPower.setText(Integer.toString(c.getPower()));
+
+            if(c.getEffect() != Effect.DESTROY)
+            {
+                this.cardAttack.setText(Integer.toString(c.getAttack()));
+                this.cardDefense.setText(Integer.toString(c.getDefense()));
+                this.cardPower.setText(Integer.toString(c.getPower()));
+            }
+            else
+            {
+                this.cardAttack.setText("-");
+                this.cardDefense.setText("-");
+                this.cardPower.setText("-");    
+            }
+            
 
         }
         catch (Exception e)

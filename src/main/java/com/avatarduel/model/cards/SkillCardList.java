@@ -14,11 +14,10 @@ import com.avatarduel.util.*;
 
 
 /**
- * SkillCardList is the class that contains database for all Skill Card.
- * 
+ * SkillCardList is the class that uses the singleton pattern
+ * for generating new cards using its id.
  * @author mkamadeus
  */
-
 public class SkillCardList 
 {
     private static SkillCardList skillCardListInstance = null;
@@ -53,30 +52,41 @@ public class SkillCardList
                 this.skillCardIdList.add(Integer.parseInt(skillCardEntry[0]));
             }
         } catch (final URISyntaxException | IOException e ) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
 
     }
-
+    
+    /** 
+     * Get the list of skill in map form 
+     */    
     public Map<Integer, String[]> getSkillCardList()
     {
         return this.skillCardList;
     }
-
+    
+    /**
+     * Get the id list for the defined id
+     */
     public Set<Integer> getSkillCardIdList()
     {
         return this.skillCardIdList;
     }
-
+    
+    /**
+     * Get count of skill cards
+     */
     public static int getSkillCardCount() 
     {   if(skillCardListInstance == null)
             skillCardListInstance = new SkillCardList();
 
         return skillCardListInstance.getSkillCardIdList().size();
     }
-
+    
+    /** 
+     * Check whether a card is a skill card or not
+     */
     public static boolean isIdSkillCard(final int id) 
     {
         if(skillCardListInstance == null)
@@ -85,6 +95,11 @@ public class SkillCardList
         return skillCardListInstance.getSkillCardIdList().contains(new Integer(id));
     }
 
+    /**
+     * Get skill card by id
+     * @param id the card id
+     * @return SkillCard with data specified from the csv file
+     */
     public static SkillCard getSkillCardById(final int id) 
     {
         if(skillCardListInstance == null)

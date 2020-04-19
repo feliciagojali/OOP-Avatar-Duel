@@ -13,11 +13,10 @@ import com.avatarduel.util.*;
 
 
 /**
- * LandCardList is the class that contains database for all Land Card.
- * 
+ * LandCardList is the class that uses the singleton pattern
+ * for generating new cards using its id.
  * @author mkamadeus
  */
-
 public class LandCardList 
 {
     private static LandCardList landCardListInstance = null;
@@ -56,7 +55,6 @@ public class LandCardList
                 this.landCardIdList.add(Integer.parseInt(landCardEntry[0]));
             }
         } catch (final URISyntaxException | IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
@@ -64,16 +62,25 @@ public class LandCardList
 
     }
 
+    /** 
+     * Get the list of land in map form 
+     */    
     public Map<Integer, String[]> getLandCardList()
     {
         return this.landCardList;
     }
 
+    /**
+     * Get the id list for the defined id
+     */
     public Set<Integer> getLandCardIdList()
     {
         return this.landCardIdList;
     }
 
+    /**
+     * Get count of land cards
+     */
     public static int getLandCardCount()
     {
         if(landCardListInstance == null)
@@ -82,6 +89,9 @@ public class LandCardList
         return landCardListInstance.getLandCardIdList().size();
     }
 
+    /** 
+     * Check whether a card is a land card or not
+     */
     public static boolean isIdLandCard(final int id)
     {
         if(landCardListInstance == null)
@@ -90,6 +100,11 @@ public class LandCardList
         return landCardListInstance.getLandCardIdList().contains(new Integer(id));
     }
 
+    /**
+     * Get land card by id
+     * @param id the card id
+     * @return LandCard with data specified from the csv file
+     */
     public static LandCard getLandCardById(final int id)
     {
         if(landCardListInstance == null)

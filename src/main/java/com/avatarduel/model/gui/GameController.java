@@ -221,6 +221,7 @@ public class GameController {
         this.bottomFieldController.disableAttackButton(true);
         this.bottomFieldController.disableStanceButton(true);
         this.bottomFieldController.toggleAttachButton(false);
+        this.bottomFieldController.disableDetachButton(true);
     }
     
     /**
@@ -232,6 +233,7 @@ public class GameController {
         
         this.bottomFieldController.disableStanceButton(false);
         this.bottomFieldController.toggleAttachButton(true);
+        this.bottomFieldController.disableDetachButton(false);
     }
     
     /**
@@ -242,6 +244,7 @@ public class GameController {
         this.bottomFieldController.disableAttackButton(false);
         this.bottomFieldController.disableStanceButton(true);
         this.bottomFieldController.toggleAttachButton(false);
+        this.bottomFieldController.disableDetachButton(true);
     }
     
     /**

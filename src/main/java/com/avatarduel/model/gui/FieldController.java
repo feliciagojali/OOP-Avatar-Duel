@@ -130,12 +130,11 @@ public class FieldController extends GridPane{
 
             this.gameController.getActivePlayer().playCard(this.gameController.getSelectedCardIndex(), slotIndex);
             
-            
-          
             // Reset display
             this.displayField();
             this.gameController.getHandController().displayHand();
             this.gameController.getStatsController().displayStats();
+
 
         } catch (InvalidActionException e) {
             AlertBox.showError(e.getMessage());

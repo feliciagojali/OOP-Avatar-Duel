@@ -4,7 +4,6 @@ import com.avatarduel.model.cards.CharacterCard;
 import com.avatarduel.model.player.Phase;
 import com.avatarduel.util.AlertBox;
 import com.avatarduel.util.InvalidActionException;
-import com.avatarduel.util.AlertBox;
 
 import javafx.scene.input.MouseEvent;
 

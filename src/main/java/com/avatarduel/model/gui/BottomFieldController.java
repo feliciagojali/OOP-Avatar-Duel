@@ -213,6 +213,7 @@ public class BottomFieldController extends FieldController{
                     this.attackDone = true;
                     this.displayAttackButton();
                     this.gameController.getStatsController().displayStats();
+                    this.displayField();
 
                 }
                 catch(InvalidActionException msg)
@@ -241,6 +242,8 @@ public class BottomFieldController extends FieldController{
                     // boolean isStanceAttack = this.gameController.getActivePlayer().getField().getCharacterStance(buttonIndex - 1);
                     this.gameController.getActivePlayer().getField().toggleStance(buttonIndex - 1);
                     this.gameController.setFieldInterface(this.gameController.getActivePlayer(), this.gameController.getOtherPlayer());
+                    this.displayField();
+                    
                 }
                 catch(InvalidActionException msg)
                 {
@@ -326,6 +329,22 @@ public class BottomFieldController extends FieldController{
             });
 
         }
+    }
+
+    /**
+     * Procedure for disabling ALL detach buttons
+     */
+    public void disableDetachButton(boolean disabled)
+    {
+        for(int i = 1; i <= 6; i++) { this.disableDetachButton(i, disabled); }
+    }
+
+    /**
+     * Procedure for disabling one detach button at a time
+     */
+    public void disableDetachButton(int buttonIndex, boolean disabled)
+    {
+        this.buttonsMap.get("detachButton" + buttonIndex).setDisable(disabled);
     }
 
     /**
